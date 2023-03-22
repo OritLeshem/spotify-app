@@ -1,4 +1,14 @@
+import { OptionsBar } from './options-bar'
+import { PlayerBar } from './player-bar'
+import { SongDisplay } from './song-display'
+
 export function AppFooter() {
-  return <>
-    hello from footer</>
+
+  return <footer className="app-footer">
+    <main>
+      <SongDisplay />
+      <PlayerBar />
+      <OptionsBar />
+    </main>
+  </footer>
 }
