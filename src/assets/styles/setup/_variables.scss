@@ -1,0 +1,28 @@
+// COLOR PALETTE
+$bgc-base: #121212;
+$bgc-highlight: #1a1a1a;
+$bgc-hover: #282828;
+$bgc-player: #181818;
+$bgc-det: #535353;
+$bgc-nav: #000;
+$bgc-trans: rgba(0, 0, 0, 0.7);
+
+$bgc-btn: #1ed760;
+
+$clr-txt: #fff;
+$clr-txtsub: #b3b3b3;
+
+//$clr-txtsub: #a7a7a7;
+
+// LAYOUT
+$layoutPadding: 32px;
+
+// LAYOUT BREAKPOINTS
+$break-narrow: 400px;
+$break-normal: 960px;
+$break-wide: 1200px;
+$max: 1900px;
+
+// $padded-break-narrow: $break-narrow + $layoutPadding * 2;
+$padded-break-normal: $break-normal + $layoutPadding * 2;
+// $padded-break-wide: $break-wide + $layoutPadding * 2;

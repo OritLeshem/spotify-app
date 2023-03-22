@@ -1,0 +1,164 @@
+h1 {
+  font-size: rem(96px);
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+//h3-sidebar navigation
+h3,
+h4,
+h5,
+input {
+  font-size: rem(14px);
+}
+
+//h4-show all
+h4,
+h5,
+small {
+  color: $clr-txtsub;
+}
+
+//h5- card artist name +song in player
+h5,
+small,
+input {
+  font-family: circular-light;
+}
+
+//small player artist name
+small {
+  font-size: rem(11px);
+}
+
+.play-btn {
+  position: absolute;
+  background-color: $bgc-btn;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0 .5em .5em rgb(0 0 0 / 30%);
+  transition: all .3s ease;
+  right: .5em;
+  bottom: 0;
+  opacity: 0;
+
+  span {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: #1fdf64;
+  }
+}
+
+.play-btn-bar {
+  position: relative;
+  background-color: $clr-txt;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+
+  span {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+
+.divider {
+  background-color: rgba(179, 179, 179, 0.2);
+  height: 1px;
+}
+
+.create-playlist,
+.liked-songs {
+  @include flex($justify: center);
+  border-radius: em(2px);
+  width: em(24px);
+  height: em(24px);
+}
+
+.create-playlist {
+  background-color: $clr-txt;
+}
+
+.liked-songs {
+  background: linear-gradient(135deg, #450af5, #c4efd9);
+}
+
+.back-btn,
+.forward-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bgc-trans;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  margin: 1em 0;
+}
+
+.user-btn {
+  @include flex;
+  border-radius: em(23px);
+  gap: .5em;
+  background-color: $bgc-trans;
+  padding: em(2px);
+
+  .arrow {
+    margin-right: em(6px);
+  }
+
+  .avatar {
+    @include flex($justify: center);
+    background-color: $bgc-det;
+    width: em(28px);
+    height: em(28px);
+    border-radius: 50%;
+
+    svg {
+      padding-bottom: 1px;
+    }
+  }
+
+  &:hover {
+    background-color: $bgc-hover;
+  }
+}
+
+.logo {
+  padding: .5em 0;
+}
+
+.place {
+  background-image: linear-gradient($bgc-trans 0, $bgc-base 100%), url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1IiBkPSJNMCAwaDMwMHYzMDBIMHoiLz48L3N2Zz4=);
+  height: 332px;
+  margin-top: -64px;
+  position: absolute;
+  transition: background 1s ease;
+  width: 100%;
+  z-index: -1;
+}
+
+.like-btn {
+  @include flex($justify: center);
+  width: 2rem;
+  height: 2rem;
+}
+
+.app-divider {
+
+  .divider {
+    margin: 72px 0 80px;
+  }
+}

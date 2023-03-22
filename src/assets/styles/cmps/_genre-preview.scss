@@ -1,0 +1,28 @@
+.genre-preview {
+    position: relative;
+    border-radius: .5rem;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+
+    h2 {
+        position: absolute;
+        padding: em(16px, 24px);
+    }
+
+    img {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: 100px;
+        width: 100px;
+        box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+        transform: rotate(25deg) translate(18%, -2%);
+    }
+
+    &::after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
+}

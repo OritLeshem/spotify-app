@@ -1,0 +1,21 @@
+.playlist-filter {
+    max-width: 364px;
+    position: relative;
+    color: $bgc-nav;
+    
+    input {
+        border-radius: 500px;
+        padding: em(12px) em(48px);
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+    
+    .svg-container {
+        position: absolute;
+        bottom: 0;
+        height: em(40px);
+        display: flex;
+        align-items: center;
+        left: em(12px);
+    }
+}

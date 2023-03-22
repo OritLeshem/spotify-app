@@ -1,0 +1,15 @@
+.app-header {
+    padding: 0 2rem;
+
+    main {
+        @include flex;
+        // border: 1px solid red;
+    }
+
+    nav {
+        button:not(:first-child) {
+            padding: 1em 0;
+            margin-inline-start: 1em;
+        }
+    }
+}

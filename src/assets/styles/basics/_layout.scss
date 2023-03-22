@@ -1,0 +1,32 @@
+.main-layout {
+    display: grid;
+    grid-template-areas:
+        "navbar app-header"
+        "navbar main-page"
+        "app-footer app-footer";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+}
+
+.app-header {
+    grid-area: app-header;
+}
+
+.main-page {
+    grid-area: main-page;
+    max-width: $max;
+    padding: 0 1rem;
+    min-height: 90vh;
+
+    @media (min-width: $padded-break-normal) {
+        padding: 0 2rem;
+    }
+}
+
+.navbar {
+    grid-area: navbar;
+}
+
+.app-footer {
+    grid-area: app-footer;
+}

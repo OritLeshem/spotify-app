@@ -1,0 +1,72 @@
+.playlist-search {
+    height: 90vh;
+
+    h2 {
+        margin-bottom: em(16px, 24px);
+    }
+}
+
+.song-list {
+    width: 50%;
+}
+
+.song-preview {
+    @include flex;
+    border-radius: em(4px);
+    padding: .5em;
+
+    h5 {
+        color: $clr-txt;
+    }
+
+    .cover-container,
+    .img-container {
+        width: em(40px);
+        height: em(40px);
+    }
+
+    .img-container {
+        position: relative;
+        overflow: hidden;
+
+        img {
+            transform: scale(1.4);
+        }
+    }
+
+    .cover-container {
+        position: absolute;
+    }
+
+    &:hover {
+        background-color: hsla(0, 0%, 100%, .1);
+
+        .music {
+            opacity: 1;
+        }
+        
+        .cover-container {
+            background-color: $bgc-hover;
+            opacity: .3;
+        }
+    }
+}
+
+.music {
+    position: absolute;
+    top: 0;
+    width: em(40px);
+    height: em(40px);
+    @include flex($justify: center);
+    opacity: 0;
+    z-index: 1;
+
+    iframe {
+        display: none;
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}

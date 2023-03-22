@@ -1,0 +1,19 @@
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    background-color: $bgc-player;
+    width: 100%;
+    // border: 1px solid red;
+    border-top: 1px solid $bgc-hover;
+    padding: 0 1rem;
+
+    main {
+        @include flex;
+        height: rem(90px);
+    }
+
+    nav>* {
+        padding: 1em 0;
+        margin-inline-start: 1em;
+    }
+}

@@ -1,0 +1,19 @@
+.options-bar {
+    @include flex($justify: flex-end);
+    flex: 1;
+    gap: 1em;
+
+    button {
+        color: $clr-txtsub;
+
+        &:hover {
+            color: $clr-txt;
+        }
+    }
+
+    .volume-bar {
+        @include flex;
+        gap: 1em;
+        max-width: 125px;
+    }
+}

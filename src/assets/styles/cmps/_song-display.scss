@@ -1,0 +1,15 @@
+.song-display {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: .5em;
+
+    h5 {
+        color: $clr-txt;
+    }
+
+    img {
+        width: 56px;
+        height: 56px;
+    }
+}
