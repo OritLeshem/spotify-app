@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { loadPlaylists, removePlaylist } from '../store/playlist.actions'
 import { PlaylistList } from '../cmps/playlist-list'
-import { SET_FILTER } from '../store/playlist.reducer'
+import { SET_FILTER, SET_SONGS_LIST } from '../store/playlist.reducer'
 import { youtubeService } from '../services/youtube.service'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -15,6 +15,7 @@ import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer'
 
 export function PlaylistSearch() {
   const playlists = useSelector(storeState => storeState.playlistModule.playlists)
+  const playSongs = useSelector(storeState => storeState.playlistModule.playSongs)
   const filterBy = useSelector(storeState => storeState.playlistModule.filterBy)
   const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
   const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
@@ -36,23 +37,29 @@ export function PlaylistSearch() {
   function onSetFilter(filterBy) {
     console.log("filterBy", filterBy.txt)
     youtubeService.getVideoResults(filterBy.txt)
-      .then(res => setSearchResults(res))
+      .then(res => {
+        setSearchResults(res)
+        dispatch({ type: SET_SONGS_LIST, playSongs: res })
+        console.log(res)
+      })
+
 
     dispatch({ type: SET_FILTER, filterBy })
   }
 
-  console.log('searchResults:', searchResults)
+  // console.log('searchResults:', searchResults)
 
   const handlePlayPauseClick = (song) => {
+    dispatch({ type: SET_CURRENT_SONG, song })
     if (song.id !== currentSong.id) {
-      dispatch({ type: SET_CURRENT_SONG, song })
       dispatch({ type: ISPLAYING, isPlaying: true })
     } else {
       dispatch({ type: ISPLAYING, isPlaying: !isPlaying })
-      dispatch({ type: SET_CURRENT_SONG, song })
+
       console.log("currentSong", currentSong)
     }
-  };
+  }
+
 
   if (!playlists) return
   return <section className="main-page playlist-search">

@@ -10,12 +10,13 @@ export const SET_FILTER = 'SET_FILTER'
 export const REMOVE_SONG_FROM_PLAYLIST = 'REMOVE_SONG_FROM_PLAYLIST'
 export const SET_PLAYLIST = 'SET_PLAYLIST'
 export const ADD_SONG_TO_PLAYLIST = 'ADD_SONG_TO_PLAYLIST'
-
+export const SET_SONGS_LIST = 'SET_SONGS_LIST'
 const initialState = {
     playlists: [],
     playlist: null,
     filterBy: playlistService.getDefaultFilter(),
-    lastRemovedPlaylist: null
+    lastRemovedPlaylist: null,
+    playSongs: []
 }
 
 export function playlistReducer(state = initialState, action) {
@@ -48,6 +49,11 @@ export function playlistReducer(state = initialState, action) {
         //song in playlist
         case SET_PLAYLIST:
             newState = { ...state, playlist: action.playlist }
+            break
+        //song in playlist-search
+
+        case SET_SONGS_LIST:
+            newState = { ...state, playSongs: action.playSongs }
             break
         case REMOVE_SONG_FROM_PLAYLIST:
             newState = { ...state, playlist: action.playlist }

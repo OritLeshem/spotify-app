@@ -1,31 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
-import { ISPLAYING } from '../store/player.reducer';
-// import { SET_CURRENT_SONG, INCREMENT } from '../store/player.reducer';
-
+import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer';
 import { PlayBtnBar, RepeatBtn, ShuffleBtn, SkipBackBtn, SkipForwardBtn } from "./form";
 
 export function PlayerBar() {
-    const [time, setTime] = useState(0)
+
     const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
-
-    const playerRef = useRef(null);
-    // console.log("playerRef", playerRef)
     const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
-    // console.log("isPlaying playerbar", isPlaying)
-    const dispatch = useDispatch()
+    const playSongs = useSelector(storeState => storeState.playlistModule.playSongs)
 
-    // useEffect(() => {
-    //     if (playerRef.current) return
-    //     if (playerRef.current !== null) {
-    //         if (!isPlaying) {
-    //             playerRef.current.pauseVideo();
-    //         } else {
-    //             playerRef.current.playVideo();
-    //         }
-    //     }
-    // }, [playerRef])
+    const playerRef = useRef(null)
+    const [time, setTime] = useState(0)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        console.log(isPlaying, playerRef.current)
+        if (playerRef.current && !isPlaying) {
+            playerRef.current.pauseVideo()
+        }
+
+        if (playerRef.current && isPlaying) {
+            playerRef.current.playVideo()
+        }
+    }, [playerRef.current, isPlaying])
 
     function handleChange({ target }) {
         setTime(target.value)
@@ -35,53 +33,56 @@ export function PlayerBar() {
         height: '0',
         width: '0',
         playerVars: {
-            autoplay: 1,
+            autoplay: 0,
             controls: 0,
             showinfo: 0,
             rel: 0,
         },
     }
 
-    const onReady = (event) => {
-        playerRef.current = event.target;
-    }
-    if (playerRef.current && !isPlaying) {
-        playerRef.current.pauseVideo();
-    }
-    if (playerRef.current && isPlaying) {
-        playerRef.current.playVideo();
+
+    function onReady(event) {
+        playerRef.current = event.target
     }
 
+    if (playerRef.current && !isPlaying) {
+        playerRef.current.pauseVideo()
+    }
+
+    if (playerRef.current && isPlaying) {
+        playerRef.current.playVideo()
+    }
 
     const onPlayButtonClick = (ev) => {
         const test = String(ev.target)
-        if (test.includes('SVG')) console.log("YES")
-
+        console.log("TESSSSST", test, test.includes('Span'))
         if (!isPlaying && playerRef) {
-            playerRef.current.pauseVideo();
+            playerRef.current.pauseVideo()
         }
-        if (isPlaying && playerRef && test.includes('SVG')) {
-            playerRef.current.playVideo();
+        if (isPlaying && playerRef && test.includes('Span')) {
+            playerRef.current.playVideo()
         }
-        // setIsPlaying(!isPlaying);
-        dispatch({ type: ISPLAYING }); // Dispatch action to update current song
-    };
-
+        dispatch({ type: ISPLAYING })
+    }
+    function handleNextSong() {
+        console.log("currentSong", currentSong)
+        const currIndex = playSongs.indexOf(currentSong)
+        if (currIndex === playSongs.length - 1) dispatch({ type: SET_CURRENT_SONG, song: playSongs[0] })
+        else dispatch({ type: SET_CURRENT_SONG, song: playSongs[currIndex + 1] })
+        console.log("currIndex", currIndex)
+    }
 
     return <section className="player-bar">
         <div className="player-control">
             <ShuffleBtn />
             <SkipBackBtn />
-
             <button onClick={onPlayButtonClick}>
                 {isPlaying ? <span className='fa-solid pause'></span> : <PlayBtnBar />}
             </button>
             {currentSong && <YouTube videoId={currentSong.id || "4m1EFMoRFvY"} opts={opts} onReady={onReady} />}
-
-
             {/* <PlayBtnBar /> */}
-
-            <SkipForwardBtn />
+            <button onClick={handleNextSong}> <SkipForwardBtn /></button>
+            {/* <SkipForwardBtn /> */}
             <RepeatBtn />
         </div>
         <div className="playback-bar">
