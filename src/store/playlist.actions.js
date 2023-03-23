@@ -29,6 +29,15 @@ export async function loadPlaylists(filterBy) {
     }
 }
 
+export async function loadPlaylist(playlistId) {
+    try {
+        const playlist = await playlistService.getById(playlistId)
+        store.dispatch({ type: SET_PLAYLIST, playlist })
+    } catch (err) {
+        console.log('cannot load playlist', err)
+        throw err
+    }
+}
 
 export async function removePlaylist(playlistId) {
     try {
@@ -52,20 +61,7 @@ export async function addPlaylist(playlist) {
         throw err
     }
 }
-export async function addSonfToPlaylist(playlistId, newSong) {
-    try {
-        let newPlaylist = await playlistService.getById(playlistId)
-        newPlaylist = { ...newPlaylist, songs: [...newPlaylist.songs, newSong] }
-        const savedPlaylist = await playlistService.save(newPlaylist)
-        console.log('Added Playlist', savedPlaylist)
-        showSuccessMsg('song added succesfully')
-        store.dispatch({ type: ADD_SONG_TO_PLAYLIST, playlist: savedPlaylist })
-        return savedPlaylist
-    } catch (err) {
-        console.log('Cannot add playlist', err)
-        throw err
-    }
-}
+
 
 export async function updatePlaylist(playlist) {
     try {
@@ -93,7 +89,23 @@ export async function onRemovePlaylistOptimistic(playlistId) {
         store.dispatch({ type: UNDO_REMOVE_PLAYLIST, })
     }
 }
-// playlist
+// Song in playlist
+
+export async function addSonfToPlaylist(playlistId, newSong) {
+    try {
+        let newPlaylist = await playlistService.getById(playlistId)
+        newPlaylist = { ...newPlaylist, songs: [...newPlaylist.songs, newSong] }
+        const savedPlaylist = await playlistService.save(newPlaylist)
+        console.log('Added Playlist', savedPlaylist)
+        showSuccessMsg('song added succesfully')
+        store.dispatch({ type: ADD_SONG_TO_PLAYLIST, playlist: savedPlaylist })
+        return savedPlaylist
+    } catch (err) {
+        console.log('Cannot add playlist', err)
+        throw err
+    }
+}
+
 export async function removeSongFromPlayList(playlistId, songId) {
     try {
         let playlist = await playlistService.getById(playlistId)
@@ -108,12 +120,3 @@ export async function removeSongFromPlayList(playlistId, songId) {
     }
 }
 
-export async function loadPlaylist(playlistId) {
-    try {
-        const playlist = await playlistService.getById(playlistId)
-        store.dispatch({ type: SET_PLAYLIST, playlist })
-    } catch (err) {
-        console.log('cannot load playlist', err)
-        throw err
-    }
-}

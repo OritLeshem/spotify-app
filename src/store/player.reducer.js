@@ -1,9 +1,9 @@
 export const INCREMENT = 'INCREMENT'
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG'
 export const ISPLAYING = 'ISPLAYING'
-
+export const SET_PLAYER = "SET_PLAYER"
 const initialState = {
-
+    player: null,
     currentSong: {
         "_id": "4m1EFMoRFvY",
         "title": "Beyoncé - Single Ladies",
@@ -23,7 +23,8 @@ export function playerReducer(state = initialState, action) {
     switch (action.type) {
         case INCREMENT:
             return { ...state, count: state.count + 1 }
-
+        case SET_PLAYER:
+            return { ...state, player: action.player }
         case SET_CURRENT_SONG:
             console.log("action", action)
             return { ...state, currentSong: action.song }

@@ -1,5 +1,5 @@
 import { store } from './store'
-import { SET_CURRENT_SONG } from './player.reducer'
+import { SET_CURRENT_SONG, SET_PLAYER } from './player.reducer'
 
 
 
@@ -12,3 +12,11 @@ export async function setCurrentSong(song) {
     }
 }
 
+export async function loadPlayer(player) {
+    console.log('LOADING PLAYER')
+    try {
+        store.dispatch({ type: SET_PLAYER, player })
+    } catch (err) {
+        console.log('Cant load player', err)
+    }
+}

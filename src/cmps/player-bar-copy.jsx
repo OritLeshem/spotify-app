@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { loadPlayer } from '../store/player.actions'
 
 import { useDispatch, useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
@@ -19,58 +20,57 @@ export function PlayerBar() {
 
     const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
     const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
+    // const player = useSelector(storeState => storeState.playerModule.player)
     const playSongs = useSelector(storeState => storeState.playlistModule.playSongs)
     console.log(isPlaying)
-    const playerRef = useRef(null)
+    // const playerRef = useRef(null)
     const [player, setPlayer] = useState(null)
     const [time, setTime] = useState(0)
     const dispatch = useDispatch()
-    // useEffect(() => {
-    //     console.log(isPlaying, playerRef.current)
-    //     if (playerRef.current && !isPlaying) {
-    //         playerRef.current.pauseVideo()
-    //     }
 
-    //     if (playerRef.current && isPlaying) {
-    //         playerRef.current.playVideo()
-    //     }
-    // }, [playerRef.current, isPlaying])
+    useEffect(() => {
+        if (player !== null) console.dir(player.i)
+        if (player === null) return
+        if (player?.i === null) return
+
+        if (player?.i && !isPlaying) {
+            player.pauseVideo()
+
+        }
+
+        if (player?.i && isPlaying) {
+            player.playVideo()
+        }
+    }, [player, isPlaying])
+
 
     function handleChange({ target }) {
         setTime(target.value)
     }
 
-
-
     function onReady(event) {
-        playerRef.current = event.target;
+        console.log("event.target", event.target)
+        setPlayer(event.target)
+        // loadPlayer(event.target)
+        if (player === null) return
 
-        console.log(isPlaying, "HEEELLO", playerRef.current)
-        if (isPlaying) {
-            event.target.playVideo()
+        console.log(isPlaying, "HEEELLO", player)
+        if (event.target.i !== null && isPlaying) {
+            player.playVideo()
         }
-        // if (playerRef.current && isPlaying) {
-        //     playerRef.current.playVideo()
-        // }
-
+        if (event.target.i !== null && !isPlaying) {
+            player.pauseVideo()
+        }
     }
-
-    // if (playerRef.current && !isPlaying) {
-    //     playerRef.current.pauseVideo()
-    // }
-
-    // if (playerRef.current && isPlaying) {
-    //     playerRef.current.playVideo()
-    // }
 
     const onPlayButtonClick = (ev) => {
         const test = String(ev.target)
         console.log("TESSSSST", test, test.includes('Span'))
-        if (!isPlaying && playerRef) {
-            playerRef.current.pauseVideo()
+        if (!isPlaying && player) {
+            player.pauseVideo()
         }
-        if (isPlaying && playerRef && test.includes('Span')) {
-            playerRef.current.playVideo()
+        if (isPlaying && player && test.includes('Span')) {
+            player.playVideo()
         }
         dispatch({ type: ISPLAYING })
     }

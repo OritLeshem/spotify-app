@@ -76,7 +76,7 @@ export function PlaylistSearch() {
             </div>
             <div className="cover-container"></div>
             <h5>{song.title}</h5>
-            <button onClick={() => handlePlayPauseClick(song)}>
+            <button className="play-pause" onClick={() => handlePlayPauseClick(song)}>
               {isPlaying && song.id === currentSong.id ? "Pause" : "Play"}
             </button>
           </li>)}
