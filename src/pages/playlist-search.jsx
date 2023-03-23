@@ -10,11 +10,14 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { PlaylistFilter } from '../cmps/playlist-filter'
 import { GenreList } from '../cmps/genre-list'
 import { AppDivider, PlayBtn } from '../cmps/form'
+import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer'
 // import { Music } from '../cmps/music'
 
 export function PlaylistSearch() {
   const playlists = useSelector(storeState => storeState.playlistModule.playlists)
   const filterBy = useSelector(storeState => storeState.playlistModule.filterBy)
+  const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
+  const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
   const dispatch = useDispatch()
   const [searchResults, setSearchResults] = useState(null)
 
@@ -40,6 +43,17 @@ export function PlaylistSearch() {
 
   console.log('searchResults:', searchResults)
 
+  const handlePlayPauseClick = (song) => {
+    if (song.id !== currentSong.id) {
+      dispatch({ type: SET_CURRENT_SONG, song })
+      dispatch({ type: ISPLAYING, isPlaying: true })
+    } else {
+      dispatch({ type: ISPLAYING, isPlaying: !isPlaying })
+      dispatch({ type: SET_CURRENT_SONG, song })
+      console.log("currentSong", currentSong)
+    }
+  };
+
   if (!playlists) return
   return <section className="main-page playlist-search">
     <PlaylistFilter onSetFilter={onSetFilter} />
@@ -47,19 +61,21 @@ export function PlaylistSearch() {
     {searchResults && <>
       <h2>Songs</h2>
       <ul className="song-list">
-        {searchResults.map(result =>
-          <li className="song-preview" key={result.id}>
+        {searchResults.map(song =>
+          <li className="song-preview" key={song.id}>
             <div className="img-container">
-              <img src={result.imgUrl} alt="" />
-              {/* <Music song={result} songId={result.id || '4m1EFMoRFvY'} /> */}
+              <img src={song.imgUrl} alt="" />
+              {/* <Music song={song} songId={song.id || '4m1EFMoRFvY'} /> */}
             </div>
             <div className="cover-container"></div>
-            <h5>{result.title}</h5>
+            <h5>{song.title}</h5>
+            <button onClick={() => handlePlayPauseClick(song)}>
+              {isPlaying && song.id === currentSong.id ? "Pause" : "Play"}
+            </button>
           </li>)}
       </ul>
     </>}
-    {/* <PlaylistList playlists={playlists} onRemovePlaylist={onRemovePlaylist}
-            onEditPlaylist={onEditPlaylist} /> */}
+
     {!searchResults && <>
       <h2>Browse all</h2>
       <GenreList />

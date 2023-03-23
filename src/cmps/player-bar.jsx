@@ -8,10 +8,24 @@ import { PlayBtnBar, RepeatBtn, ShuffleBtn, SkipBackBtn, SkipForwardBtn } from "
 
 export function PlayerBar() {
     const [time, setTime] = useState(0)
-    const playerRef = useRef(null);
     const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
+
+    const playerRef = useRef(null);
+    // console.log("playerRef", playerRef)
     const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
+    // console.log("isPlaying playerbar", isPlaying)
     const dispatch = useDispatch()
+
+    // useEffect(() => {
+    //     if (playerRef.current) return
+    //     if (playerRef.current !== null) {
+    //         if (!isPlaying) {
+    //             playerRef.current.pauseVideo();
+    //         } else {
+    //             playerRef.current.playVideo();
+    //         }
+    //     }
+    // }, [playerRef])
 
     function handleChange({ target }) {
         setTime(target.value)
@@ -21,7 +35,7 @@ export function PlayerBar() {
         height: '0',
         width: '0',
         playerVars: {
-            autoplay: 0,
+            autoplay: 1,
             controls: 0,
             showinfo: 0,
             rel: 0,
@@ -30,18 +44,29 @@ export function PlayerBar() {
 
     const onReady = (event) => {
         playerRef.current = event.target;
-    };
+    }
+    if (playerRef.current && !isPlaying) {
+        playerRef.current.pauseVideo();
+    }
+    if (playerRef.current && isPlaying) {
+        playerRef.current.playVideo();
+    }
 
-    const onPlayButtonClick = () => {
-        console.log("music play button clicked", currentSong)
-        if (isPlaying) {
+
+    const onPlayButtonClick = (ev) => {
+        const test = String(ev.target)
+        if (test.includes('SVG')) console.log("YES")
+
+        if (!isPlaying && playerRef) {
             playerRef.current.pauseVideo();
-        } else {
+        }
+        if (isPlaying && playerRef && test.includes('SVG')) {
             playerRef.current.playVideo();
         }
         // setIsPlaying(!isPlaying);
         dispatch({ type: ISPLAYING }); // Dispatch action to update current song
     };
+
 
     return <section className="player-bar">
         <div className="player-control">
@@ -51,7 +76,7 @@ export function PlayerBar() {
             <button onClick={onPlayButtonClick}>
                 {isPlaying ? <span className='fa-solid pause'></span> : <PlayBtnBar />}
             </button>
-            <YouTube videoId={currentSong.id || "4m1EFMoRFvY"} opts={opts} onReady={onReady} />
+            {currentSong && <YouTube videoId={currentSong.id || "4m1EFMoRFvY"} opts={opts} onReady={onReady} />}
 
 
             {/* <PlayBtnBar /> */}
