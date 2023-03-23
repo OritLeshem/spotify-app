@@ -49,7 +49,7 @@ export function PlaylistSearch() {
 
   // console.log('searchResults:', searchResults)
 
-  const handlePlayPauseClick = (song) => {
+  function handlePlayPauseClick(song) {
     dispatch({ type: SET_CURRENT_SONG, song })
     if (song.id !== currentSong.id) {
       dispatch({ type: ISPLAYING, isPlaying: true })
@@ -84,6 +84,7 @@ export function PlaylistSearch() {
     </>}
 
     {!searchResults && <>
+
       <h2>Browse all</h2>
       <GenreList />
       <AppDivider />

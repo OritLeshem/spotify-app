@@ -1,5 +1,5 @@
 import axios from "axios"
-const API_KEY = 'AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E'
+const API_KEY = process.env.REACT_APP_API_KEY
 
 export const youtubeService = {
   getVideoResults,
@@ -29,6 +29,3 @@ async function getVideoResults(val) {
   }
 }
 
- //https://www.googleapis.com/youtube/v3/videos?id=Q4VK9_CfOLQ&part=contentDetails&key=AIzaSyCp8KMTEjR9frWUGpSnc8Cw5cLVe7wRRDM
-         // const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&maxResults=4&type=video&key=AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E&q=${val}`)
-        // `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&maxResults=3&type=video&key=AIzaSyCp8KMTEjR9frWUGpSnc8Cw5cLVe7wRRDM&q=madona`
