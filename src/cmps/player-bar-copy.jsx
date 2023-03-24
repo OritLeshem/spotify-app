@@ -53,12 +53,12 @@ export function PlayerBar() {
         setPlayer(event.target)
         // loadPlayer(event.target)
         if (player === null) return
-
+        console.log("player", player)
         console.log(isPlaying, "HEEELLO", player)
-        if (event.target.i !== null && isPlaying) {
+        if (isPlaying) {
             player.playVideo()
         }
-        if (event.target.i !== null && !isPlaying) {
+        else {
             player.pauseVideo()
         }
     }

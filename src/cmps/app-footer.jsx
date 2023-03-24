@@ -1,6 +1,6 @@
 import { OptionsBar } from './options-bar'
 // import { PlayerBar } from './player-bar'
-import { PlayerBar } from './player-bar-copy'
+import { PlayerBar } from './player-bar'
 
 import { SongDisplay } from './song-display'
 
