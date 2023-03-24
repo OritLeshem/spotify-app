@@ -41,27 +41,36 @@ export function PlayerBar() {
     }
 
 
+    // function onReady(event) {
+    //         playerRef.current = event.target;
+    //         console.log(isPlaying, "HEEELLO", playerRef.current)
+    //         if (isPlaying) {
+    //             playerRef.current.playVideo()
+    //         }
+    //         if (playerRef.current && isPlaying) {
+    //             playerRef.current.playVideo()
+    //         }
 
+    //     }
     function onReady(event) {
         playerRef.current = event.target;
-
         console.log(isPlaying, "HEEELLO", playerRef.current)
         if (isPlaying) {
-            event.target.playVideo()
+            playerRef.current.playVideo()
         }
-        // if (playerRef.current && isPlaying) {
-        //     playerRef.current.playVideo()
-        // }
+        if (playerRef.current && isPlaying) {
+            playerRef.current.playVideo()
+        }
 
     }
 
-    // if (playerRef.current && !isPlaying) {
-    //     playerRef.current.pauseVideo()
-    // }
+    if (playerRef.current && !isPlaying) {
+        playerRef.current.pauseVideo()
+    }
 
-    // if (playerRef.current && isPlaying) {
-    //     playerRef.current.playVideo()
-    // }
+    if (playerRef.current && isPlaying) {
+        playerRef.current.playVideo()
+    }
 
     const onPlayButtonClick = (ev) => {
         const test = String(ev.target)
