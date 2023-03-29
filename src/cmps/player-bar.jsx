@@ -21,40 +21,18 @@ export function PlayerBar() {
     const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
     const playSongs = useSelector(storeState => storeState.playlistModule.playSongs)
     const playerRef = useRef(null)
-    const [player, setPlayer] = useState(null)
     const [time, setTime] = useState(0)
     const dispatch = useDispatch()
-    // useEffect(() => {
-    //     console.log(isPlaying, playerRef.current)
-    //     if (playerRef.current && !isPlaying) {
-    //         playerRef.current.pauseVideo()
-    //     }
-
-    //     if (playerRef.current && isPlaying) {
-    //         playerRef.current.playVideo()
-    //     }
-    // }, [playerRef.current, isPlaying])
 
     function handleChange({ target }) {
         setTime(target.value)
     }
 
 
-    // function onReady(event) {
-    //         playerRef.current = event.target;
-    //         console.log(isPlaying, "HEEELLO", playerRef.current)
-    //         if (isPlaying) {
-    //             playerRef.current.playVideo()
-    //         }
-    //         if (playerRef.current && isPlaying) {
-    //             playerRef.current.playVideo()
-    //         }
 
-    //     }
     function onReady(event) {
         setTimeout(() => {
             playerRef.current = event.target;
-            // console.log(isPlaying, "HEEELLO", playerRef.current)
             if (isPlaying) {
                 playerRef.current.playVideo()
             }
@@ -76,7 +54,6 @@ export function PlayerBar() {
 
     const onPlayButtonClick = (ev) => {
         const test = String(ev.target)
-        // console.log("TESSSSST", test, test.includes('Span'))
         if (!isPlaying && playerRef) {
             playerRef.current.pauseVideo()
         }

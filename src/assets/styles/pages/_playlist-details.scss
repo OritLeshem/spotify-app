@@ -17,7 +17,7 @@
   height: 100%;
   overflow: hidden;
 
-  ul {
+  .list-of-playlist {
     margin-bottom: 1.5rem;
     max-height: 45vh;
     overflow-y: scroll;
@@ -131,10 +131,6 @@
     .cover-container {
       width: 40px;
       height: 40px;
-
-      &:hover {
-        background-color: red;
-      }
     }
 
     .table-img-container {

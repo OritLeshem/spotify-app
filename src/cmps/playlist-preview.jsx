@@ -3,7 +3,7 @@ import { PlayBtn } from './form'
 
 export function PlaylistPreview({ playlist }) {
 
-    return <>
+    return <Link to={`/genre/${playlist.name.substring(0, playlist.name.indexOf("-" || ":")) || playlist.name}`}>
         <div className="img-container">
             <img src={playlist.imgUrl} alt="" />
             <PlayBtn />
@@ -12,6 +12,6 @@ export function PlaylistPreview({ playlist }) {
             <span>{playlist.name}</span>
             <h5>{playlist.description}</h5>
         </div>
-    </>
+    </Link>
 }
 

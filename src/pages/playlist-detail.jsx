@@ -2,36 +2,31 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AiFillClockCircle } from "react-icons/ai";
 
-import YouTube from 'react-youtube';
+import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer';
 
-import { playlistService } from '../services/playlist.service.local'
-import { showErrorMsg } from '../services/event-bus.service'
 import { youtubeService } from '../services/youtube.service';
-import { PlaylistFilter } from '../cmps/playlist-filter';
 import { utilService } from '../services/util.service';
-import { updatePlaylist, addSonfToPlaylist, loadPlaylist, loadPlaylists, removeSongFromPlayList, updateNamePlayList } from '../store/playlist.actions';
+
+import { showErrorMsg } from '../services/event-bus.service'
+import { PlaylistFilter } from '../cmps/playlist-filter';
+import { addSonfToPlaylist, loadPlaylist, removeSongFromPlayList } from '../store/playlist.actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPDATE_PLAYLIST } from '../store/playlist.reducer';
 import { EditModal } from '../cmps/edit-modal';
 import { Music } from '../cmps/music';
-import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer';
 
 
 export function PlaylistDetail() {
   const dispatch = useDispatch()
   const { playlistId } = useParams()
   const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
-
   let playlist = useSelector(storeState => storeState.playlistModule.playlist)
   const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
-
   const [searchResults, setSearchResults] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
   const [isOpenEdit, setIsOpenEdit] = useState(false)
-  const [playlistToEdit, setPlaylistToEdit] = useState(playlist)
+
   useEffect(() => {
     function handleResize() {
-      // console.log(window.innerWidth < 960)
       if (window.innerWidth < 700) setIsMobile(true)
       if (window.innerWidth > 700) setIsMobile(false)
     }
@@ -43,10 +38,8 @@ export function PlaylistDetail() {
   }, [])
   useEffect(() => {
     const randomColor = utilService.generateRandomColor()
-    // document.body.style.backgroundColor = ' rgb(32, 87, 100)';
     document.body.style.backgroundColor = randomColor;
 
-    // Clean up the effect
     return () => {
       document.body.style.backgroundColor = '#121212';
     };
@@ -54,15 +47,13 @@ export function PlaylistDetail() {
 
   useEffect(() => {
     loadPlaylist(playlistId)
-
   }, [playlistId])
+
   function onSetFilter(filterBy) {
     console.log("filterBy", filterBy.txt)
     youtubeService.getVideoResults(filterBy.txt)
       .then(res => setSearchResults(res))
   }
-
-
 
   function handleSong(ev, songId) {
     console.log("song, li clicked", songId);
@@ -95,12 +86,7 @@ export function PlaylistDetail() {
       dispatch({ type: ISPLAYING, isPlaying: true })
     } else {
       dispatch({ type: ISPLAYING, isPlaying: !isPlaying })
-
-      console.log("currentSong", currentSong)
     }
-
-
-
   }
 
 
@@ -121,7 +107,6 @@ export function PlaylistDetail() {
           <h1 onClick={editPlaylistNameAndImg} className='playlist-detail-header-title'>
             {name}
           </h1>
-
           {isOpenEdit && <EditModal onCloseEditModal={onCloseEditModal} />}
           <div className='playlist-detail-header-title-details'>Puki | {songs.length} songs | 14 min 57 sec</div>
         </div>
@@ -145,7 +130,7 @@ export function PlaylistDetail() {
         </div>
       </div>
 
-      <ul>{songs.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
+      <ul className='list-of-playlist'>{songs.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
         <div className="headline-table-col table-num">{index + 1}
         </div>
         <div className="headline-table-col song-detail">
@@ -154,25 +139,19 @@ export function PlaylistDetail() {
             <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
           </div>
           <div className="cover-container"></div>
-
           <div className='song-info'>
             {/* TITLE FORMATTED */}
             {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
-
-
             {/* ARTIST NAME */}
             <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
           </div>
         </div>
-
         <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
         <small onClick={(ev) => onRemoveSongFromPlayList(ev, song.id)} className='fa-regular trash-can'></small>
         <small className='song-time'>time</small>
       </li>)}
       </ul>
       {/* ///result */}
-
-
       {searchResults && <>
         <hr />
         <h3>Search results:</h3>
@@ -182,21 +161,19 @@ export function PlaylistDetail() {
           <div className="headline-table-col song-detail">
             <div className="table-img-container">
               <img src={song.imgUrl} alt="song" />
+              <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
             </div>
+            <div className="cover-container"></div>
             <div className='song-info'>
               {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
               <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
             </div>
           </div>
-
           <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
           <small onClick={() => { onAddSongTpPlayList(song) }} className='fa-regular plus'></small>
           <small className='song-time'>time</small>
-
         </li>)}
         </ul>
-
-
       </>}
     </section>
   </>

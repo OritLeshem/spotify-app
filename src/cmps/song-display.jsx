@@ -7,8 +7,9 @@ export function SongDisplay() {
     return <section className="song-display">
         {currentSong && <img src={currentSong.imgUrl} alt="" />}
         <div>
-            <h5>{currentSong.title}</h5>
-            <small>{currentSong.title}</small>
+            {/* <h5>{currentSong.title}</h5> */}
+            <h5 title={currentSong.title}>{currentSong.title.slice((currentSong.title.indexOf('-' || ':') + 2), currentSong.title.length + 1).slice(0, 15)}{currentSong.title.length > 15 && "..."}</h5>
+            <small>{currentSong.title.substring(0, currentSong.title.indexOf("-" || ":"))}</small>
         </div>
         <LikeBtn />
     </section>
