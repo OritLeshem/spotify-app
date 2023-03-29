@@ -51,10 +51,7 @@
             opacity: 1;
         }
 
-        .cover-container {
-            background-color: $bgc-hover;
-            opacity: .3;
-        }
+
     }
 }
 
@@ -74,5 +71,6 @@
     svg {
         width: 16px;
         height: 16px;
+        z-index: 4
     }
 }

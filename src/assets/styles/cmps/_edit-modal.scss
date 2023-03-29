@@ -1,0 +1,16 @@
+.edit-modal {
+  z-index: 4;
+  background-color: $bgc-base;
+
+  color: black;
+
+  .edit-name-input {
+    height: 30px;
+    width: 100px;
+  }
+
+  button {
+    color: white;
+  }
+
+}

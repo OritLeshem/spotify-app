@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
+import defaultPhoto from '../assets/imgs/add-pic.png'
 
 const STORAGE_KEY = 'playlist'
 
@@ -35,9 +36,11 @@ async function remove(playlistId) {
 }
 
 async function save(playlist) {
+  console.log("hello from save service")
   let savedPlaylist
   if (playlist._id) {
     savedPlaylist = await storageService.put(STORAGE_KEY, playlist)
+    console.log("hello from save service", savedPlaylist)
   } else {
     // Later, owner is set by the backend
     // playlist.owner = userService.getLoggedinUser()
@@ -46,8 +49,33 @@ async function save(playlist) {
   return savedPlaylist
 }
 
-function getEmptyPlaylist(title = '', price = 0) {
-  return { title, price }
+function getEmptyPlaylist() {
+  return {
+    name: "playlist",
+    tags: ["Funk", "Happy"],
+    createdBy: {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "http://some-photo/"
+    },
+    // imgUrl: "../assets/img/add-pic.png",
+    imgUrl: defaultPhoto,
+
+    songs: [{
+      "id": "Q4VK9_CfOLQ",
+      "title": "Spears1",
+      "url": "youtube/song.mp4",
+      "imgUrl": "https://i.ytimg.com/vi/C-u5WLJ9Yk4/default.jpg",
+      "artist": "Spears"
+    },
+    {
+      "id": "8YzabSdk7ZA",
+      "title": "Spears2",
+      "url": "youtube/song.mp4",
+      "imgUrl": "https://i.ytimg.com/vi/CduA0TULnow/default.jpg",
+      "artist": "Spears"
+    }]
+  }
 }
 
 function getDefaultFilter() {
@@ -209,16 +237,7 @@ function hiphop() {
       ],
       "imgUrl": "https://i.ytimg.com/vi/4UZtwZYB55Q/hqdefault.jpg",
     },
-    {
-      "id": "y1XBVJV236A",
-      "name": "HIP HOP PARTY MIX",
-      "description": "Follow 90'S HIP HOP MIX🏆️ ",
-      "tags": [
-        "Hiphop",
-        "Happy"
-      ],
-      "imgUrl": "https://i.ytimg.com/vi/y1XBVJV236A/hqdefault.jpg",
-    },
+
     {
       "id": "bImx3tpGR5w",
       "name": "Hip Hop Mix 2020",
@@ -297,16 +316,7 @@ function latin() {
       "Happy"
     ],
     "songs": [
-      {
-        "id": "cKr46JBACIg",
-        "name": "Musica 2022 Los Mas Nuevo",
-        "description": "Musica 2022 Los Mas Nuevo - Pop Latino 2022 - Mix Canciones Reggaeton 2022! Luis Fonsi, Sebastian Yatra, Nacho, Wisin, ...",
-        "tags": [
-          "latino",
-          "Happy"
-        ],
-        "imgUrl": "https://i.ytimg.com/vi/cKr46JBACIg/hqdefault_live.jpg",
-      },
+
       {
         "id": "2pXRfMy-aEM",
         "name": "Fiesta Latina Mix 2020",

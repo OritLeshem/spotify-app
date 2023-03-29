@@ -1,5 +1,5 @@
 import { store } from './store'
-import { SET_PLAYLIST, ADD_SONG_TO_PLAYLIST, REMOVE_SONG_FROM_PLAYLIST, ADD_PLAYLIST, REMOVE_PLAYLIST, SET_PLAYLISTS, UNDO_REMOVE_PLAYLIST, UPDATE_PLAYLIST } from './playlist.reducer'
+import { SET_PLAYLIST, ADD_SONG_TO_PLAYLIST, REMOVE_SONG_FROM_PLAYLIST, ADD_PLAYLIST, REMOVE_PLAYLIST, SET_PLAYLISTS, UNDO_REMOVE_PLAYLIST, UPDATE_PLAYLIST, UPDATE_NAME_PLAYLIST } from './playlist.reducer'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { playlistService } from '../services/playlist.service.local'
@@ -120,3 +120,88 @@ export async function removeSongFromPlayList(playlistId, songId) {
     }
 }
 
+export async function editNameOfPlayList(playlistId, newName) {
+    console.log(typeof (playlistId), newName)
+    try {
+        console.log("first")
+        const playlist = await playlistService.getById(playlistId)
+        let newPlaylist = { ...playlist, name: newName }
+        console.log("NEW", newPlaylist)
+        await playlistService.save(newPlaylist)
+
+        store.dispatch({ type: UPDATE_PLAYLIST, playlist: newPlaylist })
+    } catch (err) {
+        console.log('Cannot remove playlist', err)
+        throw err
+    }
+}
+
+export async function savePlaylist(playlist) {
+    console.log(playlist._id, playlist.name)
+    const type = (playlist._id) ? UPDATE_PLAYLIST : ADD_PLAYLIST
+    console.log(playlist._id, playlist.name, type)
+    try {
+        const savedPlaylist = await playlistService.save(playlist)
+        console.log("savedPlaylist", savedPlaylist)
+
+        store.dispatch({ type, playlist: savedPlaylist })
+        return savedPlaylist
+    }
+    catch (err) {
+        console.error('Cannot save playlist:', err)
+        throw err
+    }
+}
+export function getActionUpdateGig(playlist) {
+    return {
+        type: UPDATE_PLAYLIST,
+        playlist
+    }
+}
+export async function updateGig(gig) {
+    console.log(gig)
+    try {
+        const savedGig = await playlistService.save(gig)
+        console.log('Updated Gig action store:', savedGig)
+        store.dispatch(getActionUpdateGig(savedGig))
+        return savedGig
+    } catch (err) {
+        console.log('Cannot save gig', err)
+        throw err
+    }
+}
+
+// export async function updateNaneOfPlayList(playlistId, newName) {
+//     console.log(playlistId, newName)
+//     try {
+//         let playlist = await playlistService.getById(playlistId)
+//         console.log("pp", playlist)
+//         await playlistService.save({ ...playlist, name: newName })
+//         store.dispatch(getActionUpdateNameOfPlaylist(playlist, newName))
+//         console.log(playlist.songs.length)
+//     } catch (err) {
+//         console.log('Cannot remove playlist', err)
+//         throw err
+//     }
+// }
+
+export function updateNaneOfPlayList(playlistId, newName) {
+    console.log(playlistId, newName)
+    playlistService.getById(playlistId)
+        .then(playlist => {
+            console.log("pp", playlist)
+            return playlistService.save({ ...playlist, name: newName })
+        })
+        .then(updatedPlaylist => {
+            store.dispatch(getActionUpdateNameOfPlaylist(updatedPlaylist, newName))
+            console.log(updatedPlaylist.songs.length)
+        })
+        .catch(err => {
+            console.log('Cannot remove playlist', err)
+            throw err
+        })
+}
+
+export function getActionUpdateNameOfPlaylist(playlist, newName) {
+    return { type: UPDATE_NAME_PLAYLIST, newName }
+}

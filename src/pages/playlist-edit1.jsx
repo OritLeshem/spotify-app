@@ -5,30 +5,29 @@ import { AiFillClockCircle } from "react-icons/ai";
 import YouTube from 'react-youtube';
 
 import { playlistService } from '../services/playlist.service.local'
-import { showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { youtubeService } from '../services/youtube.service';
 import { PlaylistFilter } from '../cmps/playlist-filter';
+// import { Music } from '../cmps/music';
 import { utilService } from '../services/util.service';
-import { updatePlaylist, addSonfToPlaylist, loadPlaylist, loadPlaylists, removeSongFromPlayList, updateNamePlayList } from '../store/playlist.actions';
+import { addSonfToPlaylist, loadPlaylist, loadPlaylists, removeSongFromPlayList, savePlaylist, updatePlaylist } from '../store/playlist.actions';
+import { SET_PLAYLIST } from '../store/playlist.reducer'
 import { useDispatch, useSelector } from 'react-redux';
-import { UPDATE_PLAYLIST } from '../store/playlist.reducer';
-import { EditModal } from '../cmps/edit-modal';
-import { Music } from '../cmps/music';
-import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer';
+import { uploadService } from '../services/upload.service';
 
 
-export function PlaylistDetail() {
-  const dispatch = useDispatch()
+
+export function PlaylistEdit() {
+  const [playlistToEdit, setPlaylistToEdit] = useState(playlistService.getEmptyPlaylist())
+  console.log(playlistToEdit)
   const { playlistId } = useParams()
-  const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
-
-  let playlist = useSelector(storeState => storeState.playlistModule.playlist)
-  const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
-
+  const playlist = useSelector(storeState => storeState.playlistModule.playlist)
   const [searchResults, setSearchResults] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
-  const [isOpenEdit, setIsOpenEdit] = useState(false)
-  const [playlistToEdit, setPlaylistToEdit] = useState(playlist)
+  const [isEditing, setIsEditing] = useState(false)
+  const [imgUrl, setImgUrl] = useState(null)
+  const [nameOfPlaylist, setNameOfPlaylist] = useState('tsilyalp');
+  const dispatch = useDispatch()
   useEffect(() => {
     function handleResize() {
       // console.log(window.innerWidth < 960)
@@ -53,16 +52,73 @@ export function PlaylistDetail() {
   }, [playlistId]);
 
   useEffect(() => {
-    loadPlaylist(playlistId)
+    dispatch({ type: SET_PLAYLIST, playlist: null })
+    // loadPlaylist(playlistToEdit)
 
-  }, [playlistId])
-  function onSetFilter(filterBy) {
-    console.log("filterBy", filterBy.txt)
-    youtubeService.getVideoResults(filterBy.txt)
-      .then(res => setSearchResults(res))
+  }, [playlistId, setImgUrl])
+
+  // function onSetFilter(filterBy) {
+  //   console.log("filterBy", filterBy.txt)
+  //   youtubeService.getVideoResults(filterBy.txt)
+  //     .then(res => setSearchResults(res))
+  // }
+  function handleChange({ target }) {
+    let { value, type, name: field } = target
+    value = type === 'number' ? +value : value
+    setPlaylistToEdit((prev) => ({ ...prev, [field]: value }))
   }
 
+  const handleTextChange = (e) => {
+    const childNodes = e.target.childNodes;
+    let newText = '';
 
+    for (let i = 0; i < childNodes.length; i++) {
+      if (childNodes[i].nodeName === '#text') {
+        newText += childNodes[i].textContent;
+      }
+    }
+
+    if (newText.trim() !== '') {
+      setNameOfPlaylist(newText);
+    }
+    setPlaylistToEdit(prev => ({ ...prev, name: newText }))
+    console.log("play list to edit", playlistToEdit)
+  };
+
+
+
+
+  async function onSavePlaylist(ev) {
+    ev.preventDefault()
+    setIsEditing(false)
+    try {
+      const playlist = await savePlaylist(playlistToEdit)
+      console.log('toy saved', playlist);
+      showSuccessMsg('saved Playlist!')
+      dispatch({ type: SET_PLAYLIST, playlist })
+      console.log(playlist)
+    }
+    catch (err) {
+      console.log('err', err)
+      showErrorMsg('Cannot save playlist')
+    }
+  }
+
+  async function onUploadImg(ev) {
+    console.log("img was clicked")
+    try {
+      const newImgUrl = await uploadService.uploadImg(ev)
+      console.log("imgurl", imgUrl)
+      setPlaylistToEdit((prev) => ({ ...prev, imgUrl: newImgUrl }))
+      const playlist = await savePlaylist(playlistToEdit)
+      setImgUrl(newImgUrl)
+      console.log(playlist.imgUrl)
+      showSuccessMsg('saved img!')
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
 
   function handleSong(ev, songId) {
     console.log("song, li clicked", songId);
@@ -81,35 +137,81 @@ export function PlaylistDetail() {
     }
     addSonfToPlaylist(playlistId, song)
   }
-  function onCloseEditModal() {
-    setIsOpenEdit(false)
+  const onEditImgClick = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.addEventListener('change', onUploadImg)
+    input.click()
   }
-  function editPlaylistNameAndImg() {
-    setIsOpenEdit(true)
-  }
 
-
-  function handlePlayPauseClick(song) {
-    dispatch({ type: SET_CURRENT_SONG, song })
-    if (song.id !== currentSong.id) {
-      dispatch({ type: ISPLAYING, isPlaying: true })
-    } else {
-      dispatch({ type: ISPLAYING, isPlaying: !isPlaying })
-
-      console.log("currentSong", currentSong)
+  const toggleEditing = (e) => {
+    // Only change the state if the input field loses focus due to clicking outside of it
+    if (e.relatedTarget !== e.currentTarget) {
+      setIsEditing(false);
     }
+  };
 
 
+  if (!playlist) return <section className="main-page playlist-details">
+    <div className='playlist-detail-header'>
 
-  }
+      <div className='playlist-header-img-container '>
 
+        <img onClick={onEditImgClick} src={playlistToEdit.imgUrl} />
 
-  if (!playlist) return
+      </div>
+      {/* <img onClick={onEditImgClick} src={playlistToEdit.imgUrl} /> */}
+
+      <div className='playlist-detail-header-info'>
+        <div className='playlist-detail-header-title-detail'>Playlist</div>
+
+        {/* <h1 className='playlist-edit-name' contentEditable={true} onInput={handleTextChange} style={{ unicodeBidi: 'bidi-override', direction: 'rtl' }}>
+          {nameOfPlaylist}
+          <h1>{playlistToEdit.name}</h1>
+        </h1> */}
+        <h1 onClick={() => setIsEditing(true)} className='playlist-detail-header-title'>{playlistToEdit.name}</h1>
+        <div className='playlist-detail-header-title-details'>Puki |  songs | 14 min 50 sec</div>
+        {isEditing &&
+          <form onSubmit={onSavePlaylist}>
+            <input type="text"
+              name="name"
+              className='playlist-detail-header-title-input'
+              id="name"
+              placeholder="playlist name..."
+              // value={playlistToEdit.name}
+              onChange={handleChange}
+              onBlur={toggleEditing}
+
+            />
+            <button onMouseDown={onSavePlaylist} type="submit">save</button>
+          </form>}
+
+      </div>
+    </div>
+    <div className="headline-table-title">
+      <div className="header-row">
+        <div className="headline-table-col">
+          <span>#</span>
+        </div>
+        <div className="headline-table-col">
+          <span>TITLE</span>
+        </div>
+        <div className="headline-table-col">
+          <span>ALBUM</span>
+        </div>
+        <div className="headline-table-col">
+          <span>
+            <AiFillClockCircle />
+          </span>
+        </div>
+      </div>
+    </div></section >
+
   const { name, songs } = playlist
-
   return <>
     <section className="main-page playlist-search">
-      <PlaylistFilter onSetFilter={onSetFilter} />
+      {/* <PlaylistFilter onSetFilter={onSetFilter} /> */}
     </section>
 
     <section className="main-page playlist-details">
@@ -117,13 +219,9 @@ export function PlaylistDetail() {
         <div className='playlist-header-img-container '> <img src={songs[0].imgUrl} /></div>
         <div className='playlist-detail-header-info'>
           <div className='playlist-detail-header-title-detail'>Playlist</div>
+          <h1 className='playlist-detail-header-title'>{name}</h1>
+          <div className='playlist-detail-header-title-details'>Puki | {songs.length} songs | 14 min 50 sec</div>
 
-          <h1 onClick={editPlaylistNameAndImg} className='playlist-detail-header-title'>
-            {name}
-          </h1>
-
-          {isOpenEdit && <EditModal onCloseEditModal={onCloseEditModal} />}
-          <div className='playlist-detail-header-title-details'>Puki | {songs.length} songs | 14 min 57 sec</div>
         </div>
       </div>
       <div className="headline-table-title">
@@ -149,12 +247,9 @@ export function PlaylistDetail() {
         <div className="headline-table-col table-num">{index + 1}
         </div>
         <div className="headline-table-col song-detail">
-          <div className="table-img-container ">
+          <div className="table-img-container">
             <img src={song.imgUrl} alt="song" />
-            <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
           </div>
-          <div className="cover-container"></div>
-
           <div className='song-info'>
             {/* TITLE FORMATTED */}
             {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
@@ -162,6 +257,7 @@ export function PlaylistDetail() {
 
             {/* ARTIST NAME */}
             <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+
           </div>
         </div>
 

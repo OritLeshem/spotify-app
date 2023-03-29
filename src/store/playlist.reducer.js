@@ -11,6 +11,7 @@ export const REMOVE_SONG_FROM_PLAYLIST = 'REMOVE_SONG_FROM_PLAYLIST'
 export const SET_PLAYLIST = 'SET_PLAYLIST'
 export const ADD_SONG_TO_PLAYLIST = 'ADD_SONG_TO_PLAYLIST'
 export const SET_SONGS_LIST = 'SET_SONGS_LIST'
+export const UPDATE_NAME_PLAYLIST = 'UPDATE_NAME_PLAYLIST'
 const initialState = {
     playlists: [],
     playlist: null,
@@ -38,6 +39,7 @@ export function playlistReducer(state = initialState, action) {
         case UPDATE_PLAYLIST:
             playlists = state.playlists.map(playlist => (playlist._id === action.playlist._id) ? action.playlist : playlist)
             newState = { ...state, playlists }
+            console.log("PLAYLISTS", playlists)
             break
         case UNDO_REMOVE_PLAYLIST:
             if (state.lastRemovedPlaylist) {
@@ -60,6 +62,9 @@ export function playlistReducer(state = initialState, action) {
             break
         case ADD_SONG_TO_PLAYLIST:
             newState = { ...state, playlist: action.playlist }
+            break
+        case UPDATE_NAME_PLAYLIST:
+            newState = { ...state, playlist: { ...state.playlist, name: action.newName } }
             break
         default:
     }

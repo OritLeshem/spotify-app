@@ -11,7 +11,7 @@ import { PlaylistFilter } from '../cmps/playlist-filter'
 import { GenreList } from '../cmps/genre-list'
 import { AppDivider, PlayBtn } from '../cmps/form'
 import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer'
-// import { Music } from '../cmps/music'
+import { Music } from '../cmps/music'
 
 export function PlaylistSearch() {
   const playlists = useSelector(storeState => storeState.playlistModule.playlists)
@@ -75,7 +75,7 @@ export function PlaylistSearch() {
           <li className="song-preview" key={song.id}>
             <div className="img-container">
               <img src={song.imgUrl} alt="" />
-              {/* <Music song={song} songId={song.id || '4m1EFMoRFvY'} /> */}
+              <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
             </div>
             <div className="cover-container"></div>
             <h5>{song.title}</h5>

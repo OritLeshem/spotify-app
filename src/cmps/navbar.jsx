@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { loadPlaylists } from '../store/playlist.actions'
 import { CreatePlaylist, HomePageSvg, LibrarySvg, LikedSongs, Logo, SearchSvg } from './form'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { SET_PLAYLIST } from '../store/playlist.reducer'
 export function Navbar() {
   const [isMobile, setIsMobile] = useState(false)
   const [activeNav, setActiveNav] = useState('#')
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   function handleHome() {
     navigate('/')
     setActiveNav('#')
@@ -21,12 +23,14 @@ export function Navbar() {
     setActiveNav('#playlist')
   }
   function handleCreate() {
+    const newPlaylist = null
+    dispatch({ type: SET_PLAYLIST, playlist: newPlaylist })
     navigate('/create')
     setActiveNav('#create')
   }
   useEffect(() => {
     function handleResize() {
-      console.log(window.innerWidth < 960)
+      // console.log(window.innerWidth < 960)
       if (window.innerWidth < 960) setIsMobile(true)
       if (window.innerWidth > 960) setIsMobile(false)
     }
@@ -39,7 +43,7 @@ export function Navbar() {
   const playlists = useSelector(storeState => storeState.playlistModule.playlists)
   useEffect(() => {
     loadPlaylists()
-    console.log(playlists)
+    // console.log(playlists)
   }, [])
 
   // const playlists = ['My First List', 'Pop Songs List']
@@ -57,7 +61,7 @@ export function Navbar() {
       </NavLink>
     </nav>
     <div className="preferences">
-      <NavLink to="/create"><CreatePlaylist /><h3>Create Playlist</h3></NavLink>
+      <NavLink onClick={handleCreate} to="/create"><CreatePlaylist /><h3>Create Playlist</h3></NavLink>
       <NavLink to="/liked"><LikedSongs /><h3>Liked Songs</h3></NavLink>
     </div>
     <div className="divider"></div>
