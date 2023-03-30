@@ -17,13 +17,10 @@ import { uploadService } from '../services/upload.service';
 export function PlaylistEdit() {
   const [playlistToEdit, setPlaylistToEdit] = useState(playlistService.getEmptyPlaylist())
   // console.log(playlistToEdit.imgUrl === defaultPhoto)
-  const { playlistId } = useParams()
   const playlist = useSelector(storeState => storeState.playlistModule.playlist)
-  const [searchResults, setSearchResults] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [imgUrl, setImgUrl] = useState(null)
-  const [nameOfPlaylist, setNameOfPlaylist] = useState('tsilyalp');
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -59,6 +56,7 @@ export function PlaylistEdit() {
       const playlist = await savePlaylist(playlistToEdit)
       showSuccessMsg('saved Playlist!')
       dispatch({ type: SET_PLAYLIST, playlist })
+      console.log(imgUrl === defaultPhoto, imgUrl, defaultPhoto)
       navigate(`/detail/${playlist._id}`)
     }
     catch (err) {
@@ -88,15 +86,8 @@ export function PlaylistEdit() {
     input.click()
   }
 
-  const toggleEditing = (e) => {
-    // Only change the state if the input field loses focus due to clicking outside of it
-    if (e.relatedTarget !== e.currentTarget) {
-      setIsEditing(false);
-    }
-  };
 
-
-  if (!playlist) return <section className="main-page playlist-details">
+  return <section className="main-page playlist-details">
     <div className='playlist-detail-header'>
 
       <div className='playlist-header-img-container '>
@@ -122,7 +113,6 @@ export function PlaylistEdit() {
             placeholder="playlist name..."
             // value={playlistToEdit.name}
             onChange={handleChange}
-            onBlur={toggleEditing}
 
           />
           <button onMouseDown={onSavePlaylist} type="submit">save</button>

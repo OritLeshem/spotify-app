@@ -36,7 +36,6 @@ async function remove(playlistId) {
 }
 
 async function save(playlist) {
-  console.log("hello from save service")
   let savedPlaylist
   if (playlist._id) {
     savedPlaylist = await storageService.put(STORAGE_KEY, playlist)
@@ -61,20 +60,7 @@ function getEmptyPlaylist() {
     // imgUrl: "../assets/img/add-pic.png",
     imgUrl: defaultPhoto,
 
-    songs: [{
-      "id": "Q4VK9_CfOLQ",
-      "title": "Spears1",
-      "url": "youtube/song.mp4",
-      "imgUrl": "https://i.ytimg.com/vi/C-u5WLJ9Yk4/default.jpg",
-      "artist": "Spears"
-    },
-    {
-      "id": "8YzabSdk7ZA",
-      "title": "Spears2",
-      "url": "youtube/song.mp4",
-      "imgUrl": "https://i.ytimg.com/vi/CduA0TULnow/default.jpg",
-      "artist": "Spears"
-    }]
+    songs: []
   }
 }
 

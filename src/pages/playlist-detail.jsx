@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AiFillClockCircle } from "react-icons/ai";
+import defaultPhoto from '../assets/imgs/add-pic.png'
 
 import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer';
 
@@ -11,7 +12,6 @@ import { showErrorMsg } from '../services/event-bus.service'
 import { PlaylistFilter } from '../cmps/playlist-filter';
 import { addSonfToPlaylist, loadPlaylist, removeSongFromPlayList } from '../store/playlist.actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { EditModal } from '../cmps/edit-modal';
 import { Music } from '../cmps/music';
 
 
@@ -23,7 +23,6 @@ export function PlaylistDetail() {
   const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
   const [searchResults, setSearchResults] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
-  const [isOpenEdit, setIsOpenEdit] = useState(false)
 
   useEffect(() => {
     function handleResize() {
@@ -72,13 +71,6 @@ export function PlaylistDetail() {
     }
     addSonfToPlaylist(playlistId, song)
   }
-  function onCloseEditModal() {
-    setIsOpenEdit(false)
-  }
-  function editPlaylistNameAndImg() {
-    setIsOpenEdit(true)
-  }
-
 
   function handlePlayPauseClick(song) {
     dispatch({ type: SET_CURRENT_SONG, song })
@@ -100,14 +92,14 @@ export function PlaylistDetail() {
 
     <section className="main-page playlist-details">
       <div className='playlist-detail-header'>
-        <div className='playlist-header-img-container '> <img src={songs[0].imgUrl} /></div>
+        <div className='playlist-header-img-container '> <img src={playlist.imgUrl !== defaultPhoto ? playlist.imgUrl : songs.length ? songs[0].imgUrl : defaultPhoto} /></div>
         <div className='playlist-detail-header-info'>
           <div className='playlist-detail-header-title-detail'>Playlist</div>
 
-          <h1 onClick={editPlaylistNameAndImg} className='playlist-detail-header-title'>
+          <h1 className='playlist-detail-header-title'>
             {name}
           </h1>
-          {isOpenEdit && <EditModal onCloseEditModal={onCloseEditModal} />}
+
           <div className='playlist-detail-header-title-details'>Puki | {songs.length} songs | 14 min 57 sec</div>
         </div>
       </div>
