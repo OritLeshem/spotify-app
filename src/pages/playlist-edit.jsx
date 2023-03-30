@@ -24,7 +24,9 @@ export function PlaylistEdit() {
   const [isEditing, setIsEditing] = useState(false)
   const [imgUrl, setImgUrl] = useState(null)
   const [nameOfPlaylist, setNameOfPlaylist] = useState('tsilyalp');
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch({ type: SET_PLAYLIST, playlist: null })
     if (playlist) loadPlaylist(playlist)
@@ -42,17 +44,6 @@ export function PlaylistEdit() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-  useEffect(() => {
-    const randomColor = utilService.generateRandomColor()
-    document.body.style.backgroundColor = randomColor;
-
-    // Clean up the effect
-    return () => {
-      document.body.style.backgroundColor = '#121212';
-    };
-  }, [playlistId]);
-
-
 
   function handleChange({ target }) {
     let { value, type, name: field } = target
@@ -60,35 +51,15 @@ export function PlaylistEdit() {
     setPlaylistToEdit((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleTextChange = (e) => {
-    const childNodes = e.target.childNodes;
-    let newText = '';
-
-    for (let i = 0; i < childNodes.length; i++) {
-      if (childNodes[i].nodeName === '#text') {
-        newText += childNodes[i].textContent;
-      }
-    }
-
-    if (newText.trim() !== '') {
-      setNameOfPlaylist(newText);
-    }
-    setPlaylistToEdit(prev => ({ ...prev, name: newText }))
-    console.log("play list to edit", playlistToEdit)
-  };
-
-
-
 
   async function onSavePlaylist(ev) {
     ev.preventDefault()
     setIsEditing(false)
     try {
       const playlist = await savePlaylist(playlistToEdit)
-      console.log('playlist saved', playlist);
       showSuccessMsg('saved Playlist!')
       dispatch({ type: SET_PLAYLIST, playlist })
-      console.log(playlist)
+      navigate('/detail/5cksxjas89xjsa8xjsa8jxs091')
     }
     catch (err) {
       console.log('err', err)
@@ -100,8 +71,6 @@ export function PlaylistEdit() {
     try {
       const newImgUrl = await uploadService.uploadImg(ev)
       setPlaylistToEdit((prev) => ({ ...prev, imgUrl: newImgUrl }))
-      const playlist = await savePlaylist(playlistToEdit)
-      dispatch({ type: SET_PLAYLIST, playlist })
       setImgUrl(newImgUrl)
       showSuccessMsg('saved img!')
     }
@@ -110,23 +79,7 @@ export function PlaylistEdit() {
     }
   }
 
-  function handleSong(ev, songId) {
-    console.log("song, li clicked", songId);
-  }
 
-  function onRemoveSongFromPlayList(ev, songId) {
-    ev.stopPropagation()
-    console.log("remove song", songId)
-    removeSongFromPlayList(playlistId, songId)
-  }
-  function onAddSongTpPlayList(song) {
-    console.log("add song", song)
-    if (playlist?.songs.some(checkSong => checkSong.id === song.id)) {
-      showErrorMsg("This song is already in this playlist")
-      return
-    }
-    addSonfToPlaylist(playlistId, song)
-  }
   const onEditImgClick = () => {
     const input = document.createElement('input')
     input.type = 'file'
@@ -160,82 +113,23 @@ export function PlaylistEdit() {
           <h1>{playlistToEdit.name}</h1>
         </h1> */}
         <h1 onClick={() => setIsEditing(true)} className='playlist-detail-header-title'>{playlistToEdit.name}</h1>
-        <div className='playlist-detail-header-title-details'>Puki |  songs | 14 min 50 sec</div>
-        {isEditing &&
-          <form onSubmit={onSavePlaylist}>
-            <input type="text"
-              name="name"
-              className='playlist-detail-header-title-input'
-              id="name"
-              placeholder="playlist name..."
-              // value={playlistToEdit.name}
-              onChange={handleChange}
-              onBlur={toggleEditing}
 
-            />
-            <button onMouseDown={onSavePlaylist} type="submit">save</button>
-          </form>}
+        <form onSubmit={onSavePlaylist}>
+          <input type="text"
+            name="name"
+            className='playlist-detail-header-title-input'
+            id="name"
+            placeholder="playlist name..."
+            // value={playlistToEdit.name}
+            onChange={handleChange}
+            onBlur={toggleEditing}
+
+          />
+          <button onMouseDown={onSavePlaylist} type="submit">save</button>
+        </form>
 
       </div>
     </div>
-    <div className="headline-table-title">
-      <div className="header-row">
-        <div className="headline-table-col">
-          <span>#</span>
-        </div>
-        <div className="headline-table-col">
-          <span>TITLE</span>
-        </div>
-        <div className="headline-table-col">
-          <span>ALBUM</span>
-        </div>
-        <div className="headline-table-col">
-          <span>
-            <AiFillClockCircle />
-          </span>
-        </div>
-      </div>
-    </div></section >
+  </section >
 
-  const { name, songs } = playlist
-  return <>
-    <section className="main-page playlist-search">
-      {/* <PlaylistFilter onSetFilter={onSetFilter} /> */}
-    </section>
-
-    <section className="main-page playlist-details">
-      <div className='playlist-detail-header'>
-        <div className='playlist-header-img-container '> <img src={playlistToEdit.imgUrl === defaultPhoto ? songs[0].imgUrl : playlistToEdit.imgUrl} /></div>
-        <div className='playlist-detail-header-info'>
-          <div className='playlist-detail-header-title-detail'>Playlist</div>
-          <h1 className='playlist-detail-header-title'>{name}</h1>
-          <div className='playlist-detail-header-title-details'>Puki | {songs.length} songs | 14 min 50 sec</div>
-
-        </div>
-      </div>
-      <div className="headline-table-title">
-        <div className="header-row">
-          <div className="headline-table-col">
-            <span>#</span>
-          </div>
-          <div className="headline-table-col">
-            <span>TITLE</span>
-          </div>
-          <div className="headline-table-col">
-            <span>ALBUM</span>
-          </div>
-          <div className="headline-table-col">
-            <span>
-              <AiFillClockCircle />
-            </span>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-    </section>
-  </>
 }

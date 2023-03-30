@@ -1,11 +1,13 @@
 .playlist-search {
+
+
     .play-pause {
         &:active {
             transform: scale(1.1);
         }
     }
 
-    height: 90vh;
+    height: 100%;
 
     h2 {
         margin-bottom: em(16px, 24px);
@@ -14,15 +16,30 @@
 
 .song-list {
     width: 50%;
+    height: 100%;
+    margin-bottom: 6vh;
+
 }
 
 .song-preview {
-    @include flex;
+    display: flex;
     border-radius: em(4px);
     padding: .5em;
+    width: 90vw;
+
+    .song-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 1rem;
+        padding: 0;
+
+    }
 
     h5 {
         color: $clr-txt;
+        margin-left: 1rem;
     }
 
     .cover-container,

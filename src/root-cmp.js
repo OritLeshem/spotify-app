@@ -10,7 +10,6 @@ import { Navbar } from './cmps/navbar'
 import { UserMsg } from './cmps/user-msg'
 import { PlaylistEdit } from './pages/playlist-edit'
 import { PlaylistGenre } from './pages/playlist-genre'
-// import { PlaylistEdit } from './cmps/modal1'
 export function RootCmp() {
 
 
@@ -22,9 +21,7 @@ export function RootCmp() {
         <Route path="/" element={<HomePage />} />
         <Route path="/playlist" element={<PlaylistIndex />} />
         <Route path="/search" element={<PlaylistSearch />} />
-        {/* <Route path="/create" element={<PlaylistEdit />} /> */}
         <Route path="/create" element={<PlaylistEdit />} />
-
         <Route path="/detail/:playlistId" element={<PlaylistDetail />} />
         <Route path="/genre/:genreName" element={<PlaylistGenre />} />
 

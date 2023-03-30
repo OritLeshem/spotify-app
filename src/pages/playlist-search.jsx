@@ -15,17 +15,27 @@ import { Music } from '../cmps/music'
 
 export function PlaylistSearch() {
   const playlists = useSelector(storeState => storeState.playlistModule.playlists)
-  const playSongs = useSelector(storeState => storeState.playlistModule.playSongs)
   const filterBy = useSelector(storeState => storeState.playlistModule.filterBy)
   const isPlaying = useSelector(storeState => storeState.playerModule.isPlaying)
   const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
   const dispatch = useDispatch()
   const [searchResults, setSearchResults] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     onLoadPlaylists(filterBy)
   }, [filterBy])
-
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 700) setIsMobile(true)
+      if (window.innerWidth > 700) setIsMobile(false)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
   async function onLoadPlaylists(filterBy) {
     try {
       await loadPlaylists(filterBy)
@@ -42,12 +52,8 @@ export function PlaylistSearch() {
         dispatch({ type: SET_SONGS_LIST, playSongs: res })
         console.log(res)
       })
-
-
     dispatch({ type: SET_FILTER, filterBy })
   }
-
-  // console.log('searchResults:', searchResults)
 
   function handlePlayPauseClick(song) {
     dispatch({ type: SET_CURRENT_SONG, song })
@@ -78,10 +84,20 @@ export function PlaylistSearch() {
               <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
             </div>
             <div className="cover-container"></div>
-            <h5>{song.title}</h5>
-            <button className="play-pause" onClick={() => handlePlayPauseClick(song)}>
-              {isPlaying && song.id === currentSong.id ? "Pause" : "Play"}
-            </button>
+            {/* <h5>{song.title}</h5> */}
+
+            <div className='song-info'>
+              {/* TITLE FORMATTED */}
+              {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+              {/* ARTIST NAME */}
+              <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+            </div>
+            {/* {(!isMobile) ? <h5 title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2),
+              song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</h5> :
+              <h5 title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2),
+                song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</h5>} */}
+
+
           </li>)}
       </ul>
     </>}

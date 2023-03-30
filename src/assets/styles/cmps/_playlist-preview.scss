@@ -1,10 +1,11 @@
 .playlist-preview {
     background-color: $bgc-highlight;
+    width: fit-content;
     padding: 1em;
     border-radius: em(6px);
     max-width: 204px;
 
-    .img-container {
+    .img-container-preview {
         position: relative;
         overflow: hidden;
         width: 167px;

@@ -31,11 +31,11 @@ export function HomePage() {
   if (!pop) return
   return <section className="main-page home-page">
     {/* <Music /> */}
-    <h2>POP</h2>
+    <h2 className='home-page-title'>POP</h2>
     <PlaylistList playlists={pop.songs} />
-    <h2>HIPHOP</h2>
+    <h2 className='home-page-title'>HIPHOP</h2>
     <PlaylistList playlists={hiphop.songs} />
-    <h2>LATIN</h2>
+    <h2 className='home-page-title'>LATIN</h2>
     <PlaylistList playlists={latin.songs} />
   </section >
 }
