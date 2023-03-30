@@ -59,7 +59,7 @@ export function PlaylistEdit() {
       const playlist = await savePlaylist(playlistToEdit)
       showSuccessMsg('saved Playlist!')
       dispatch({ type: SET_PLAYLIST, playlist })
-      navigate('/detail/5cksxjas89xjsa8xjsa8jxs091')
+      navigate(`/detail/${playlist._id}`)
     }
     catch (err) {
       console.log('err', err)
