@@ -13,6 +13,7 @@ const initialState = {
             "Happy"
         ],
         "imgUrl": "https://i.ytimg.com/vi/4m1EFMoRFvY/hqdefault.jpg",
+        currentTime: 0
     },
     count: 1,
     isPlaying: false

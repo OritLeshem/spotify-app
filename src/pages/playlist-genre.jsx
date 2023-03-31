@@ -57,7 +57,7 @@ export function PlaylistGenre() {
       </div>
     </div>
 
-    <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
+    {searchResults && <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
       <div className="headline-table-col table-num">{index + 1}
       </div>
       <div className="headline-table-col song-detail">
@@ -73,7 +73,7 @@ export function PlaylistGenre() {
       </div>
 
     </li>)}
-    </ul>
+    </ul>}
 
 
 

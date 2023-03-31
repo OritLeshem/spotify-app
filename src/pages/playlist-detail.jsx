@@ -147,7 +147,7 @@ export function PlaylistDetail() {
       {searchResults && <>
         <hr />
         <h3>Search results:</h3>
-        <ul className='playlist-detail-result-list'>{searchResults.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
+        <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
           <div className="headline-table-col table-num">{index + 1}
           </div>
           <div className="headline-table-col song-detail">
