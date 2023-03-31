@@ -53,11 +53,11 @@ const genres = [
         bgc: 'rgb(232, 17, 91)',
         imgUrl: 'https://i.scdn.co/image/ab67706f000000027ea4d505212b9de1f72c5112'
     },
-    {
-        name: 'Live Events',
-        bgc: 'rgb(115, 88, 255)',
-        imgUrl: 'https://concerts.spotifycdn.com/images/live-events_category-image.jpg'
-    },
+    // {
+    //     name: 'Live Events',
+    //     bgc: 'rgb(115, 88, 255)',
+    //     imgUrl: 'https://concerts.spotifycdn.com/images/live-events_category-image.jpg'
+    // },
 ]
 
 export function GenreList() {

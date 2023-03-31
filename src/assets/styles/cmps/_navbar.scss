@@ -32,8 +32,34 @@
     margin-top: em(24px);
   }
 
-  .playlists {
+  .navbar-playlists {
     margin-top: .5em;
+
+    .navbar-playlist {
+      display: flex;
+      align-items: center;
+      // background-color: pink;
+      width: 100%;
+
+      &:hover {
+        background-color: $bgc-hover;
+      }
+
+      small {
+        padding-right: 1rem;
+      }
+    }
+
+    .navbar-playlist small {
+      display: none;
+    }
+
+    .navbar-playlist:hover small {
+      display: block;
+      color: $clr-txt;
+      transition: opacity .2s linear;
+
+    }
   }
 
   .active {

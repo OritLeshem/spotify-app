@@ -74,8 +74,6 @@ export function PlayerBar() {
         })
 
         .catch((err) => console.error("Error fetching song duration:", err))
-
-
     }
   }, [currentSong]);
 

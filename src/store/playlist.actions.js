@@ -152,24 +152,7 @@ export async function savePlaylist(playlist) {
         throw err
     }
 }
-export function getActionUpdateGig(playlist) {
-    return {
-        type: UPDATE_PLAYLIST,
-        playlist
-    }
-}
-export async function updateGig(gig) {
-    console.log(gig)
-    try {
-        const savedGig = await playlistService.save(gig)
-        console.log('Updated Gig action store:', savedGig)
-        store.dispatch(getActionUpdateGig(savedGig))
-        return savedGig
-    } catch (err) {
-        console.log('Cannot save gig', err)
-        throw err
-    }
-}
+
 
 // export async function updateNaneOfPlayList(playlistId, newName) {
 //     console.log(playlistId, newName)

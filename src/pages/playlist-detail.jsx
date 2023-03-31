@@ -13,6 +13,7 @@ import { PlaylistFilter } from '../cmps/playlist-filter';
 import { addSonfToPlaylist, loadPlaylist, removeSongFromPlayList } from '../store/playlist.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Music } from '../cmps/music';
+import { loadPlaylists, removePlaylist } from '../store/playlist.actions'
 
 
 export function PlaylistDetail() {
@@ -23,6 +24,15 @@ export function PlaylistDetail() {
   const currentSong = useSelector(storeState => storeState.playerModule.currentSong)
   const [searchResults, setSearchResults] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
+  const playlists = useSelector(storeState => storeState.playlistModule.playlists)
+
+  useEffect(() => {
+    loadPlaylist(playlistId)
+  }, [playlistId])
+
+  useEffect(() => {
+    loadPlaylists('')
+  }, [playlist])
 
   useEffect(() => {
     function handleResize() {
@@ -35,6 +45,7 @@ export function PlaylistDetail() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
   useEffect(() => {
     const randomColor = utilService.generateRandomColor()
     document.body.style.backgroundColor = randomColor;
@@ -44,9 +55,6 @@ export function PlaylistDetail() {
     };
   }, [playlistId]);
 
-  useEffect(() => {
-    loadPlaylist(playlistId)
-  }, [playlistId])
 
   function onSetFilter(filterBy) {
     console.log("filterBy", filterBy.txt)

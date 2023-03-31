@@ -17,6 +17,7 @@ import { uploadService } from '../services/upload.service';
 export function PlaylistEdit() {
   const [playlistToEdit, setPlaylistToEdit] = useState(playlistService.getEmptyPlaylist())
   // console.log(playlistToEdit.imgUrl === defaultPhoto)
+  const playlists = useSelector(storeState => storeState.playlists)
   const playlist = useSelector(storeState => storeState.playlistModule.playlist)
   const [isMobile, setIsMobile] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
@@ -28,6 +29,11 @@ export function PlaylistEdit() {
     dispatch({ type: SET_PLAYLIST, playlist: null })
     if (playlist) loadPlaylist(playlist)
   }, [imgUrl])
+
+  useEffect(() => {
+
+    if (playlist) loadPlaylists('')
+  }, [playlist])
 
   useEffect(() => {
     function handleResize() {

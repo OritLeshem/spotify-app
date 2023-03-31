@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { loadPlaylists } from '../store/playlist.actions'
+import { loadPlaylists, removePlaylist } from '../store/playlist.actions'
 import { CreatePlaylist, HomePageSvg, LibrarySvg, LikedSongs, Logo, SearchSvg } from './form'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { SET_PLAYLIST } from '../store/playlist.reducer'
@@ -47,7 +47,10 @@ export function Navbar() {
   }, [])
 
   // const playlists = ['My First List', 'Pop Songs List']
-
+  function onRemovePlaylist(ev, playlistId) {
+    console.log("removePlaylist", playlistId)
+    removePlaylist(playlistId)
+  }
   if (!isMobile) return <section className="navbar">
 
     <Logo />
@@ -65,12 +68,16 @@ export function Navbar() {
       <NavLink to="/liked"><LikedSongs /><h3>Liked Songs</h3></NavLink>
     </div>
     <div className="divider"></div>
-    <div className="playlists">
-      {playlists && playlists.map(playlist =>
+
+    <div className="navbar-playlists">
+      {playlists && playlists.map(playlist => <div className='navbar-playlist'>
         <NavLink to={`/detail/${playlist._id}`} key={playlist._id}>
           <h5>{playlist.name}</h5></NavLink>
+        <small onClick={(ev) => onRemovePlaylist(ev, playlist._id)} className='fa-regular trash-can'></small>
+      </div>
       )}
     </div>
+
   </section>
   if (isMobile) return <nav className='nav-mobile'>
     <button onClick={handleHome} className={activeNav === '#' ? 'active' : ''}><HomePageSvg /></button>
