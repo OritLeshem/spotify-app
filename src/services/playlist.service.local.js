@@ -55,7 +55,7 @@ function getEmptyPlaylist() {
     createdBy: {
       "_id": "u101",
       "fullname": "Puki Ben David",
-      "imgUrl": "http://some-photo/"
+      "imgUrl": "../assets/imgs/add-pic.png"
     },
     // imgUrl: "../assets/img/add-pic.png",
     imgUrl: defaultPhoto,
@@ -81,7 +81,7 @@ function _createPlaylists() {
       "createdBy": {
         "_id": "u101",
         "fullname": "Puki Ben David",
-        "imgUrl": "http://some-photo/"
+        "imgUrl": "../assets/imgs/add-pic.png"
       },
       "likedByUsers": ['{minimal-user}', '{minimal-user}'],
       "songs": [
@@ -154,7 +154,7 @@ function _createPlaylists() {
       "createdBy": {
         "_id": "u101",
         "fullname": "Puki Ben David",
-        "imgUrl": "http://some-photo/"
+        "imgUrl": defaultPhoto,
       },
       "likedByUsers": ['{minimal-user}', '{minimal-user}'],
       "songs": [
@@ -335,7 +335,7 @@ function latin() {
       },
       {
         "id": "4I25nV9hXGA",
-        "name": "Shakira, Rauw Alejandro - Te Felicito",
+        "name": "Shakira",
         "description": "Shakira, Rauw Alejandro - Te Felicito: https://SML.lnk.to/TeFelicito Apple Music: https://SML.lnk.to/TeFelicito/applemusic Spotify: ...",
         "tags": [
           "latino",

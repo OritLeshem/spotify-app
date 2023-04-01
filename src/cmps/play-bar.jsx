@@ -134,7 +134,7 @@ export function PlayerBar() {
   }
   function handlePrevSong() {
     console.log('currentSong', currentSong);
-    const currIndex = playSongs.indexOf(currentSong);
+    const currIndex = currentSong ? playSongs.indexOf(currentSong) : -1;
     if (currIndex === 0) {
       dispatch({ type: SET_CURRENT_SONG, song: playSongs[playSongs.length - 1] });
     } else {
@@ -142,6 +142,7 @@ export function PlayerBar() {
     }
     console.log('currIndex', currIndex);
   }
+
   function handleShuffle() {
     console.log("handleShuffle")
     const shuffledSongs = [...playSongs].sort(() => Math.random() - 0.5);

@@ -1,6 +1,6 @@
 import axios from "axios"
 // const API_KEY = process.env.REACT_APP_API_KEY
-const API_KEY = "AIzaSyB78sQnIs2jGHmBAwiuGLKbt9d9kpLGkU4"
+const API_KEY = "AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E"
 export const youtubeService = {
   getVideoResults,
   getTimeOfSong,
@@ -11,7 +11,7 @@ export const youtubeService = {
 async function getVideoResults(val) {
   const results = []
   try {
-    const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&maxResults=5&type=video&key=${API_KEY}&q=${val}`)
+    const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&maxResults=25&type=video&key=${API_KEY}&q=${val}`)
     const videos = res.data.items
     videos.map(video => {
       if (video.snippet.title.includes('Trailer') || !video.snippet.title) return

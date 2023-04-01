@@ -130,9 +130,7 @@ export function PlaylistDetail() {
             <span>ALBUM</span>
           </div>
           <div className="headline-table-col">
-            <span>
-              <AiFillClockCircle />
-            </span>
+
           </div>
         </div>
       </div>
@@ -155,7 +153,7 @@ export function PlaylistDetail() {
         </div>
         <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
         <small onClick={(ev) => onRemoveSongFromPlayList(ev, song.id)} className='fa-regular trash-can'></small>
-        <small className='song-time'>time</small>
+
       </li>)}
       </ul>
       {/* ///result */}
@@ -178,7 +176,7 @@ export function PlaylistDetail() {
           </div>
           <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
           <small onClick={() => { onAddSongTpPlayList(song) }} className='fa-regular plus'></small>
-          <small className='song-time'>time</small>
+
         </li>)}
         </ul>
       </>}

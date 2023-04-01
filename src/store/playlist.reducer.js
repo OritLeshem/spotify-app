@@ -27,9 +27,19 @@ const initialState = {
         ],
         "imgUrl": "https://i.ytimg.com/vi/4m1EFMoRFvY/hqdefault.jpg",
         currentTime: 0
-    },]
+    }],
+    currentSong: {
+        "_id": "4m1EFMoRFvY",
+        "title": "Beyoncé - Single Ladies",
+        "description": "Beyoncé's official 'Single Ladies",
+        "tags": [
+            "Pop",
+            "Happy"
+        ],
+        "imgUrl": "https://i.ytimg.com/vi/4m1EFMoRFvY/hqdefault.jpg",
+        currentTime: 0
+    }
 }
-
 export function playlistReducer(state = initialState, action) {
     var newState = state
     var playlists
