@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { loadPlaylists } from '../store/playlist.actions';
 import { Link } from 'react-router-dom'
-// import { PlayBtn } from './form'
+import { PlayBtn } from '../cmps/form'
 
 
 export function PlaylistIndex() {
@@ -15,13 +15,13 @@ export function PlaylistIndex() {
   return <section className="main-page home-page">
     {/* <Music /> */}
     <h2 className='home-page-title'>PLAYLISTS</h2>
-    <ul className="playlist-list">
+    <ul className="playlist-index">
       {playlists.map(playlist =>
         <li className="playlist-preview" key={playlist.id}>
           <Link to={`/detail/${playlist._id}`}>
             <div className="img-container-preview ">
               <img src={playlist.imgUrl} alt="" />
-              {/* <PlayBtn /> */}
+              <PlayBtn />
             </div>
             <div>
               <span>{playlist.name.substring(0, playlist.name.indexOf("-" || ":")) || playlist.name.slice(0, 20)}{playlist.name.length > 20 && "..."}</span>

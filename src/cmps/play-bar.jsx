@@ -151,7 +151,7 @@ export function PlayerBar() {
   return (
     <section className="player-bar">
       <div className="player-control">
-        <button><ShuffleBtn onClick={handleShuffle} /></button>
+        <button onClick={handleShuffle}><ShuffleBtn /></button>
 
         <button onClick={handlePrevSong}>
           <SkipBackBtn />

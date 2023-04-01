@@ -1,2 +1,95 @@
 .playlist-index {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+
+
+  @media (min-width: 770px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (min-width: 980px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1300px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1500px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1700px) {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .playlist-preview {
+    background-color: $bgc-highlight;
+    width: fit-content;
+    padding: 1em;
+    border-radius: em(6px);
+    max-width: 204px;
+
+    .img-container-preview {
+      position: relative;
+      overflow: hidden;
+      width: 167px;
+      height: 167px;
+      margin-bottom: 1em;
+      border-radius: em(4px);
+    }
+
+    img {
+      transform: scale(1.4);
+    }
+
+    div {
+      min-height: 62px;
+    }
+
+    span {
+      display: block;
+      margin-bottom: em(4px);
+    }
+
+    span,
+    h5 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &:hover {
+      background-color: $bgc-hover;
+
+      .play-btn {
+        opacity: 1;
+        transform: translateY(-8px);
+
+        &:hover {
+          transform: translateY(-8px) scale(1.05);
+        }
+      }
+    }
+  }
+
+  .playlist-preview-loader {
+    background-color: $bgc-highlight;
+    padding: 1em;
+    border-radius: em(6px);
+    max-width: 204px;
+    min-height: 280px;
+
+    background: linear-gradient(90deg, $bgc-highlight 8%, $bgc-base 18%, $bgc-highlight 33%);
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+  }
+
+  @keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
 }

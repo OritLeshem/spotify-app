@@ -115,7 +115,7 @@ export function PlaylistDetail() {
             {name}
           </h1>
 
-          <div className='playlist-detail-header-title-details'>Puki | {songs.length} songs | 14 min 57 sec</div>
+          <div className='playlist-detail-header-title-details'>Puki | {songs?.length} songs | 14 min 57 sec</div>
         </div>
       </div>
       <div className="headline-table-title">
@@ -137,7 +137,7 @@ export function PlaylistDetail() {
         </div>
       </div>
 
-      <ul className='list-of-playlist'>{songs.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
+      <ul className='list-of-playlist'>{songs?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
         <div className="headline-table-col table-num">{index + 1}
         </div>
         <div className="headline-table-col song-detail">
@@ -148,7 +148,7 @@ export function PlaylistDetail() {
           <div className="cover-container"></div>
           <div className='song-info'>
             {/* TITLE FORMATTED */}
-            {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+            {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 1), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
             {/* ARTIST NAME */}
             <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
           </div>
