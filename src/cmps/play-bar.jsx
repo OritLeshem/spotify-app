@@ -45,8 +45,10 @@ export function PlayerBar() {
   }, [isPlaying, duration]);
 
 
+
   useEffect(() => {
     if (currentSong) {
+      // youtubeService.getTimeOfSong(currentSong._id)
       console.log('Video ID:', currentSong.id);
       axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${currentSong.id}&part=contentDetails&key=AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E`)
         .then(res => {
@@ -129,7 +131,7 @@ export function PlayerBar() {
         <ShuffleBtn />
         <SkipBackBtn />
         <button className='playbar-play-pause' onClick={onPlayButtonClick}>
-          {isPlaying ? <span className="fa-solid pause"></span> : <PlayBtnBar onClick={onPlayButtonClick} />}
+          {isPlaying ? <span className="fa-solid pause"></span> : <PlayBtnBar />}
         </button>
         {currentSong && (
           <YouTube videoId={currentSong.id || '4m1EFMoRFvY'} opts={opts} onReady={onReady} />

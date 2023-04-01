@@ -80,15 +80,19 @@ export function PlaylistDetail() {
     addSonfToPlaylist(playlistId, song)
   }
 
-  function handlePlayPauseClick(song) {
-    dispatch({ type: SET_CURRENT_SONG, song })
-    if (song.id !== currentSong.id) {
-      dispatch({ type: ISPLAYING, isPlaying: true })
+  const handlePlayPauseClick = (song) => {
+    if (song.id === currentSong.id) {
+      // If the clicked song is the same as the current song, toggle isPlaying state.
+      dispatch({ type: ISPLAYING });
     } else {
-      dispatch({ type: ISPLAYING, isPlaying: !isPlaying })
+      // If the clicked song is different, pause the current song, set the new song and start playing it.
+      if (isPlaying) {
+        dispatch({ type: ISPLAYING });
+      }
+      dispatch({ type: SET_CURRENT_SONG, song });
+      dispatch({ type: ISPLAYING });
     }
-  }
-
+  };
 
   if (!playlist) return
   const { name, songs } = playlist
@@ -154,7 +158,7 @@ export function PlaylistDetail() {
       {/* ///result */}
       {searchResults && <>
         <hr />
-        <h3>Search results:</h3>
+        <h3>Let's find something for your playlist</h3>
         <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
           <div className="headline-table-col table-num">{index + 1}
           </div>

@@ -44,24 +44,6 @@ export function PlayerBar() {
     }
   }, [isPlaying, duration]);
 
-  // useEffect(() => {
-  //   if (currentSong) {
-  //     async function fetchVideoDuration() {
-  //       console.log('Video ID:', currentSong.id);
-
-  //       try {
-  //         const durationResponse = await youtubeService.getTimeOfSong(currentSong._id);
-  //         setShowTime(youtubeService.formatDuration(durationResponse));
-  //         setDuration(youtubeService.convertDurationToSeconds(durationResponse));
-  //       } catch (err) {
-  //         console.error("Error fetching song duration:", err);
-  //       }
-  //     }
-
-  //     fetchVideoDuration();
-  //   }
-  // }, [currentSong]);
-
   useEffect(() => {
     if (currentSong) {
       // youtubeService.getTimeOfSong(currentSong._id)

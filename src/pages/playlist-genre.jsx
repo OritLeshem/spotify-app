@@ -32,14 +32,19 @@ export function PlaylistGenre() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-  function handlePlayPauseClick(song) {
-    dispatch({ type: SET_CURRENT_SONG, song })
-    if (song.id !== currentSong.id) {
-      dispatch({ type: ISPLAYING, isPlaying: true })
+  const handlePlayPauseClick = (song) => {
+    if (song.id === currentSong.id) {
+      // If the clicked song is the same as the current song, toggle isPlaying state.
+      dispatch({ type: ISPLAYING });
     } else {
-      dispatch({ type: ISPLAYING, isPlaying: !isPlaying })
+      // If the clicked song is different, pause the current song, set the new song and start playing it.
+      if (isPlaying) {
+        dispatch({ type: ISPLAYING });
+      }
+      dispatch({ type: SET_CURRENT_SONG, song });
+      dispatch({ type: ISPLAYING });
     }
-  }
+  };
   function handleSong(ev, songId) {
     console.log("song, li clicked", songId);
   }

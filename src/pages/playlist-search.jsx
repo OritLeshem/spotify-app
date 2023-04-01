@@ -55,20 +55,19 @@ export function PlaylistSearch() {
     dispatch({ type: SET_FILTER, filterBy })
   }
 
-  function handlePlayPauseClick(song) {
-    dispatch({ type: SET_CURRENT_SONG, song })
-    if (song.id !== currentSong.id) {
-      dispatch({ type: ISPLAYING, isPlaying: true })
+  const handlePlayPauseClick = (song) => {
+    if (song.id === currentSong.id) {
+      // If the clicked song is the same as the current song, toggle isPlaying state.
+      dispatch({ type: ISPLAYING });
     } else {
-      dispatch({ type: ISPLAYING, isPlaying: !isPlaying })
-
-      console.log("currentSong", currentSong)
+      // If the clicked song is different, pause the current song, set the new song and start playing it.
+      if (isPlaying) {
+        dispatch({ type: ISPLAYING });
+      }
+      dispatch({ type: SET_CURRENT_SONG, song });
+      dispatch({ type: ISPLAYING });
     }
-
-
-
-  }
-
+  };
 
   if (!playlists) return
   return <section className="main-page playlist-search">
