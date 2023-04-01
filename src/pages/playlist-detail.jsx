@@ -14,6 +14,7 @@ import { addSonfToPlaylist, loadPlaylist, removeSongFromPlayList } from '../stor
 import { useDispatch, useSelector } from 'react-redux';
 import { Music } from '../cmps/music';
 import { loadPlaylists, removePlaylist } from '../store/playlist.actions'
+import { SET_SONGS_LIST } from '../store/playlist.reducer';
 
 
 export function PlaylistDetail() {
@@ -28,10 +29,12 @@ export function PlaylistDetail() {
 
   useEffect(() => {
     loadPlaylist(playlistId)
+
   }, [playlistId])
 
   useEffect(() => {
     loadPlaylists('')
+
   }, [playlist])
 
   useEffect(() => {

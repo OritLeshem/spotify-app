@@ -43,8 +43,12 @@ export function PlayerBar() {
       };
     }
   }, [isPlaying, duration]);
+  //to set the duration each time we change the song
+  useEffect(() => {
+    setTime(0)
+    setUserTime(0)
 
-
+  }, [currentSong])
 
   useEffect(() => {
     if (currentSong) {
@@ -113,7 +117,11 @@ export function PlayerBar() {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
+  }
+
+  function handleSongEnd() {
+    handleNextSong();
+  }
   function handleNextSong() {
     console.log('currentSong', currentSong);
     const currIndex = playSongs.indexOf(currentSong);
@@ -124,17 +132,36 @@ export function PlayerBar() {
     }
     console.log('currIndex', currIndex);
   }
-
+  function handlePrevSong() {
+    console.log('currentSong', currentSong);
+    const currIndex = playSongs.indexOf(currentSong);
+    if (currIndex === 0) {
+      dispatch({ type: SET_CURRENT_SONG, song: playSongs[playSongs.length - 1] });
+    } else {
+      dispatch({ type: SET_CURRENT_SONG, song: playSongs[currIndex - 1] });
+    }
+    console.log('currIndex', currIndex);
+  }
+  function handleShuffle() {
+    console.log("handleShuffle")
+    const shuffledSongs = [...playSongs].sort(() => Math.random() - 0.5);
+    dispatch({ type: SET_CURRENT_SONG, song: shuffledSongs[0] });
+    dispatch({ type: 'SET_PLAYLIST', playlist: shuffledSongs });
+  }
   return (
     <section className="player-bar">
       <div className="player-control">
-        <ShuffleBtn />
-        <SkipBackBtn />
+        <button><ShuffleBtn onClick={handleShuffle} /></button>
+
+        <button onClick={handlePrevSong}>
+          <SkipBackBtn />
+        </button>
         <button className='playbar-play-pause' onClick={onPlayButtonClick}>
           {isPlaying ? <span className="fa-solid pause"></span> : <PlayBtnBar />}
         </button>
         {currentSong && (
-          <YouTube videoId={currentSong.id || '4m1EFMoRFvY'} opts={opts} onReady={onReady} />
+          <YouTube videoId={currentSong.id || '4m1EFMoRFvY'} opts={opts} onReady={onReady} onEnd={handleSongEnd}
+          />
         )}
         <button onClick={handleNextSong}>
           {' '}

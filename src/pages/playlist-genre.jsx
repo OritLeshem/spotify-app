@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { Music } from "../cmps/music"
 import { youtubeService } from "../services/youtube.service"
 import { ISPLAYING, SET_CURRENT_SONG } from "../store/player.reducer"
+import { SET_SONGS_LIST } from "../store/playlist.reducer"
 
 export function PlaylistGenre() {
   const { genreName } = useParams()
@@ -18,6 +19,8 @@ export function PlaylistGenre() {
     async function fetchVideoResults() {
       const results = await youtubeService.getVideoResults(genreName)
       setSearchResults(results)
+      dispatch({ type: SET_SONGS_LIST, playSongs: results })
+
     }
     fetchVideoResults()
   }, [genreName])

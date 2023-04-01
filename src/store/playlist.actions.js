@@ -1,5 +1,5 @@
 import { store } from './store'
-import { SET_PLAYLIST, ADD_SONG_TO_PLAYLIST, REMOVE_SONG_FROM_PLAYLIST, ADD_PLAYLIST, REMOVE_PLAYLIST, SET_PLAYLISTS, UNDO_REMOVE_PLAYLIST, UPDATE_PLAYLIST, UPDATE_NAME_PLAYLIST } from './playlist.reducer'
+import { SET_PLAYLIST, ADD_SONG_TO_PLAYLIST, REMOVE_SONG_FROM_PLAYLIST, ADD_PLAYLIST, REMOVE_PLAYLIST, SET_PLAYLISTS, UNDO_REMOVE_PLAYLIST, UPDATE_PLAYLIST, UPDATE_NAME_PLAYLIST, SET_SONGS_LIST } from './playlist.reducer'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { playlistService } from '../services/playlist.service.local'
@@ -33,6 +33,7 @@ export async function loadPlaylist(playlistId) {
     try {
         const playlist = await playlistService.getById(playlistId)
         store.dispatch({ type: SET_PLAYLIST, playlist })
+        store.dispatch({ type: SET_SONGS_LIST, playSongs: playlist.songs })
     } catch (err) {
         console.log('cannot load playlist', err)
         throw err
