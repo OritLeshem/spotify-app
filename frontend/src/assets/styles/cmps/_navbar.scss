@@ -1,0 +1,110 @@
+.navbar {
+  width: rem(240px);
+  height: 100%;
+  padding-top: em(24px);
+  background-color: $bgc-nav;
+
+  .logo {
+    margin-bottom: em(18px);
+    padding: 0 em(24px);
+  }
+
+  h5 {
+    color: $clr-txt;
+  }
+
+  a,
+  button {
+    display: flex;
+    align-items: center;
+    padding: .5em 1.5em;
+    gap: 1em;
+    width: 100%;
+    opacity: 0.7;
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .preferences {
+    margin-top: em(24px);
+  }
+
+  .navbar-playlists {
+    margin-top: .5em;
+
+    .navbar-playlist {
+      display: flex;
+      align-items: center;
+      // background-color: pink;
+      width: 100%;
+
+      &:hover {
+        background-color: $bgc-hover;
+      }
+
+      small {
+        padding-right: 1rem;
+      }
+    }
+
+    .navbar-playlist small {
+      display: none;
+    }
+
+    .navbar-playlist:hover small {
+      display: block;
+      color: $clr-txt;
+      transition: opacity .2s linear;
+
+
+    }
+
+    .navbar-playlist:active small {
+      transform: scale(1.5);
+      transition: 0.3s ease-in-out;
+    }
+
+  }
+
+  .active {
+    opacity: 1;
+
+  }
+
+  .divider {
+    margin: .5em 1.5em 0;
+  }
+}
+
+.nav-mobile {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding: 0.7rem 1.7rem;
+  z-index: 2;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.8rem;
+  border-radius: 4rem 4rem 0 0;
+  backdrop-filter: blur(15px);
+
+  .create-btn {
+    font-size: 1.5rem;
+  }
+
+  button {
+    color: $clr-txtsub;
+
+    &:hover {
+      // background: rgba(0, 0, 0, 0.3);
+      color: $clr-txt;
+
+    }
+  }
+}

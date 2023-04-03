@@ -1,0 +1,18 @@
+.playlist-detail-header-title-input {
+  background-color: $bgc-hover;
+  color: $clr-txt;
+  height: 2rem;
+  width: 10rem;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.playlist-edit-name {
+  &:focus {
+    outline: none;
+  }
+}
+
+.playlist-chosen-img {
+  opacity: 0.7;
+}
