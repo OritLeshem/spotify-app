@@ -51,7 +51,7 @@ function getEmptyPlaylist() {
     tags: ["Funk", "Happy"],
     createdBy: {
       "_id": "u101",
-      "fullname": "Puki Ben David",
+      "username": "Puki",
       "imgUrl": "../assets/imgs/add-pic.png"
     },
     // imgUrl: "../assets/img/add-pic.png",
@@ -77,7 +77,7 @@ function _createPlaylists() {
       ],
       "createdBy": {
         "_id": "u101",
-        "fullname": "Puki Ben David",
+        "username": "Puki",
         "imgUrl": "../assets/imgs/add-pic.png"
       },
       "likedByUsers": ['{minimal-user}', '{minimal-user}'],
@@ -150,7 +150,7 @@ function _createPlaylists() {
       ],
       "createdBy": {
         "_id": "u101",
-        "fullname": "Puki Ben David",
+        "username": "Puki",
         "imgUrl": defaultPhoto,
       },
       "likedByUsers": ['{minimal-user}', '{minimal-user}'],

@@ -1,15 +1,23 @@
 import { useState } from 'react'
 import { BackBtn, ForwardBtn, UserBtn } from './form'
+import { userService } from "../services/user.service.local"
+import { LoginSignup } from './login-signup.jsx'
+import { logout } from "../store/user/user.actions"
 
 export function AppHeader() {
-  const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const [user, setUser] = useState(userService.getLoggedinUser())
 
-  function onToggleMenu() {
-    setIsOpenMenu(!isOpenMenu)
+
+  function onChangeLoginStatus(user) {
+    setUser(user)
   }
-
+  function onLogout() {
+    logout()
+      .then(() => {
+        setUser(null)
+      })
+  }
   return <>
-    {/* <div className="place"></div> */}
     <header className="app-header">
       <main>
         <nav>
@@ -17,11 +25,17 @@ export function AppHeader() {
           <ForwardBtn />
         </nav>
         <UserBtn />
-        {/* <button className="fa-solid bars menu-toggle-btn"
-                    onClick={() => onToggleMenu()}></button>
-                {isOpenMenu && <div className="main-screen" onClick={() => onToggleMenu()}>
-                    <div className="mobile-menu"></div>
-                </div>} */}
+        {user ? (
+          < section >
+            <span>Hello {user.username} </span>
+            <button className="user-login-logout" onClick={onLogout}> Logout</button>
+          </ section >
+        ) : (
+          <section>
+            <LoginSignup onChangeLoginStatus={onChangeLoginStatus} />
+          </section>
+        )}
+
       </main>
     </header>
   </>
