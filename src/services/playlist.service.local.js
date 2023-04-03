@@ -18,12 +18,9 @@ export const playlistService = {
   latin
 }
 
-async function query(filterBy = getDefaultFilter()) {
+async function query() {
   let playlists = await storageService.query(STORAGE_KEY)
-  if (filterBy.txt) {
-    const regex = new RegExp(filterBy.txt, 'i')
-    playlists = playlists.filter(playlist => regex.test(playlist.name))
-  }
+
   return playlists
 }
 

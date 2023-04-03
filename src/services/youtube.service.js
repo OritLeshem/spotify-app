@@ -11,7 +11,7 @@ export const youtubeService = {
 async function getVideoResults(val) {
   const results = []
   try {
-    const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&maxResults=25&type=video&key=${API_KEY}&q=${val}`)
+    const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&maxResults=5&type=video&key=${API_KEY}&q=${val}`)
     const videos = res.data.items
     videos.map(video => {
       if (video.snippet.title.includes('Trailer') || !video.snippet.title) return

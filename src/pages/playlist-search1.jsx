@@ -22,7 +22,9 @@ export function PlaylistSearch() {
   const [searchResults, setSearchResults] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
 
-
+  useEffect(() => {
+    onLoadPlaylists(filterBy)
+  }, [filterBy])
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 700) setIsMobile(true)
@@ -50,12 +52,15 @@ export function PlaylistSearch() {
         dispatch({ type: SET_SONGS_LIST, playSongs: res })
         console.log(res)
       })
+    dispatch({ type: SET_FILTER, filterBy })
   }
 
   const handlePlayPauseClick = (song) => {
     if (song.id === currentSong.id) {
+      // If the clicked song is the same as the current song, toggle isPlaying state.
       dispatch({ type: ISPLAYING });
     } else {
+      // If the clicked song is different, pause the current song, set the new song and start playing it.
       if (isPlaying) {
         dispatch({ type: ISPLAYING });
       }
@@ -78,11 +83,18 @@ export function PlaylistSearch() {
               <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
             </div>
             <div className="cover-container"></div>
+            {/* <h5>{song.title}</h5> */}
 
             <div className='song-info'>
+              {/* TITLE FORMATTED */}
               {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+              {/* ARTIST NAME */}
               <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
             </div>
+            {/* {(!isMobile) ? <h5 title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2),
+              song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</h5> :
+              <h5 title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2),
+                song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</h5>} */}
 
 
           </li>)}

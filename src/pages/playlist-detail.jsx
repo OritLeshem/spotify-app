@@ -14,7 +14,6 @@ import { addSonfToPlaylist, loadPlaylist, removeSongFromPlayList } from '../stor
 import { useDispatch, useSelector } from 'react-redux';
 import { Music } from '../cmps/music';
 import { loadPlaylists, removePlaylist } from '../store/playlist.actions'
-import { SET_SONGS_LIST } from '../store/playlist.reducer';
 
 
 export function PlaylistDetail() {
@@ -33,7 +32,7 @@ export function PlaylistDetail() {
   }, [playlistId])
 
   useEffect(() => {
-    loadPlaylists('')
+    loadPlaylists()
 
   }, [playlist])
 
@@ -85,10 +84,8 @@ export function PlaylistDetail() {
 
   const handlePlayPauseClick = (song) => {
     if (song.id === currentSong.id) {
-      // If the clicked song is the same as the current song, toggle isPlaying state.
       dispatch({ type: ISPLAYING });
     } else {
-      // If the clicked song is different, pause the current song, set the new song and start playing it.
       if (isPlaying) {
         dispatch({ type: ISPLAYING });
       }
@@ -110,35 +107,32 @@ export function PlaylistDetail() {
         <div className='playlist-header-img-container '> <img src={playlist.imgUrl !== defaultPhoto ? playlist.imgUrl : songs.length ? songs[0].imgUrl : defaultPhoto} /></div>
         <div className='playlist-detail-header-info'>
           <div className='playlist-detail-header-title-detail'>Playlist</div>
-
           <h1 className='playlist-detail-header-title'>
             {name}
           </h1>
-
           <div className='playlist-detail-header-title-details'>Puki | {songs?.length} songs | 14 min 57 sec</div>
         </div>
       </div>
       <div className="headline-table-title">
         <div className="header-row">
-          <div className="headline-table-col">
+          <div className=">
             <span>#</span>
           </div>
-          <div className="headline-table-col">
+          <div className=">
             <span>TITLE</span>
           </div>
-          <div className="headline-table-col">
+          <div className=">
             <span>ALBUM</span>
           </div>
-          <div className="headline-table-col">
-
+          <div className=">
           </div>
         </div>
       </div>
 
       <ul className='list-of-playlist'>{songs?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
-        <div className="headline-table-col table-num">{index + 1}
+        <div className="table-num">{index + 1}
         </div>
-        <div className="headline-table-col song-detail">
+        <div className="song-detail">
           <div className="table-img-container ">
             <img src={song.imgUrl} alt="song" />
             <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
@@ -159,11 +153,11 @@ export function PlaylistDetail() {
       {/* ///result */}
       {searchResults && <>
         <hr />
-        <h3>Let's find something for your playlist</h3>
+        <h2>Let's find something for your playlist</h2>
         <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
-          <div className="headline-table-col table-num">{index + 1}
+          <div className="table-num">{index + 1}
           </div>
-          <div className="headline-table-col song-detail">
+          <div className="song-detail">
             <div className="table-img-container">
               <img src={song.imgUrl} alt="song" />
               <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />

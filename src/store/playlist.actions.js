@@ -19,9 +19,9 @@ export function getActionUpdatePlaylist(playlist) {
     return { type: UPDATE_PLAYLIST, playlist }
 }
 
-export async function loadPlaylists(filterBy) {
+export async function loadPlaylists() {
     try {
-        const playlists = await playlistService.query(filterBy)
+        const playlists = await playlistService.query()
         store.dispatch({ type: SET_PLAYLISTS, playlists })
     } catch (err) {
         console.log('Cannot load playlists', err)
