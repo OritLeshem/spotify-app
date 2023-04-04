@@ -1,7 +1,7 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import defaultPhoto from '../assets/imgs/add-pic.png'
-
+import { userService } from './user.service.local'
 const STORAGE_KEY = 'playlist'
 
 _createPlaylists()
@@ -51,7 +51,7 @@ function getEmptyPlaylist() {
     tags: ["Funk", "Happy"],
     createdBy: {
       "_id": "u101",
-      "username": "Puki",
+      "fullname": "Puki Ben David",
       "imgUrl": "../assets/imgs/add-pic.png"
     },
     // imgUrl: "../assets/img/add-pic.png",
@@ -60,7 +60,6 @@ function getEmptyPlaylist() {
     songs: []
   }
 }
-
 function getDefaultFilter() {
   return { txt: '' }
 }
@@ -176,11 +175,7 @@ function _createPlaylists() {
   }
 }
 
-function _createPlaylist(title, price) {
-  const playlist = getEmptyPlaylist(title, price)
-  playlist._id = utilService.makeId()
-  return playlist
-}
+
 
 function hiphop() {
   const hiphop = {

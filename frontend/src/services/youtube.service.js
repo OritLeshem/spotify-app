@@ -1,6 +1,6 @@
 import axios from "axios"
 // const API_KEY = process.env.REACT_APP_API_KEY
-const API_KEY = "AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E"
+const API_KEY = "AIzaSyB78sQnIs2jGHmBAwiuGLKbt9d9kpLGkU4"
 export const youtubeService = {
   getVideoResults,
   getTimeOfSong,

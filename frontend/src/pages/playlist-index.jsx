@@ -7,16 +7,21 @@ import { PlayBtn } from '../cmps/form'
 
 
 export function PlaylistIndex() {
-  const playlists = useSelector(storeState => storeState.playlistModule.playlists)
+  const user = useSelector(storeState => storeState.userModule.user)
+
+  let playlists = useSelector(storeState => storeState.playlistModule.playlists)
+  const loggedinUser = useSelector(storeState => storeState.user)
+  console.log(loggedinUser)
   useEffect(() => {
     loadPlaylists()
+    console.log(playlists)
   }, [])
 
   return <section className="main-page home-page">
     {/* <Music /> */}
     <h2 className='home-page-title'>PLAYLISTS</h2>
     <ul className="playlist-index">
-      {playlists.map(playlist =>
+      {user && playlists && playlists && playlists.filter(playlist => playlist.createdBy._id === user._id).map(playlist =>
         <li className="playlist-preview" key={playlist.id}>
           <Link to={`/detail/${playlist._id}`}>
             <div className="img-container-preview ">

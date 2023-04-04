@@ -1,5 +1,6 @@
 import { store } from './store'
-import { SET_PLAYLIST, ADD_SONG_TO_PLAYLIST, REMOVE_SONG_FROM_PLAYLIST, ADD_PLAYLIST, REMOVE_PLAYLIST, SET_PLAYLISTS, UNDO_REMOVE_PLAYLIST, UPDATE_PLAYLIST, UPDATE_NAME_PLAYLIST, SET_SONGS_LIST } from './playlist.reducer'
+import { SET_PLAYLIST, ADD_SONG_TO_PLAYLIST, REMOVE_SONG_FROM_PLAYLIST, ADD_PLAYLIST, REMOVE_PLAYLIST, SET_PLAYLISTS, UPDATE_PLAYLIST, UPDATE_NAME_PLAYLIST, SET_SONGS_LIST } from './playlist.reducer'
+import { userService } from "../services/user.service.local"
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { playlistService } from '../services/playlist.service.local'
@@ -22,6 +23,19 @@ export function getActionUpdatePlaylist(playlist) {
 export async function loadPlaylists() {
     try {
         const playlists = await playlistService.query()
+        store.dispatch({ type: SET_PLAYLISTS, playlists })
+    } catch (err) {
+        console.log('Cannot load playlists', err)
+        throw err
+    }
+}
+export async function loadPlaylistsByUser() {
+    try {
+        let playlists = await playlistService.query()
+        // const getLoggedinUser = await userService.getLoggedinUser()
+        playlists = await playlists.filter(playlist => playlist.createdBy._id === userService.getLoggedinUser()._id)
+        // console.log(playlists[2].createdBy._id, getLoggedinUser._id)
+        console.log(playlists)
         store.dispatch({ type: SET_PLAYLISTS, playlists })
     } catch (err) {
         console.log('Cannot load playlists', err)
@@ -76,21 +90,6 @@ export async function updatePlaylist(playlist) {
     }
 }
 
-// Demo for Optimistic Mutation 
-// (IOW - Assuming the server call will work, so updating the UI first)
-export async function onRemovePlaylistOptimistic(playlistId) {
-    store.dispatch({ type: REMOVE_PLAYLIST, playlistId })
-    showSuccessMsg('Playlist removed')
-    try {
-        await playlistService.remove(playlistId)
-        console.log('Server Reported - Deleted Succesfully')
-    } catch (err) {
-        showErrorMsg('Cannot remove playlist')
-        console.log('Cannot load playlists', err)
-        store.dispatch({ type: UNDO_REMOVE_PLAYLIST, })
-    }
-}
-// Song in playlist
 
 export async function addSonfToPlaylist(playlistId, newSong) {
     try {
@@ -114,37 +113,18 @@ export async function removeSongFromPlayList(playlistId, songId) {
         playlist = { ...playlist, songs: removedSong }
         await playlistService.save(playlist)
         store.dispatch(getActionRemoveSongFromPlaylist(playlist))
-        console.log(playlist.songs.length)
     } catch (err) {
         console.log('Cannot remove playlist', err)
         throw err
     }
 }
 
-export async function editNameOfPlayList(playlistId, newName) {
-    console.log(typeof (playlistId), newName)
-    try {
-        console.log("first")
-        const playlist = await playlistService.getById(playlistId)
-        let newPlaylist = { ...playlist, name: newName }
-        console.log("NEW", newPlaylist)
-        await playlistService.save(newPlaylist)
 
-        store.dispatch({ type: UPDATE_PLAYLIST, playlist: newPlaylist })
-    } catch (err) {
-        console.log('Cannot remove playlist', err)
-        throw err
-    }
-}
 
 export async function savePlaylist(playlist) {
-    console.log(playlist._id, playlist.name)
     const type = (playlist._id) ? UPDATE_PLAYLIST : ADD_PLAYLIST
-    console.log(playlist._id, playlist.name, type)
     try {
         const savedPlaylist = await playlistService.save(playlist)
-        console.log("savedPlaylist", savedPlaylist)
-
         store.dispatch({ type, playlist: savedPlaylist })
         return savedPlaylist
     }

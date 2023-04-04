@@ -1,23 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AiFillClockCircle } from "react-icons/ai";
 import defaultPhoto from '../assets/imgs/add-pic.png'
 
 
 import { playlistService } from '../services/playlist.service.local'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { utilService } from '../services/util.service';
-import { addSonfToPlaylist, loadPlaylist, loadPlaylists, removeSongFromPlayList, savePlaylist, updatePlaylist } from '../store/playlist.actions';
+import { loadPlaylist, loadPlaylists, savePlaylist } from '../store/playlist.actions';
 import { SET_PLAYLIST } from '../store/playlist.reducer'
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadService } from '../services/upload.service';
 
 
-
 export function PlaylistEdit() {
   const [playlistToEdit, setPlaylistToEdit] = useState(playlistService.getEmptyPlaylist())
-  // console.log(playlistToEdit.imgUrl === defaultPhoto)
-  const playlists = useSelector(storeState => storeState.playlists)
+  const user = useSelector(storeState => storeState.userModule.user)
+
+  console.log(playlistToEdit)
   const playlist = useSelector(storeState => storeState.playlistModule.playlist)
   const [isMobile, setIsMobile] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
@@ -51,7 +49,7 @@ export function PlaylistEdit() {
   function handleChange({ target }) {
     let { value, type, name: field } = target
     value = type === 'number' ? +value : value
-    setPlaylistToEdit((prev) => ({ ...prev, [field]: value }))
+    setPlaylistToEdit((prev) => ({ ...prev, [field]: value, createdBy: { ...user } }))
   }
 
 
@@ -62,7 +60,6 @@ export function PlaylistEdit() {
       const playlist = await savePlaylist(playlistToEdit)
       showSuccessMsg('saved Playlist!')
       dispatch({ type: SET_PLAYLIST, playlist })
-      console.log(imgUrl === defaultPhoto, imgUrl, defaultPhoto)
       navigate(`/detail/${playlist._id}`)
     }
     catch (err) {
@@ -105,10 +102,7 @@ export function PlaylistEdit() {
       <div className='playlist-detail-header-info'>
         <div className='playlist-detail-header-title-detail'>Playlist</div>
 
-        {/* <h1 className='playlist-edit-name' contentEditable={true} onInput={handleTextChange} style={{ unicodeBidi: 'bidi-override', direction: 'rtl' }}>
-          {nameOfPlaylist}
-          <h1>{playlistToEdit.name}</h1>
-        </h1> */}
+
         <h1 onClick={() => setIsEditing(true)} className='playlist-detail-header-title'>{playlistToEdit.name}</h1>
 
         <form onSubmit={onSavePlaylist}>

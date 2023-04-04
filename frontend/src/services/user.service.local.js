@@ -5,8 +5,7 @@ const USER_KEY = 'userDB'
 _createUsers()
 
 export const userService = {
-    get,
-    remove,
+    getById,
     signup,
     login,
     logout,
@@ -15,13 +14,10 @@ export const userService = {
 }
 
 
-function get(userId) {
+function getById(userId) {
     return storageService.get(USER_KEY, userId)
 }
 
-function remove(userId) {
-    return storageService.remove(USER_KEY, userId)
-}
 
 function signup(credentials) {
     return storageService.post(USER_KEY, credentials)
@@ -46,6 +42,7 @@ function getEmptyCredentials(username = '') {
 }
 
 function getLoggedinUser() {
+    console.log(JSON.parse(sessionStorage.getItem('loggedinUser') || null))
     return JSON.parse(sessionStorage.getItem('loggedinUser') || null)
 }
 

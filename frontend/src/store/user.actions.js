@@ -1,21 +1,11 @@
-import { store } from '../store'
-import { LOADING_DONE, LOADING_START } from "../system/system.reducer"
-import { SET_USER, SET_USERS } from "./user.reducer"
+import { store } from './store'
+import { LOADING_DONE, LOADING_START } from "./system/system.reducer"
+import { SET_USER } from "./user.reducer"
 
-import { userService } from "../../services/user.service.local"
-import { showErrorMsg } from '../../services/event-bus.service'
+import { userService } from "../services/user.service.local"
+import { showErrorMsg } from '../services/event-bus.service'
 
-export async function loadUsers() {
-    try {
-        store.dispatch({ type: LOADING_START })
-        const users = await userService.getUsers()
-        store.dispatch({ type: SET_USERS, users })
-    } catch (err) {
-        console.log('UserActions: err in loadUsers', err)
-    } finally {
-        store.dispatch({ type: LOADING_DONE })
-    }
-}
+
 
 
 

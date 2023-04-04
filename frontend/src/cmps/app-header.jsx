@@ -1,21 +1,17 @@
-import { useState } from 'react'
 import { BackBtn, ForwardBtn, UserBtn } from './form'
-import { userService } from "../services/user.service.local"
 import { LoginSignup } from './login-signup.jsx'
-import { logout } from "../store/user/user.actions"
+import { logout } from "../store/user.actions"
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export function AppHeader() {
-  const [user, setUser] = useState(userService.getLoggedinUser())
+  const user = useSelector(storeState => storeState.userModule.user)
+  const navigate = useNavigate()
 
-
-  function onChangeLoginStatus(user) {
-    setUser(user)
-  }
   function onLogout() {
     logout()
-      .then(() => {
-        setUser(null)
-      })
+    navigate('/')
+
   }
   return <>
     <header className="app-header">
@@ -32,7 +28,7 @@ export function AppHeader() {
           </ section >
         ) : (
           <section>
-            <LoginSignup onChangeLoginStatus={onChangeLoginStatus} />
+            <LoginSignup />
           </section>
         )}
 
