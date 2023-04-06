@@ -1,6 +1,6 @@
 import axios from "axios"
 // const API_KEY = process.env.REACT_APP_API_KEY
-const API_KEY = "AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E"
+const API_KEY = "AIzaSyCcOlhp2Odsya7qMCkamhYVD-KgSa65iCc"
 export const youtubeService = {
   getVideoResults,
   getTimeOfSong,
@@ -42,7 +42,7 @@ async function getTimeOfSong(val) {
   console.log("val", val)
   // const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=qwoyUpxjQ9c&part=contentDetails&key=AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E`)
 
-  const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${val}&part=contentDetails&key=AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E`)
+  const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${val}&part=contentDetails&key==${API_KEY}`)
   console.log("API response", res);
   console.log("API response data", res.data);
 

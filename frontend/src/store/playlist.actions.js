@@ -99,7 +99,7 @@ export async function addSonfToPlaylist(playlistId, newSong) {
         newPlaylist = { ...newPlaylist, songs: [...newPlaylist.songs, newSong] }
         const savedPlaylist = await playlistService.save(newPlaylist)
         console.log('Added Playlist', savedPlaylist)
-        showSuccessMsg('song added succesfully')
+        // showSuccessMsg('song added succesfully')
         store.dispatch({ type: ADD_SONG_TO_PLAYLIST, playlist: savedPlaylist })
         return savedPlaylist
     } catch (err) {

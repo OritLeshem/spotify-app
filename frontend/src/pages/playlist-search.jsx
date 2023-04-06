@@ -67,33 +67,63 @@ export function PlaylistSearch() {
   if (!playlists) return
   return <section className="main-page playlist-search">
     <PlaylistFilter onSetFilter={onSetFilter} />
-
-    {searchResults && <>
-      <h2>Songs</h2>
-      <ul className="song-list">
-        {searchResults.map(song =>
-          <li className="song-preview" key={song.id}>
-            <div className="img-container">
-              <img src={song.imgUrl} alt="" />
-              <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
-            </div>
-            <div className="cover-container"></div>
-
-            <div className='song-info'>
-              {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
-              <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
-            </div>
-
-
-          </li>)}
-      </ul>
-    </>}
-
     {!searchResults && <>
 
       <h2>Browse all</h2>
       <GenreList />
       <AppDivider />
     </>}
-  </section>
+
+    <section className="main-page playlist-details">
+
+      {searchResults && <>
+        <ul className='playlist-detail-result-list search-detail'>{searchResults?.map((song, index) => <li key={song.id} className='song'   >
+          <div className="table-num">{index + 1}
+          </div>
+          <div className="song-detail">
+            <div className="table-img-container">
+              <img src={song.imgUrl} alt="song" />
+              <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
+            </div>
+            <div className="cover-container"></div>
+            <div className='song-info'>
+              {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+              <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+            </div>
+          </div>
+          <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+
+        </li>)}
+        </ul>
+      </>}
+    </section>
+
+
+
+
+    {
+      searchResults && <>
+        <h2>Songs</h2>
+        <ul className="song-list">
+          {searchResults.map(song =>
+            <li className="song-preview" key={song.id}>
+              <div className="img-container">
+                <img src={song.imgUrl} alt="" />
+                <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
+              </div>
+              <div className="cover-container"></div>
+
+              <div className='song-info'>
+                {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+                <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+              </div>
+
+
+            </li>)}
+        </ul>
+      </>
+    }
+
+
+  </section >
 } 

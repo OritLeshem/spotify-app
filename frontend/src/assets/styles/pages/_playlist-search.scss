@@ -1,5 +1,7 @@
 .playlist-search {
-
+    ul {
+        padding-top: 1.5rem;
+    }
 
     .play-pause {
         &:active {
@@ -10,6 +12,7 @@
     height: 100%;
 
     h2 {
+        margin-top: em(20px, 24px);
         margin-bottom: em(16px, 24px);
     }
 }

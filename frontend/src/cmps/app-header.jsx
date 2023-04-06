@@ -27,7 +27,7 @@ export function AppHeader() {
             <button className="user-login-logout" onClick={onLogout}> Logout</button>
           </ section >
         ) : (
-          <section>
+          <section className='user-info'>
             <LoginSignup />
           </section>
         )}

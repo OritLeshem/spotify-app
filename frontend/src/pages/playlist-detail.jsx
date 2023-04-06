@@ -99,8 +99,7 @@ export function PlaylistDetail() {
   const { name, songs } = playlist
 
   return <>
-    <section className="main-page playlist-search">
-    </section>
+    <section className="main-page playlist-search"> </section>
 
     <section className="main-page playlist-details">
       <div className='playlist-detail-header'>
@@ -155,11 +154,8 @@ export function PlaylistDetail() {
       <h2>Let's find something for your playlist</h2>
 
       <PlaylistFilter onSetFilter={onSetFilter} title="Search for songs or episodes" />
+      {!searchResults && <div className='detail-divider'></div>}
       {searchResults && <>
-        {/* <hr /> */}
-
-
-        {/* <h2>Let's find something for your playlist</h2> */}
         <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
           <div className="table-num">{index + 1}
           </div>
