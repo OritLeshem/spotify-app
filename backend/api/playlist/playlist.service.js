@@ -15,9 +15,6 @@ async function query() {
     }
 }
 
-function check() {
-    console.log("add some playlists")
-}
 
 async function getById(playlistId) {
     try {
