@@ -33,3 +33,15 @@
 4.4.2023, 22:29:05 - INFO - Server is running on port: 3030 
 4.4.2023, 22:29:47 - INFO - Server is running on port: 3030 
 4.4.2023, 22:29:48 - INFO - Server is running on port: 3030 
+6.4.2023, 10:02:52 - INFO - Server is running on port: 3030 
+6.4.2023, 10:05:34 - INFO - Server is running on port: 3030 
+6.4.2023, 10:17:10 - INFO - Server is running on port: 3030 
+6.4.2023, 10:17:59 - INFO - Server is running on port: 3030 
+6.4.2023, 10:21:12 - INFO - Server is running on port: 3030 
+6.4.2023, 10:33:08 - INFO - Server is running on port: 3030 
+6.4.2023, 10:33:29 - INFO - Server is running on port: 3030 
+6.4.2023, 10:41:21 - ERROR - cannot update playlist 642ed9e1f435a5662d818a55 | TypeError: Class constructor ObjectId cannot be invoked without 'new' 
+6.4.2023, 10:41:21 - ERROR - Failed to update playlist | TypeError: Class constructor ObjectId cannot be invoked without 'new' 
+6.4.2023, 10:41:31 - ERROR - cannot update playlist undefined | TypeError: Class constructor ObjectId cannot be invoked without 'new' 
+6.4.2023, 10:41:31 - ERROR - Failed to update playlist | TypeError: Class constructor ObjectId cannot be invoked without 'new' 
+6.4.2023, 10:41:54 - INFO - Server is running on port: 3030 

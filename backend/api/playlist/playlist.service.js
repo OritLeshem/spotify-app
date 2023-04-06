@@ -41,10 +41,7 @@ async function remove(playlistId) {
 }
 async function add(playlist) {
     try {
-        playlist.owner._id = ObjectId(playlist.owner._id)
-        playlist.owner.rate = 4
-        playlist.owner.ratingsCount = 638
-        playlist.owner.level = 'basic/premium'
+
         const collection = await dbService.getCollection('playlist')
         await collection.insertOne(playlist)
         return playlist
@@ -56,17 +53,14 @@ async function add(playlist) {
 async function update(playlist) {
     try {
         const playlistToSave = {
-            price: playlist.price,
-            title: playlist.title,
-            description: playlist.description,
-            tags: playlist.tags,
-            daysToMake: playlist.daysToMake,
+            name: playlist.name,
             imgUrl: playlist.imgUrl,
-            wishList: playlist.wishList,
-            chat: playlist.chat
+            songs: playlist.songs,
+            createdBy: playlist.createdBy,
+
         }
         const collection = await dbService.getCollection('playlist')
-        await collection.updateOne({ _id: ObjectId(playlist._id) }, { $set: playlistToSave })
+        await collection.updateOne({ _id: new ObjectId(playlist._id) }, { $set: playlistToSave })
         return playlist
     } catch (err) {
         logger.error(`cannot update playlist ${playlist._id}`, err)

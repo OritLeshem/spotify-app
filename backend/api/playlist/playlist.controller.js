@@ -26,13 +26,13 @@ async function getPlaylistById(req, res) {
 }
 
 async function addPlaylist(req, res) {
-  const { loggedinUser } = req
+  // const { loggedinUser } = req
   try {
     const playlist = req.body
     const addedPlaylist = await playlistService.add(playlist)
     res.json(addedPlaylist)
   } catch (err) {
-    logger.error('Failed to add playlist', err)
+    // logger.error('Failed to add playlist', err)
     res.status(500).send({ err: 'Failed to add playlist' })
   }
 }
