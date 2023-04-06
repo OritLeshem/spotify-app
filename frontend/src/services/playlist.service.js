@@ -20,6 +20,7 @@ export const playlistService = {
 
 
 async function query() {
+  console.log("hello query")
   return httpService.get('playlist')
 }
 
