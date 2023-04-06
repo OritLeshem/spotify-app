@@ -100,7 +100,6 @@ export function PlaylistDetail() {
 
   return <>
     <section className="main-page playlist-search">
-      <PlaylistFilter onSetFilter={onSetFilter} />
     </section>
 
     <section className="main-page playlist-details">
@@ -152,9 +151,15 @@ export function PlaylistDetail() {
       </li>)}
       </ul>
       {/* ///result */}
+      <hr />
+      <h2>Let's find something for your playlist</h2>
+
+      <PlaylistFilter onSetFilter={onSetFilter} title="Search for songs or episodes" />
       {searchResults && <>
-        <hr />
-        <h2>Let's find something for your playlist</h2>
+        {/* <hr /> */}
+
+
+        {/* <h2>Let's find something for your playlist</h2> */}
         <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
           <div className="table-num">{index + 1}
           </div>

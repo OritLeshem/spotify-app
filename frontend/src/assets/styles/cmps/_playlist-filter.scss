@@ -2,14 +2,21 @@
     max-width: 364px;
     position: relative;
     color: $bgc-nav;
-    
+
     input {
         border-radius: 500px;
         padding: em(12px) em(48px);
         text-overflow: ellipsis;
         width: 100%;
     }
-    
+
+    .search-detail {
+        color: $clr-txtsub;
+        background-color: $bgc-hover;
+        border-radius: 3px;
+
+    }
+
     .svg-container {
         position: absolute;
         bottom: 0;
@@ -17,5 +24,10 @@
         display: flex;
         align-items: center;
         left: em(12px);
+
+    }
+
+    .svg-detail {
+        color: $clr-txtsub;
     }
 }

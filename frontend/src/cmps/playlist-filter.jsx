@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { playlistService } from '../services/playlist.service'
 import { SearchSvg } from './form'
 
-export function PlaylistFilter({ onSetFilter }) {
+export function PlaylistFilter({ onSetFilter, title }) {
     const [filterByToEdit, setFilterByToEdit] = useState(playlistService.getDefaultFilter())
 
     function handleChange({ target }) {
@@ -19,15 +19,15 @@ export function PlaylistFilter({ onSetFilter }) {
 
     return <section className="playlist-filter">
         <form onSubmit={onSubmitFilter}>
-            <input type="text"
+            <input className={title ? "search-detail" : ""} type="text"
                 name="txt"
-                placeholder="What do you want to listen to?"
+                placeholder={title || "What do you want to listen to?"}
                 value={filterByToEdit.txt}
                 onChange={handleChange}
             />
             {/* <button>Search</button> */}
         </form>
-        <div className="svg-container">
+        <div className={title ? "svg-container svg-detail" : "svg-container"}>
             <SearchSvg />
         </div>
     </section>
