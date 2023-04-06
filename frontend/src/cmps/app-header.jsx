@@ -17,12 +17,12 @@ export function AppHeader() {
     <header className="app-header">
       <main>
         <nav>
-          <BackBtn />
-          <ForwardBtn />
+          {/* <BackBtn />
+          <ForwardBtn /> */}
         </nav>
-        <UserBtn />
+        {/* <UserBtn /> */}
         {user ? (
-          < section >
+          < section className='user-info'>
             <span>Hello {user.username} </span>
             <button className="user-login-logout" onClick={onLogout}> Logout</button>
           </ section >

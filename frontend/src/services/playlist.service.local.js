@@ -68,7 +68,7 @@ function _createPlaylists() {
   let playlists = utilService.loadFromStorage(STORAGE_KEY)
   if (!playlists || !playlists.length) {
     playlists = [{
-      "_id": "5cksxjas89xjsa8xjsa8jxs091",
+      "_id": "642ccee08a4d6ae1ec6766c8",
       "name": "Spears",
       "tags": [
         "Funk",

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { SET_PLAYLIST, UPDATE_NAME_PLAYLIST, UPDATE_PLAYLIST } from '../store/playlist.reducer';
 import { editNameOfPlayList, loadPlaylist, savePlaylist, updateGig, updateNaneOfPlayList } from '../store/playlist.actions';
 import { useParams } from 'react-router-dom';
-import { playlistService } from '../services/playlist.service.local'
+import { playlistService } from '../services/playlist.service'
 
 
 export function EditModal({ onCloseEditModal }) {

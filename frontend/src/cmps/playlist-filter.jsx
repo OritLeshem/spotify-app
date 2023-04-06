@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { playlistService } from '../services/playlist.service.local'
+import { playlistService } from '../services/playlist.service'
 import { SearchSvg } from './form'
 
 export function PlaylistFilter({ onSetFilter }) {

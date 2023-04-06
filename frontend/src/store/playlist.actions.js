@@ -2,8 +2,10 @@ import { store } from './store'
 import { SET_PLAYLIST, ADD_SONG_TO_PLAYLIST, REMOVE_SONG_FROM_PLAYLIST, ADD_PLAYLIST, REMOVE_PLAYLIST, SET_PLAYLISTS, UPDATE_PLAYLIST, UPDATE_NAME_PLAYLIST, SET_SONGS_LIST } from './playlist.reducer'
 import { userService } from "../services/user.service.local"
 
+
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { playlistService } from '../services/playlist.service.local'
+import { playlistService } from '../services/playlist.service'
+
 // import { playlistService } from '../services/playlist.service'
 
 // Action Creators:

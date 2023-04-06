@@ -1,11 +1,10 @@
-import { playlistService } from "../services/playlist.service.local"
+import { playlistService } from "../services/playlist.service"
 
 export const SET_PLAYLISTS = 'SET_PLAYLISTS'
 export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST'
 export const ADD_PLAYLIST = 'ADD_PLAYLIST'
 export const UPDATE_PLAYLIST = 'UPDATE_PLAYLIST'
 export const UNDO_REMOVE_PLAYLIST = 'UNDO_REMOVE_PLAYLIST'
-export const SET_FILTER = 'SET_FILTER'
 //song
 export const REMOVE_SONG_FROM_PLAYLIST = 'REMOVE_SONG_FROM_PLAYLIST'
 export const SET_PLAYLIST = 'SET_PLAYLIST'
@@ -15,7 +14,6 @@ export const UPDATE_NAME_PLAYLIST = 'UPDATE_NAME_PLAYLIST'
 const initialState = {
     playlists: [],
     playlist: null,
-    filterBy: playlistService.getDefaultFilter(),
     lastRemovedPlaylist: null,
     playSongs: [{
         "_id": "4m1EFMoRFvY",
@@ -66,8 +64,7 @@ export function playlistReducer(state = initialState, action) {
                 newState = { ...state, playlists: [...state.playlists, state.lastRemovedPlaylist], lastRemovedPlaylist: null }
             }
             break
-        case SET_FILTER:
-            return { ...state, filterBy: action.filterBy }
+
         //song in playlist
         case SET_PLAYLIST:
             newState = { ...state, playlist: action.playlist }

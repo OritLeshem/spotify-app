@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PlaylistList } from '../cmps/playlist-list'
 import { PlaylistPreview } from '../cmps/playlist-preview'
 import { GreenBtn, LibrarySvg } from '../cmps/form'
-import { playlistService } from '../services/playlist.service.local'
+import { playlistService } from '../services/playlist.service'
 import { youtubeService } from '../services/youtube.service'
 
 export function HomePage() {

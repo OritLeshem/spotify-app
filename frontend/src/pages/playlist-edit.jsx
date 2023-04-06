@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import defaultPhoto from '../assets/imgs/add-pic.png'
 
 
-import { playlistService } from '../services/playlist.service.local'
+import { playlistService } from '../services/playlist.service'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { loadPlaylist, loadPlaylists, savePlaylist } from '../store/playlist.actions';
 import { SET_PLAYLIST } from '../store/playlist.reducer'
@@ -89,8 +89,8 @@ export function PlaylistEdit() {
     input.click()
   }
 
-
-  return <section className="main-page playlist-details">
+  if (!user) return <h2 className="main-page playlist-details">Please signup / login to create a playlist</h2>
+  else return <section className="main-page playlist-details">
     <div className='playlist-detail-header'>
 
       <div className='playlist-header-img-container '>
