@@ -8,7 +8,6 @@ async function query() {
 
         const collection = await dbService.getCollection('playlist')
         var playlists = await collection.find().toArray()
-
         return playlists
     } catch (err) {
         logger.error('cannot find playlists', err)
