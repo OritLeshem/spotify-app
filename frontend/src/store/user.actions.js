@@ -2,7 +2,7 @@ import { store } from './store'
 import { LOADING_DONE, LOADING_START } from "./system/system.reducer"
 import { SET_USER } from "./user.reducer"
 
-import { userService } from "../services/user.service.local"
+import { userService } from "../services/user.service"
 import { showErrorMsg } from '../services/event-bus.service'
 
 

@@ -1,7 +1,7 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import defaultPhoto from '../assets/imgs/add-pic.png'
-import { userService } from './user.service.local'
+import { userService } from './playlist.service'
 const STORAGE_KEY = 'playlist'
 
 _createPlaylists()

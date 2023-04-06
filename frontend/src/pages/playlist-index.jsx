@@ -31,8 +31,7 @@ export function PlaylistIndex() {
             </div>
             <div>
               <span>{playlist.name.substring(0, playlist.name.indexOf("-" || ":")) || playlist.name.slice(0, 20)}{playlist.name.length > 20 && "..."}</span>
-              <h5>{playlist.createdBy._id}</h5>
-              <h5>{user._id}</h5>
+
               <h5 >{playlist.name.slice((playlist.name.indexOf('-' || ':') + 2), playlist.name.length + 1).slice(0, 15)}{playlist.name.length > 15 && "..."}</h5>        </div>
           </Link>
         </li>

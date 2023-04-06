@@ -25,6 +25,7 @@ export function PlaylistDetail() {
   const [searchResults, setSearchResults] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
   const playlists = useSelector(storeState => storeState.playlistModule.playlists)
+  const user = useSelector(storeState => storeState.userModule.user)
 
   useEffect(() => {
     loadPlaylist(playlistId)
@@ -110,7 +111,7 @@ export function PlaylistDetail() {
           <h1 className='playlist-detail-header-title'>
             {name}
           </h1>
-          <div className='playlist-detail-header-title-details'>Puki | {songs?.length} songs | 14 min 57 sec</div>
+          <div className='playlist-detail-header-title-details'>{user.username} | {songs?.length} songs | 14 min 57 sec</div>
         </div>
       </div>
       <div className="headline-table-title">

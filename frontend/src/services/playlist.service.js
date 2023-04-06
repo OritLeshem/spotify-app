@@ -1,9 +1,7 @@
 import { httpService } from './http.service'
 
-import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import defaultPhoto from '../assets/imgs/add-pic.png'
-const STORAGE_KEY = 'playlist'
 
 
 export const playlistService = {
@@ -64,116 +62,116 @@ function getDefaultFilter() {
   return { txt: '' }
 }
 
-function _createPlaylists() {
-  let playlists = utilService.loadFromStorage(STORAGE_KEY)
-  if (!playlists || !playlists.length) {
-    playlists = [{
-      "_id": "642ccee08a4d6ae1ec6766c8",
-      "name": "Spears",
-      "tags": [
-        "Funk",
-        "Happy"
-      ],
-      "createdBy": {
-        "_id": "u101",
-        "username": "Puki",
-        "imgUrl": "../assets/imgs/add-pic.png"
-      },
-      "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-      "songs": [
-        {
-          "id": "Q4VK9_CfOLQ",
-          "title": "Spears1",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/C-u5WLJ9Yk4/default.jpg",
-          "artist": "Spears"
-        },
-        {
-          "id": "8YzabSdk7ZA",
-          "title": "Spears2",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/CduA0TULnow/default.jpg",
-          "artist": "Spears"
-        },
-        {
-          "id": "t0bPrt69rag",
-          "title": "Spears3",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/t0bPrt69rag/hqdefault.jpg",
-          "artist": "Spears"
-        },
-        {
-          "id": "AJWtLf4-WWs",
-          "title": "Spears4",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/AJWtLf4-WWs/hqdefault.jpg",
-          "artist": "Spears"
-        },
-        {
-          "id": "XniAE34FShA",
-          "title": "Spears5",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/XniAE34FShA/hqdefault.jpg",
-          "artist": "Spears"
-        },
-        {
-          "id": "s6b33PTbGxk",
-          "title": "Spears6",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/s6b33PTbGxk/hqdefault.jpg",
-          "artist": "Spears"
-        },
-        {
-          "id": "T-sxSd1uwoU",
-          "title": "Spears7",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/T-sxSd1uwoU/hqdefault.jpg",
-          "artist": "Spears"
-        },
-        {
-          "id": "PZYSiWHW8V0",
-          "title": "Spears8",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/PZYSiWHW8V0/hqdefault.jpg",
-          "artist": "Spears"
-        },
+// function _createPlaylists() {
+//   let playlists = utilService.loadFromStorage(STORAGE_KEY)
+//   if (!playlists || !playlists.length) {
+//     playlists = [{
+//       "_id": "642ccee08a4d6ae1ec6766c8",
+//       "name": "Spears",
+//       "tags": [
+//         "Funk",
+//         "Happy"
+//       ],
+//       "createdBy": {
+//         "_id": "u101",
+//         "username": "Puki",
+//         "imgUrl": "../assets/imgs/add-pic.png"
+//       },
+//       "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+//       "songs": [
+//         {
+//           "id": "Q4VK9_CfOLQ",
+//           "title": "Spears1",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/C-u5WLJ9Yk4/default.jpg",
+//           "artist": "Spears"
+//         },
+//         {
+//           "id": "8YzabSdk7ZA",
+//           "title": "Spears2",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/CduA0TULnow/default.jpg",
+//           "artist": "Spears"
+//         },
+//         {
+//           "id": "t0bPrt69rag",
+//           "title": "Spears3",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/t0bPrt69rag/hqdefault.jpg",
+//           "artist": "Spears"
+//         },
+//         {
+//           "id": "AJWtLf4-WWs",
+//           "title": "Spears4",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/AJWtLf4-WWs/hqdefault.jpg",
+//           "artist": "Spears"
+//         },
+//         {
+//           "id": "XniAE34FShA",
+//           "title": "Spears5",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/XniAE34FShA/hqdefault.jpg",
+//           "artist": "Spears"
+//         },
+//         {
+//           "id": "s6b33PTbGxk",
+//           "title": "Spears6",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/s6b33PTbGxk/hqdefault.jpg",
+//           "artist": "Spears"
+//         },
+//         {
+//           "id": "T-sxSd1uwoU",
+//           "title": "Spears7",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/T-sxSd1uwoU/hqdefault.jpg",
+//           "artist": "Spears"
+//         },
+//         {
+//           "id": "PZYSiWHW8V0",
+//           "title": "Spears8",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/PZYSiWHW8V0/hqdefault.jpg",
+//           "artist": "Spears"
+//         },
 
-      ],
-    },
-    {
-      "_id": "5cksxjas89xjsa8xjsa8jxs10",
-      "name": "Madona",
-      "tags": [
-        "Funk",
-        "Happy"
-      ],
-      "createdBy": {
-        "_id": "u101",
-        "username": "Puki",
-        "imgUrl": defaultPhoto,
-      },
-      "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-      "songs": [
-        {
-          "id": "GTxPUFWjOlQ",
-          "title": "Madona1",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/zpzdgmqIHOQ/default.jpg",
-          "artist": "Madona"
-        },
-        {
-          "id": "zpzdgmqIHOQ",
-          "title": "Madona2",
-          "url": "youtube/song.mp4",
-          "imgUrl": "https://i.ytimg.com/vi/EDwb9jOVRtU/default.jpg",
-          "artist": "Madona"
+//       ],
+//     },
+//     {
+//       "_id": "5cksxjas89xjsa8xjsa8jxs10",
+//       "name": "Madona",
+//       "tags": [
+//         "Funk",
+//         "Happy"
+//       ],
+//       "createdBy": {
+//         "_id": "u101",
+//         "username": "Puki",
+//         "imgUrl": defaultPhoto,
+//       },
+//       "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+//       "songs": [
+//         {
+//           "id": "GTxPUFWjOlQ",
+//           "title": "Madona1",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/zpzdgmqIHOQ/default.jpg",
+//           "artist": "Madona"
+//         },
+//         {
+//           "id": "zpzdgmqIHOQ",
+//           "title": "Madona2",
+//           "url": "youtube/song.mp4",
+//           "imgUrl": "https://i.ytimg.com/vi/EDwb9jOVRtU/default.jpg",
+//           "artist": "Madona"
 
-        },
-      ],
-    }]
-    utilService.saveToStorage(STORAGE_KEY, playlists)
-  }
-}
+//         },
+//       ],
+//     }]
+//     utilService.saveToStorage(STORAGE_KEY, playlists)
+//   }
+// }
 
 
 

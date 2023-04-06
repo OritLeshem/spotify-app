@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { userService } from "../services/user.service.local"
+import { userService } from "../services/playlist.service"
 import { LoginForm } from './login-form.jsx'
 import { login, signup } from "../store/user.actions"
 
