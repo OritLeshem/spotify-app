@@ -62,3 +62,15 @@
 6.4.2023, 15:12:06 - INFO - Server is running on port: 3030 
 6.4.2023, 15:12:16 - INFO - Server is running on port: 3030 
 6.4.2023, 16:22:24 - INFO - Server is running on port: 3030 
+6.4.2023, 18:02:34 - INFO - Server is running on port: 3030 
+6.4.2023, 18:03:33 - INFO - Server is running on port: 3030 
+6.4.2023, 18:04:44 - INFO - Server is running on port: 3030 
+6.4.2023, 18:04:48 - ERROR - while finding user by username: ad | ReferenceError: Cannot access 'user' before initialization 
+6.4.2023, 18:05:01 - INFO - Server is running on port: 3030 
+6.4.2023, 18:05:50 - INFO - Server is running on port: 3030 
+6.4.2023, 18:05:53 - INFO - Server is running on port: 3030 
+6.4.2023, 18:12:20 - INFO - Server is running on port: 3030 
+6.4.2023, 18:31:50 - INFO - Server is running on port: 3030 
+6.4.2023, 18:36:09 - INFO - Server is running on port: 3030 
+6.4.2023, 18:37:16 - INFO - Server is running on port: 3030 
+6.4.2023, 18:37:25 - INFO - Server is running on port: 3030 
