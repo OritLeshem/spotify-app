@@ -7,11 +7,8 @@ import { userReducer } from './user.reducer'
 
 const rootReducer = combineReducers({
     userModule: userReducer,
-
     playlistModule: playlistReducer,
     playerModule: playerReducer,
-    // userModule: userReducer
-
     // systemModule: systemReducer,
 })
 
@@ -19,7 +16,7 @@ const middleware = (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ? window.__REDU
 export const store = createStore(rootReducer, middleware)
 
 store.subscribe(() => {
-    console.log('storeState:\n', store.getState())
+    // console.log('storeState:\n', store.getState())
 })
 
 

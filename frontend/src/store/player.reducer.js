@@ -36,8 +36,6 @@ export function playerReducer(state = initialState, action) {
             return { ...state, isPlaying: !state.isPlaying }
         case SET_VOLUME:
             return { ...state, volume: action.volume };
-
-
         default:
             return { ...state }
     }

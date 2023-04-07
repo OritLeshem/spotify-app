@@ -1,7 +1,6 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import defaultPhoto from '../assets/imgs/add-pic.png'
-import { userService } from './playlist.service'
 const STORAGE_KEY = 'playlist'
 
 _createPlaylists()
@@ -36,10 +35,7 @@ async function save(playlist) {
   let savedPlaylist
   if (playlist._id) {
     savedPlaylist = await storageService.put(STORAGE_KEY, playlist)
-    console.log("hello from save service", savedPlaylist)
   } else {
-    // Later, owner is set by the backend
-    // playlist.owner = userService.getLoggedinUser()
     savedPlaylist = await storageService.post(STORAGE_KEY, playlist)
   }
   return savedPlaylist
@@ -54,9 +50,7 @@ function getEmptyPlaylist() {
       "fullname": "Puki Ben David",
       "imgUrl": "../assets/imgs/add-pic.png"
     },
-    // imgUrl: "../assets/img/add-pic.png",
     imgUrl: defaultPhoto,
-
     songs: []
   }
 }

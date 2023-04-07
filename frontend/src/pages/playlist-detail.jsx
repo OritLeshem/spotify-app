@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { AiFillClockCircle } from "react-icons/ai";
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+
 import defaultPhoto from '../assets/imgs/add-pic.png'
 
 import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer';
-
-import { youtubeService } from '../services/youtube.service';
-import { utilService } from '../services/util.service';
+import { addSonfToPlaylist, loadPlaylist, removeSongFromPlayList } from '../store/playlist.actions';
 
 import { showErrorMsg } from '../services/event-bus.service'
+import { youtubeService } from '../services/youtube.service';
+import { utilService } from '../services/util.service';
 import { PlaylistFilter } from '../cmps/playlist-filter';
-import { addSonfToPlaylist, loadPlaylist, removeSongFromPlayList } from '../store/playlist.actions';
-import { useDispatch, useSelector } from 'react-redux';
 import { Music } from '../cmps/music';
-import { loadPlaylists, removePlaylist } from '../store/playlist.actions'
+import { loadPlaylists } from '../store/playlist.actions';
 
 
 export function PlaylistDetail() {
@@ -74,6 +73,7 @@ export function PlaylistDetail() {
     console.log("remove song", songId)
     removeSongFromPlayList(playlistId, songId)
   }
+
   function onAddSongTpPlayList(song) {
     console.log("add song", song)
     if (playlist?.songs.some(checkSong => checkSong.id === song.id)) {
@@ -93,14 +93,13 @@ export function PlaylistDetail() {
       dispatch({ type: SET_CURRENT_SONG, song });
       dispatch({ type: ISPLAYING });
     }
-  };
+  }
 
   if (!playlist) return
   const { name, songs } = playlist
 
   return <>
     <section className="main-page playlist-search"> </section>
-
     <section className="main-page playlist-details">
       <div className='playlist-detail-header'>
         <div className='playlist-header-img-container '> <img src={playlist.imgUrl !== defaultPhoto ? playlist.imgUrl : songs.length ? songs[0].imgUrl : defaultPhoto} /></div>
@@ -127,7 +126,6 @@ export function PlaylistDetail() {
           </div>
         </div>
       </div>
-
       <ul className='list-of-playlist'>{songs?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
         <div className="table-num">{index + 1}
         </div>
@@ -146,13 +144,10 @@ export function PlaylistDetail() {
         </div>
         <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
         <small onClick={(ev) => onRemoveSongFromPlayList(ev, song.id)} className='fa-regular trash-can'></small>
-
       </li>)}
       </ul>
-      {/* ///result */}
       <hr />
       <h2>Let's find something for your playlist</h2>
-
       <PlaylistFilter onSetFilter={onSetFilter} title="Search for songs or episodes" />
       {!searchResults && <div className='detail-divider'></div>}
       {searchResults && <>
@@ -172,7 +167,6 @@ export function PlaylistDetail() {
           </div>
           <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
           <small onClick={() => { onAddSongTpPlayList(song) }} className='fa-regular plus'></small>
-
         </li>)}
         </ul>
       </>}

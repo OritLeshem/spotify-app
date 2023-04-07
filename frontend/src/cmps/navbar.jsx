@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { loadPlaylists, removePlaylist } from '../store/playlist.actions'
 import { CreatePlaylist, HomePageSvg, LibrarySvg, LikedSongs, Logo, SearchSvg } from './form'
 import { AiOutlinePlus } from 'react-icons/ai'
@@ -59,12 +59,9 @@ export function Navbar() {
     <Logo />
 
     <nav>
-      <NavLink to="/"><HomePageSvg /><h3>Home</h3>
-      </NavLink>
-      <NavLink to="/search"><SearchSvg /><h3>Search</h3>
-      </NavLink>
-      <NavLink to="/playlist"><LibrarySvg /><h3>Your Library</h3>
-      </NavLink>
+      <NavLink to="/"><HomePageSvg /><h3>Home</h3></NavLink>
+      <NavLink to="/search"><SearchSvg /><h3>Search</h3></NavLink>
+      <NavLink to="/playlist"><LibrarySvg /><h3>Your Library</h3></NavLink>
     </nav>
     <div className="preferences">
       <NavLink onClick={handleCreate} to="/create"><CreatePlaylist /><h3>Create Playlist</h3></NavLink>
@@ -85,7 +82,6 @@ export function Navbar() {
   if (isMobile) return <nav className='nav-mobile'>
     <button onClick={handleHome} className={activeNav === '#' ? 'active' : ''}><HomePageSvg /></button>
     <button onClick={handleSearch} className={activeNav === '#search' ? 'active' : ''}><SearchSvg /></button>
-
     <button onClick={handleLibrary} className={activeNav === '#playlist' ? 'active' : ''}><LibrarySvg /></button>
     <button onClick={handleCreate} className={activeNav === 'create-btn #create' ? 'active' : 'create-btn'}><AiOutlinePlus /></button>
   </nav>

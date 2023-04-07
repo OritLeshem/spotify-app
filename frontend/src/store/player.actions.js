@@ -1,8 +1,6 @@
 import { store } from './store'
 import { SET_CURRENT_SONG, SET_PLAYER } from './player.reducer'
 
-
-
 export async function setCurrentSong(song) {
     try {
         store.dispatch({ type: SET_CURRENT_SONG, song })

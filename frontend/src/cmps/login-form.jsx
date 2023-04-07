@@ -1,7 +1,5 @@
-
 import { useState } from "react"
 import { userService } from "../services/user.service"
-
 
 export function LoginForm({ onLogin, isSignup }) {
 
@@ -28,7 +26,6 @@ export function LoginForm({ onLogin, isSignup }) {
                 required
                 autoFocus
             />
-
             <button className="user-login-logout">{isSignup ? 'Signup' : 'Login'}</button>
         </form>
     )

@@ -16,7 +16,6 @@ function makeId(length = 6) {
     for (var i = 0; i < length; i++) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length))
     }
-
     return txt
 }
 
@@ -69,4 +68,3 @@ function generateRandomColor() {
     let randColor = randomNumber.padStart(6, 0);
     return `#${randColor.toUpperCase()}`
 }
-// console.log(generateRandomColor()); 

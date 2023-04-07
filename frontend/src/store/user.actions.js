@@ -1,13 +1,8 @@
 import { store } from './store'
-import { LOADING_DONE, LOADING_START } from "./system/system.reducer"
 import { SET_USER } from "./user.reducer"
 
 import { userService } from "../services/user.service"
 import { showErrorMsg } from '../services/event-bus.service'
-
-
-
-
 
 export async function login(credentials) {
     try {
@@ -40,7 +35,6 @@ export async function logout() {
         throw err
     }
 }
-
 
 export async function loadUser(userId) {
     try {

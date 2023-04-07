@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { userService } from "../services/playlist.service"
 import { LoginForm } from './login-form.jsx'
 import { login, signup } from "../store/user.actions"
 
@@ -11,20 +9,6 @@ export function LoginSignup({ onChangeLoginStatus }) {
     function onLogin(credentials) {
         isSignup ? signup(credentials) : login(credentials)
     }
-
-    // function login(credentials) {
-    //     userService.login(credentials)
-    //         .then(onChangeLoginStatus)
-    //         .then(() => { showSuccessMsg('Logged in successfully') })
-    //         .catch((err) => { showErrorMsg('Oops try again') })
-    // }
-
-    // function signup(credentials) {
-    //     userService.signup(credentials)
-    //         .then(onChangeLoginStatus)
-    //         .then(() => { showSuccessMsg('Signed in successfully') })
-    //         .catch((err) => { showErrorMsg('Oops try again') })
-    // }
 
     return (
         <div className="login-page">

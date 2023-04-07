@@ -35,14 +35,14 @@ export function PlayerBar() {
             return prevTime + 1;
           }
           return 0;
-        });
-      }, 1000);
+        })
+      }, 1000)
 
       return () => {
-        clearInterval(timer);
-      };
+        clearInterval(timer)
+      }
     }
-  }, [isPlaying, duration]);
+  }, [isPlaying, duration])
   //to set the duration each time we change the song
   useEffect(() => {
     setTime(0)
@@ -53,101 +53,100 @@ export function PlayerBar() {
   useEffect(() => {
     if (currentSong) {
       // youtubeService.getTimeOfSong(currentSong._id)
-      console.log('Video ID:', currentSong.id);
+      console.log('Video ID:', currentSong.id)
       axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${currentSong.id}&part=contentDetails&key=AIzaSyDbYtw99FWbtr4RCHxS0dxtj3--vXfSp4E`)
         .then(res => {
-          console.log(res)
-          setShowTime(youtubeService.formatDuration(res));
-          setDuration(youtubeService.convertDurationToSeconds(res));
+          setShowTime(youtubeService.formatDuration(res))
+          setDuration(youtubeService.convertDurationToSeconds(res))
         })
 
         .catch((err) => console.error("Error fetching song duration:", err))
     }
-  }, [currentSong]);
+  }, [currentSong])
 
   useEffect(() => {
     if (playerRef.current) {
       if (isPlaying) {
-        playerRef.current.playVideo();
+        playerRef.current.playVideo()
       } else {
-        playerRef.current.pauseVideo();
+        playerRef.current.pauseVideo()
       }
     }
-  }, [isPlaying]);
+  }, [isPlaying])
 
   useEffect(() => {
     const updateCurrentTime = () => {
       if (playerRef.current && isPlaying) {
-        setTime(Math.round(playerRef.current.getCurrentTime()));
+        setTime(Math.round(playerRef.current.getCurrentTime()))
       }
     };
 
-    const interval = setInterval(updateCurrentTime, 1000);
+    const interval = setInterval(updateCurrentTime, 1000)
 
     return () => {
-      clearInterval(interval);
+      clearInterval(interval)
     };
-  }, [playerRef, isPlaying]);
+  }, [playerRef, isPlaying])
 
   const handleChange = (event) => {
-    setUserTime(parseInt(event.target.value, 10));
+    setUserTime(parseInt(event.target.value, 10))
   };
 
   const handleRangeInputEnd = () => {
-    setTime(userTime);
+    setTime(userTime)
     if (playerRef.current) {
-      playerRef.current.seekTo(userTime);
+      playerRef.current.seekTo(userTime)
     }
   };
 
   function onReady(event) {
     setTimeout(() => {
-      playerRef.current = event.target;
+      playerRef.current = event.target
       if (isPlaying) {
-        playerRef.current.playVideo();
+        playerRef.current.playVideo()
       }
     }, 500);
   }
 
   const onPlayButtonClick = (ev) => {
-    dispatch({ type: ISPLAYING });
+    dispatch({ type: ISPLAYING })
   };
 
   const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
+    const minutes = Math.floor(seconds / 60)
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
   }
 
   function handleSongEnd() {
-    handleNextSong();
+    handleNextSong()
   }
   function handleNextSong() {
-    console.log('currentSong', currentSong);
-    const currIndex = playSongs.indexOf(currentSong);
+    console.log('currentSong', currentSong)
+    const currIndex = playSongs.indexOf(currentSong)
     if (currIndex === playSongs.length - 1) {
-      dispatch({ type: SET_CURRENT_SONG, song: playSongs[0] });
+      dispatch({ type: SET_CURRENT_SONG, song: playSongs[0] })
     } else {
-      dispatch({ type: SET_CURRENT_SONG, song: playSongs[currIndex + 1] });
+      dispatch({ type: SET_CURRENT_SONG, song: playSongs[currIndex + 1] })
     }
-    console.log('currIndex', currIndex);
+    console.log('currIndex', currIndex)
   }
   function handlePrevSong() {
-    console.log('currentSong', currentSong, playSongs);
-    const currIndex = currentSong ? playSongs.indexOf(currentSong) : -1;
+    console.log('currentSong', currentSong, playSongs)
+    const currIndex = currentSong ? playSongs.indexOf(currentSong) : -1
     if (currIndex === 0) {
-      dispatch({ type: SET_CURRENT_SONG, song: playSongs[playSongs.length - 1] });
+      dispatch({ type: SET_CURRENT_SONG, song: playSongs[playSongs.length - 1] })
     } else {
-      dispatch({ type: SET_CURRENT_SONG, song: playSongs[currIndex - 1] });
+      dispatch({ type: SET_CURRENT_SONG, song: playSongs[currIndex - 1] })
     }
-    console.log('currIndex', currIndex);
+    console.log('currIndex', currIndex)
   }
 
   function handleShuffle() {
     console.log("handleShuffle")
-    const shuffledSongs = [...playSongs].sort(() => Math.random() - 0.5);
-    dispatch({ type: SET_CURRENT_SONG, song: shuffledSongs[0] });
-    dispatch({ type: 'SET_PLAYLIST', playlist: shuffledSongs });
+    const shuffledSongs = [...playSongs].sort(() => Math.random() - 0.5)
+    dispatch({ type: SET_CURRENT_SONG, song: shuffledSongs[0] })
+    dispatch({ type: 'SET_PLAYLIST', playlist: shuffledSongs })
   }
   return (
     <section className="player-bar">
@@ -192,5 +191,5 @@ export function PlayerBar() {
         <small>{showTime}</small>
       </div>
     </section>
-  );
+  )
 }

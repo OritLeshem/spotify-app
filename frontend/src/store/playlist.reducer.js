@@ -5,12 +5,13 @@ export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST'
 export const ADD_PLAYLIST = 'ADD_PLAYLIST'
 export const UPDATE_PLAYLIST = 'UPDATE_PLAYLIST'
 export const UNDO_REMOVE_PLAYLIST = 'UNDO_REMOVE_PLAYLIST'
+export const UPDATE_NAME_PLAYLIST = 'UPDATE_NAME_PLAYLIST'
 //song
 export const REMOVE_SONG_FROM_PLAYLIST = 'REMOVE_SONG_FROM_PLAYLIST'
 export const SET_PLAYLIST = 'SET_PLAYLIST'
 export const ADD_SONG_TO_PLAYLIST = 'ADD_SONG_TO_PLAYLIST'
 export const SET_SONGS_LIST = 'SET_SONGS_LIST'
-export const UPDATE_NAME_PLAYLIST = 'UPDATE_NAME_PLAYLIST'
+
 const initialState = {
     playlists: [],
     playlist: null,
@@ -50,7 +51,6 @@ export function playlistReducer(state = initialState, action) {
             playlists = state.playlists.filter(playlist => playlist._id !== action.playlistId)
             newState = { ...state, playlists, lastRemovedPlaylist }
             break
-
         case ADD_PLAYLIST:
             newState = { ...state, playlists: [...state.playlists, action.playlist] }
             break
@@ -59,12 +59,6 @@ export function playlistReducer(state = initialState, action) {
             newState = { ...state, playlists }
             console.log("PLAYLISTS", playlists)
             break
-        case UNDO_REMOVE_PLAYLIST:
-            if (state.lastRemovedPlaylist) {
-                newState = { ...state, playlists: [...state.playlists, state.lastRemovedPlaylist], lastRemovedPlaylist: null }
-            }
-            break
-
         //song in playlist
         case SET_PLAYLIST:
             newState = { ...state, playlist: action.playlist }

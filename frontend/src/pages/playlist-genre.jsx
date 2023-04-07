@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
-import { AiFillClockCircle } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { Music } from "../cmps/music"
+
 import { youtubeService } from "../services/youtube.service"
+
 import { ISPLAYING, SET_CURRENT_SONG } from "../store/player.reducer"
 import { SET_SONGS_LIST } from "../store/playlist.reducer"
+
+import { Music } from "../cmps/music"
 
 export function PlaylistGenre() {
   const { genreName } = useParams()
@@ -38,18 +40,18 @@ export function PlaylistGenre() {
   const handlePlayPauseClick = (song) => {
     if (song.id === currentSong.id) {
       // If the clicked song is the same as the current song, toggle isPlaying state.
-      dispatch({ type: ISPLAYING });
+      dispatch({ type: ISPLAYING })
     } else {
       // If the clicked song is different, pause the current song, set the new song and start playing it.
       if (isPlaying) {
-        dispatch({ type: ISPLAYING });
+        dispatch({ type: ISPLAYING })
       }
-      dispatch({ type: SET_CURRENT_SONG, song });
-      dispatch({ type: ISPLAYING });
+      dispatch({ type: SET_CURRENT_SONG, song })
+      dispatch({ type: ISPLAYING })
     }
   };
   function handleSong(ev, songId) {
-    console.log("song, li clicked", songId);
+    console.log("song, li clicked", songId)
   }
 
   return <section className="main-page playlist-details">    <h2> {genreName}</h2>
@@ -61,10 +63,8 @@ export function PlaylistGenre() {
         <div className="headline-table-col">
           <span>TITLE</span>
         </div>
-
       </div>
     </div>
-
     {searchResults && <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
       <div className="headline-table-col table-num">{index + 1}
       </div>
@@ -79,11 +79,7 @@ export function PlaylistGenre() {
           <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
         </div>
       </div>
-
     </li>)}
     </ul>}
-
-
-
   </section>
 }

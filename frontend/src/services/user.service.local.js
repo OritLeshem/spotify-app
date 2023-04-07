@@ -15,7 +15,6 @@ export const userService = {
     getLoggedinUser,
 }
 
-
 function getById(userId) {
     return storageService.get(USER_KEY, userId)
 }

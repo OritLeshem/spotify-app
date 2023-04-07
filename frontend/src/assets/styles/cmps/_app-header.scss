@@ -1,15 +1,20 @@
 .app-header {
-    padding: 0 2rem;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: end;
 
-    main {
-        @include flex;
-        // border: 1px solid red;
-    }
+    // main {
+    //     display: flex;
+    //     justify-content: end;
+    //     // margin: 1rem;
+    //     // @include flex;
+    //     // border: 1px solid red;
+    // }
 
-    nav {
-        button:not(:first-child) {
-            padding: 1em 0;
-            margin-inline-start: 1em;
-        }
-    }
+    // nav {
+    //     button:not(:first-child) {
+    //         padding: 1em 0;
+    //         margin-inline-start: 1em;
+    //     }
+    // }
 }

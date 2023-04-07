@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom'
-import { youtubeService } from '../services/youtube.service';
-import { useState } from "react"
 
 const genres = [
     {

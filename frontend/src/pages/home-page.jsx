@@ -11,26 +11,20 @@ export function HomePage() {
   const [hiphop, setHiphop] = useState()
 
   useEffect(() => {
-
     const latin = playlistService.latin()
-    // console.log("latin", latin.songs)
     setLatin(latin)
     const hiphop = playlistService.hiphop()
-    // console.log("hiphop", hiphop.songs)
     setHiphop(hiphop)
     const pop = playlistService.pop()
-    // console.log("pop", pop.songs)
     setPop(pop)
   }, [])
 
   youtubeService.getVideoResults("pink")
     .then(res => {
-      // console.log('res:', res)
     })
 
   if (!pop) return
   return <section className="main-page home-page">
-    {/* <Music /> */}
     <h2 className='home-page-title'>POP</h2>
     <PlaylistList playlists={pop.songs} />
     <h2 className='home-page-title'>HIPHOP</h2>

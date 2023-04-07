@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import { playlistService } from '../services/playlist.service'
 import { SearchSvg } from './form'
 
@@ -25,7 +24,6 @@ export function PlaylistFilter({ onSetFilter, title }) {
                 value={filterByToEdit.txt}
                 onChange={handleChange}
             />
-            {/* <button>Search</button> */}
         </form>
         <div className={title ? "svg-container svg-detail" : "svg-container"}>
             <SearchSvg />

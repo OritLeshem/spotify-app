@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import defaultPhoto from '../assets/imgs/add-pic.png'
-
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
 
 import { playlistService } from '../services/playlist.service'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { uploadService } from '../services/upload.service';
+
 import { loadPlaylist, loadPlaylists, savePlaylist } from '../store/playlist.actions';
 import { SET_PLAYLIST } from '../store/playlist.reducer'
-import { useDispatch, useSelector } from 'react-redux';
-import { uploadService } from '../services/upload.service';
 
 
 export function PlaylistEdit() {
@@ -29,13 +28,11 @@ export function PlaylistEdit() {
   }, [imgUrl])
 
   useEffect(() => {
-
     if (playlist) loadPlaylists('')
   }, [playlist])
 
   useEffect(() => {
     function handleResize() {
-      // console.log(window.innerWidth < 960)
       if (window.innerWidth < 700) setIsMobile(true)
       if (window.innerWidth > 700) setIsMobile(false)
     }
@@ -89,7 +86,7 @@ export function PlaylistEdit() {
     input.click()
   }
 
-  if (!user) return <h2 className="main-page playlist-details">Please signup / login to create a playlist</h2>
+  if (!user) return <span className="main-page playlist-details">Please signup / login to create a playlist</span>
   else return <section className="main-page playlist-details">
     <div className='playlist-detail-header'>
 
@@ -111,9 +108,7 @@ export function PlaylistEdit() {
             className='playlist-detail-header-title-input'
             id="name"
             placeholder="playlist name..."
-            // value={playlistToEdit.name}
             onChange={handleChange}
-
           />
           <button onMouseDown={onSavePlaylist} type="submit">save</button>
         </form>

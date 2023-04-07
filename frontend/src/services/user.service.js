@@ -52,7 +52,6 @@ function getEmptyCredentials(username = '') {
 }
 
 function getLoggedinUser() {
-  console.log(JSON.parse(sessionStorage.getItem('loggedinUser') || null))
   return JSON.parse(sessionStorage.getItem('loggedinUser') || null)
 }
 

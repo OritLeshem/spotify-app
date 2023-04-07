@@ -15,24 +15,24 @@ export function AppHeader() {
   }
   return <>
     <header className="app-header">
-      <main>
-        <nav>
-          {/* <BackBtn />
+      {/* <main> */}
+      <nav>
+        {/* <BackBtn />
           <ForwardBtn /> */}
-        </nav>
-        {/* <UserBtn /> */}
-        {user ? (
-          < section className='user-info'>
-            <span>Hello {user.username} </span>
-            <button className="user-login-logout" onClick={onLogout}> Logout</button>
-          </ section >
-        ) : (
-          <section className='user-info'>
-            <LoginSignup />
-          </section>
-        )}
+      </nav>
+      {/* <UserBtn /> */}
+      {user ? (
+        < section className='user-info'>
+          <span>Hello {user.username} </span>
+          <button className="user-login-logout" onClick={onLogout}> Logout</button>
+        </ section >
+      ) : (
+        <section className='user-info'>
+          <LoginSignup />
+        </section>
+      )}
 
-      </main>
+      {/* </main> */}
     </header>
   </>
 }
