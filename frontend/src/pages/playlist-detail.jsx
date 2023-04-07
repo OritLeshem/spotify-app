@@ -28,12 +28,10 @@ export function PlaylistDetail() {
 
   useEffect(() => {
     loadPlaylist(playlistId)
-
   }, [playlistId])
 
   useEffect(() => {
     loadPlaylists()
-
   }, [playlist])
 
   useEffect(() => {
@@ -51,7 +49,6 @@ export function PlaylistDetail() {
   useEffect(() => {
     const randomColor = utilService.generateRandomColor()
     document.body.style.backgroundColor = randomColor;
-
     return () => {
       document.body.style.backgroundColor = '#121212';
     };

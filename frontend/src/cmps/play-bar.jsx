@@ -26,7 +26,19 @@ export function PlayerBar() {
   const dispatch = useDispatch();
   const [showTime, setShowTime] = useState('00:00');
   const [duration, setDuration] = useState();
+  const [isMobile, setIsMobile] = useState(false)
 
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 700) setIsMobile(true)
+      if (window.innerWidth > 700) setIsMobile(false)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
   useEffect(() => {
     if (isPlaying) {
       const timer = setInterval(() => {
@@ -151,7 +163,7 @@ export function PlayerBar() {
   return (
     <section className="player-bar">
       <div className="player-control">
-        <button onClick={handleShuffle}><ShuffleBtn /></button>
+        {!isMobile && <button onClick={handleShuffle}><ShuffleBtn /></button>}
 
         <button onClick={handlePrevSong}>
           <SkipBackBtn />
@@ -167,7 +179,7 @@ export function PlayerBar() {
           {' '}
           <SkipForwardBtn />
         </button>
-        <RepeatBtn />
+        {!isMobile && <button onClick={handleShuffle}><RepeatBtn /></button>}
       </div>
       <div className="playback-bar">
         <small>{formatTime(time)}</small>
