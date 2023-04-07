@@ -24,7 +24,6 @@ async function login(username) {
     return user
 }
 
-
 async function signup({ username }) {
     // const saltRounds = 10
 
@@ -37,7 +36,6 @@ async function signup({ username }) {
     // const hash = await bcrypt.hash(password, saltRounds)
     return userService.add({ username })
 }
-
 
 function getLoginToken(user) {
     const userInfo = { _id: user._id, fullname: user.fullname, isAdmin: user.isAdmin }

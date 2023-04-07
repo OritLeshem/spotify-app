@@ -3,6 +3,23 @@
   gap: 2rem;
   flex-wrap: wrap;
 
+  .trash {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+
+    &:hover {
+      color: $clr-txt;
+      transition: 0.3s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1.1);
+      transition: 0.3s ease-in-out;
+    }
+  }
+
   @media (min-width: 770px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

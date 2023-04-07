@@ -134,12 +134,15 @@ export function PlaylistDetail() {
           <div className="cover-container"></div>
           <div className='song-info'>
             {/* TITLE FORMATTED */}
-            {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 1), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+            {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 1), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
             {/* ARTIST NAME */}
-            <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+            <small >{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+
           </div>
         </div>
-        <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+        <small className='song-artist-name' >{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+
+
         <small onClick={(ev) => onRemoveSongFromPlayList(ev, song.id)} className='fa-regular trash-can'></small>
       </li>)}
       </ul>
@@ -158,7 +161,7 @@ export function PlaylistDetail() {
             </div>
             <div className="cover-container"></div>
             <div className='song-info'>
-              {(!isMobile) ? <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+              {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
               <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
             </div>
           </div>
