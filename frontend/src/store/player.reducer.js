@@ -1,7 +1,7 @@
 export const INCREMENT = 'INCREMENT'
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG'
 export const ISPLAYING = 'ISPLAYING'
-export const SET_PLAYER = "SET_PLAYER"
+export const SET_PLAYER = 'SET_PLAYER'
 export const SET_VOLUME = 'SET_VOLUME';
 
 const initialState = {
@@ -30,7 +30,7 @@ export function playerReducer(state = initialState, action) {
         case SET_PLAYER:
             return { ...state, player: action.player }
         case SET_CURRENT_SONG:
-            console.log("action", action)
+            console.log('action', action)
             return { ...state, currentSong: action.song }
         case ISPLAYING:
             return { ...state, isPlaying: !state.isPlaying }

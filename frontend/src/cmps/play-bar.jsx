@@ -72,7 +72,7 @@ export function PlayerBar() {
           setDuration(youtubeService.convertDurationToSeconds(res))
         })
 
-        .catch((err) => console.error("Error fetching song duration:", err))
+        .catch((err) => console.error('Error fetching song duration:', err))
     }
   }, [currentSong])
 
@@ -155,21 +155,21 @@ export function PlayerBar() {
   }
 
   function handleShuffle() {
-    console.log("handleShuffle")
+    console.log('handleShuffle')
     const shuffledSongs = [...playSongs].sort(() => Math.random() - 0.5)
     dispatch({ type: SET_CURRENT_SONG, song: shuffledSongs[0] })
     dispatch({ type: 'SET_PLAYLIST', playlist: shuffledSongs })
   }
   return (
-    <section className="player-bar">
-      <div className="player-control">
+    <section className='player-bar'>
+      <div className='player-control'>
         {!isMobile && <button onClick={handleShuffle}><ShuffleBtn /></button>}
 
         <button onClick={handlePrevSong}>
           <SkipBackBtn />
         </button>
         <button className='playbar-play-pause' onClick={onPlayButtonClick}>
-          {isPlaying ? <span className="fa-solid pause"></span> : <PlayBtnBar />}
+          {isPlaying ? <span className='fa-solid pause'></span> : <PlayBtnBar />}
         </button>
         {currentSong && (
           <YouTube videoId={currentSong.id || '4m1EFMoRFvY'} opts={opts} onReady={onReady} onEnd={handleSongEnd}
@@ -181,22 +181,21 @@ export function PlayerBar() {
         </button>
         {!isMobile && <button onClick={handleShuffle}><RepeatBtn /></button>}
       </div>
-      <div className="playback-bar">
+      <div className='playback-bar'>
         <small>{formatTime(time)}</small>
-        <div className="slider-container">
+        <div className='slider-container'>
           <input
-            type="range"
-            min="0"
+            type='range'
+            min='0'
             max={duration}
-            step="1"
-            className="slider"
+            step='1'
+            className='slider'
             value={userTime !== 0 ? userTime : time}
             onChange={handleChange}
             onMouseUp={handleRangeInputEnd}
             onTouchEnd={handleRangeInputEnd}
           />
-          {/* <div className="progress" style={{ width: `${time / 2}%` }}></div> */}
-          <div className="progress" style={{ width: `${(time / duration) * 100}%` }}></div>
+          <div className='progress' style={{ width: `${(time / duration) * 100}%` }}></div>
 
 
         </div>

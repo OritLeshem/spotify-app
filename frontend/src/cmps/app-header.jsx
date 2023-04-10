@@ -1,6 +1,6 @@
 import { BackBtn, ForwardBtn, UserBtn } from './form'
 import { LoginSignup } from './login-signup.jsx'
-import { logout } from "../store/user.actions"
+import { logout } from '../store/user.actions'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,7 +14,7 @@ export function AppHeader() {
 
   }
   return <>
-    <header className="app-header">
+    <header className='app-header'>
       {/* <main> */}
       <nav>
         {/* <BackBtn />
@@ -24,7 +24,7 @@ export function AppHeader() {
       {user ? (
         < section className='user-info'>
           <span>Hello {user.username} </span>
-          <button className="user-login-logout" onClick={onLogout}> Logout</button>
+          <button className='user-login-logout' onClick={onLogout}> Logout</button>
         </ section >
       ) : (
         <section className='user-info'>

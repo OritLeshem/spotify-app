@@ -42,7 +42,7 @@ export function PlaylistSearch() {
   }
 
   function onSetFilter(filterBy) {
-    console.log("filterBy", filterBy.txt)
+    console.log('filterBy', filterBy.txt)
     youtubeService.getVideoResults(filterBy.txt)
       .then(res => {
         setSearchResults(res)
@@ -64,7 +64,7 @@ export function PlaylistSearch() {
   }
 
   if (!playlists) return
-  return <section className="main-page playlist-search">
+  return <section className='main-page playlist-search'>
     <PlaylistFilter onSetFilter={onSetFilter} />
     {!searchResults && <>
 
@@ -72,23 +72,23 @@ export function PlaylistSearch() {
       <GenreList />
       <AppDivider />
     </>}
-    <section className="main-page playlist-details">
+    <section className='main-page playlist-details'>
       {searchResults && <>
         <ul className='playlist-detail-result-list search-detail'>{searchResults?.map((song, index) => <li key={song.id} className='song'   >
-          <div className="table-num">{index + 1}
+          <div className='table-num'>{index + 1}
           </div>
-          <div className="song-detail">
-            <div className="table-img-container">
-              <img src={song.imgUrl} alt="song" />
+          <div className='song-detail'>
+            <div className='table-img-container'>
+              <img src={song.imgUrl} alt='song' />
               <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
             </div>
-            <div className="cover-container"></div>
+            <div className='cover-container'></div>
             <div className='song-info'>
-              {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
-              <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+              {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && '...'}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && '...'}</small>}
+              <small>{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
             </div>
           </div>
-          <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+          <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
 
         </li>)}
         </ul>

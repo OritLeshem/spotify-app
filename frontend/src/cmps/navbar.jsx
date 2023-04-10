@@ -50,26 +50,26 @@ export function Navbar() {
 
   // const playlists = ['My First List', 'Pop Songs List']
   function onRemovePlaylist(ev, playlistId) {
-    console.log("removePlaylist", playlistId)
+    console.log('removePlaylist', playlistId)
     removePlaylist(playlistId)
     navigate('/search')
   }
-  if (!isMobile) return <section className="navbar">
+  if (!isMobile) return <section className='navbar'>
 
     <Logo />
 
     <nav>
-      <NavLink to="/"><HomePageSvg /><h3>Home</h3></NavLink>
-      <NavLink to="/search"><SearchSvg /><h3>Search</h3></NavLink>
-      <NavLink to="/playlist"><LibrarySvg /><h3>Your Library</h3></NavLink>
+      <NavLink to='/'><HomePageSvg /><h3>Home</h3></NavLink>
+      <NavLink to='/search'><SearchSvg /><h3>Search</h3></NavLink>
+      <NavLink to='/playlist'><LibrarySvg /><h3>Your Library</h3></NavLink>
     </nav>
-    <div className="preferences">
-      <NavLink onClick={handleCreate} to="/create"><CreatePlaylist /><h3>Create Playlist</h3></NavLink>
-      <NavLink to="/liked"><LikedSongs /><h3>Liked Songs</h3></NavLink>
+    <div className='preferences'>
+      <NavLink onClick={handleCreate} to='/create'><CreatePlaylist /><h3>Create Playlist</h3></NavLink>
+      <NavLink to='/liked'><LikedSongs /><h3>Liked Songs</h3></NavLink>
     </div>
-    <div className="divider"></div>
+    <div className='divider'></div>
 
-    <div className="navbar-playlists">
+    <div className='navbar-playlists'>
       {user && playlists && playlists.filter(playlist => playlist.createdBy._id === user._id).map(playlist => <div className='navbar-playlist'>
         <NavLink to={`/detail/${playlist._id}`} key={playlist._id}>
           <h5>{playlist.name}</h5></NavLink>

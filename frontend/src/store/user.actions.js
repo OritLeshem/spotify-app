@@ -1,7 +1,7 @@
 import { store } from './store'
-import { SET_USER } from "./user.reducer"
+import { SET_USER } from './user.reducer'
 
-import { userService } from "../services/user.service"
+import { userService } from '../services/user.service'
 import { showErrorMsg } from '../services/event-bus.service'
 
 export async function login(credentials) {

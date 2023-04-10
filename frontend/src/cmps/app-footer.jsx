@@ -18,7 +18,7 @@ export function AppFooter() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-  return <footer className="app-footer">
+  return <footer className='app-footer'>
     <main>
       <SongDisplay />
       <PlayerBar />

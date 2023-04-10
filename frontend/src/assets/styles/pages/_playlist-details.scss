@@ -67,7 +67,9 @@
   .headline-table-title {
     .header-row {
       display: grid;
-      grid-template-columns: 0.3fr 2.9fr 1.95fr 0.1fr;
+      // grid-template-columns: 0.3fr 3.9fr 1.5fr 0.1fr;
+      grid-template-columns: 0.3fr 2.8fr 2fr;
+
       margin: 1rem 0 0 0;
       color: #dddcdc;
       position: sticky;

@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
-import { youtubeService } from "../services/youtube.service"
+import { youtubeService } from '../services/youtube.service'
 
-import { ISPLAYING, SET_CURRENT_SONG } from "../store/player.reducer"
-import { SET_SONGS_LIST } from "../store/playlist.reducer"
+import { ISPLAYING, SET_CURRENT_SONG } from '../store/player.reducer'
+import { SET_SONGS_LIST } from '../store/playlist.reducer'
 
-import { Music } from "../cmps/music"
+import { Music } from '../cmps/music'
 
 export function PlaylistGenre() {
   const { genreName } = useParams()
@@ -51,34 +51,39 @@ export function PlaylistGenre() {
     }
   };
   function handleSong(ev, songId) {
-    console.log("song, li clicked", songId)
+    console.log('song, li clicked', songId)
   }
 
-  return <section className="main-page playlist-details">    <h2> {genreName}</h2>
-    <div className="headline-table-title">
-      <div className="header-row">
-        <div className="headline-table-col">
+  return <section className='main-page playlist-details'>    <h2> {genreName}</h2>
+    <div className='headline-table-title'>
+      <div className='header-row'>
+        <div className='headline-table-col'>
           <span>#</span>
         </div>
-        <div className="headline-table-col">
+        <div className='headline-table-col'>
           <span>TITLE</span>
+        </div>
+        <div >
+          <span>ALBUM</span>
         </div>
       </div>
     </div>
     {searchResults && <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
-      <div className="headline-table-col table-num">{index + 1}
+      <div className='headline-table-col table-num'>{index + 1}
       </div>
-      <div className="headline-table-col song-detail">
-        <div className="table-img-container">
-          <img src={song.imgUrl} alt="song" />
+      <div className='headline-table-col song-detail'>
+        <div className='table-img-container'>
+          <img src={song.imgUrl} alt='song' />
           <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
         </div>
-        <div className="cover-container"></div>
+        <div className='cover-container'></div>
         <div className='song-info'>
-          {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 1), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
-          <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+          {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 1), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && '...'}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && '...'}</small>}
+          <small>{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
         </div>
       </div>
+      <small className='song-artist-name' >{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
+
     </li>)}
     </ul>}
   </section>

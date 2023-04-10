@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { userService } from "../services/user.service"
+import { useState } from 'react'
+import { userService } from '../services/user.service'
 
 export function LoginForm({ onLogin, isSignup }) {
 
@@ -16,17 +16,17 @@ export function LoginForm({ onLogin, isSignup }) {
     }
 
     return (
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className='login-form' onSubmit={handleSubmit}>
             <input
-                type="text"
-                name="username"
+                type='text'
+                name='username'
                 value={credentials.username}
-                placeholder="Username"
+                placeholder='Username'
                 onChange={handleChange}
                 required
                 autoFocus
             />
-            <button className="user-login-logout">{isSignup ? 'Signup' : 'Login'}</button>
+            <button className='user-login-logout'>{isSignup ? 'Signup' : 'Login'}</button>
         </form>
     )
 }

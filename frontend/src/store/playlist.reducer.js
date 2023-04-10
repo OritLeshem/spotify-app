@@ -57,7 +57,7 @@ export function playlistReducer(state = initialState, action) {
         case UPDATE_PLAYLIST:
             playlists = state.playlists.map(playlist => (playlist._id === action.playlist._id) ? action.playlist : playlist)
             newState = { ...state, playlists }
-            console.log("PLAYLISTS", playlists)
+            console.log('PLAYLISTS', playlists)
             break
         //song in playlist
         case SET_PLAYLIST:

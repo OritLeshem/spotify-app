@@ -86,8 +86,8 @@ export function PlaylistEdit() {
     input.click()
   }
 
-  if (!user) return <span className="main-page playlist-details">Please signup / login to create a playlist</span>
-  else return <section className="main-page playlist-details">
+  if (!user) return <span className='main-page playlist-details'>Please signup / login to create a playlist</span>
+  else return <section className='main-page playlist-details'>
     <div className='playlist-detail-header'>
 
       <div className='playlist-header-img-container '>
@@ -103,14 +103,14 @@ export function PlaylistEdit() {
         <h1 onClick={() => setIsEditing(true)} className='playlist-detail-header-title'>{playlistToEdit.name}</h1>
 
         <form onSubmit={onSavePlaylist}>
-          <input type="text"
-            name="name"
+          <input type='text'
+            name='name'
             className='playlist-detail-header-title-input'
-            id="name"
-            placeholder="playlist name..."
+            id='name'
+            placeholder='playlist name...'
             onChange={handleChange}
           />
-          <button onMouseDown={onSavePlaylist} type="submit">save</button>
+          <button className='save-new-playlist' onMouseDown={onSavePlaylist} type='submit'>Save</button>
         </form>
 
       </div>

@@ -56,25 +56,25 @@ export function PlaylistDetail() {
 
 
   function onSetFilter(filterBy) {
-    console.log("filterBy", filterBy.txt)
+    console.log('filterBy', filterBy.txt)
     youtubeService.getVideoResults(filterBy.txt)
       .then(res => setSearchResults(res))
   }
 
   function handleSong(ev, songId) {
-    console.log("song, li clicked", songId);
+    console.log('song, li clicked', songId);
   }
 
   function onRemoveSongFromPlayList(ev, songId) {
     ev.stopPropagation()
-    console.log("remove song", songId)
+    console.log('remove song', songId)
     removeSongFromPlayList(playlistId, songId)
   }
 
   function onAddSongTpPlayList(song) {
-    console.log("add song", song)
+    console.log('add song', song)
     if (playlist?.songs.some(checkSong => checkSong.id === song.id)) {
-      showErrorMsg("This song is already in this playlist")
+      showErrorMsg('This song is already in this playlist')
       return
     }
     addSonfToPlaylist(playlistId, song)
@@ -96,8 +96,8 @@ export function PlaylistDetail() {
   const { name, songs } = playlist
 
   return <>
-    <section className="main-page playlist-search"> </section>
-    <section className="main-page playlist-details">
+    <section className='main-page playlist-search'> </section>
+    <section className='main-page playlist-details'>
       <div className='playlist-detail-header'>
         <div className='playlist-header-img-container '> <img src={playlist.imgUrl !== defaultPhoto ? playlist.imgUrl : songs.length ? songs[0].imgUrl : defaultPhoto} /></div>
         <div className='playlist-detail-header-info'>
@@ -108,39 +108,38 @@ export function PlaylistDetail() {
           <div className='playlist-detail-header-title-details'>{user.username} | {songs?.length} songs | 14 min 57 sec</div>
         </div>
       </div>
-      <div className="headline-table-title">
-        <div className="header-row">
-          <div className=">
+      <div className='headline-table-title'>
+        <div className='header-row'>
+          <div>
             <span>#</span>
           </div>
-          <div className=">
+          <div >
             <span>TITLE</span>
           </div>
-          <div className=">
+          <div >
             <span>ALBUM</span>
           </div>
-          <div className=">
-          </div>
+
         </div>
       </div>
       <ul className='list-of-playlist'>{songs?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
-        <div className="table-num">{index + 1}
+        <div className='table-num'>{index + 1}
         </div>
-        <div className="song-detail">
-          <div className="table-img-container ">
-            <img src={song.imgUrl} alt="song" />
+        <div className='song-detail'>
+          <div className='table-img-container'>
+            <img src={song.imgUrl} alt='song' />
             <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
           </div>
-          <div className="cover-container"></div>
+          <div className='cover-container'></div>
           <div className='song-info'>
             {/* TITLE FORMATTED */}
-            {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 1), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
+            {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 1), song.title.length + 1).slice(0, 50)}{song.title.length > 50 && '...'}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && '...'}</small>}
             {/* ARTIST NAME */}
-            <small >{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+            <small >{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
 
           </div>
         </div>
-        <small className='song-artist-name' >{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+        <small className='song-artist-name' >{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
 
 
         <small onClick={(ev) => onRemoveSongFromPlayList(ev, song.id)} className='fa-regular trash-can'></small>
@@ -148,24 +147,24 @@ export function PlaylistDetail() {
       </ul>
       <hr />
       <h2>Let's find something for your playlist</h2>
-      <PlaylistFilter onSetFilter={onSetFilter} title="Search for songs or episodes" />
+      <PlaylistFilter onSetFilter={onSetFilter} title='Search for songs or episodes' />
       {!searchResults && <div className='detail-divider'></div>}
       {searchResults && <>
         <ul className='playlist-detail-result-list'>{searchResults?.map((song, index) => <li key={song.id} className='song' onClick={() => handleSong(song.id)}  >
-          <div className="table-num">{index + 1}
+          <div className='table-num'>{index + 1}
           </div>
-          <div className="song-detail">
-            <div className="table-img-container">
-              <img src={song.imgUrl} alt="song" />
+          <div className='song-detail'>
+            <div className='table-img-container'>
+              <img src={song.imgUrl} alt='song' />
               <Music handlePlayPauseClick={handlePlayPauseClick} song={song} songId={song.id || '4m1EFMoRFvY'} />
             </div>
-            <div className="cover-container"></div>
+            <div className='cover-container'></div>
             <div className='song-info'>
-              {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && "..."}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && "..."}</small>}
-              <small>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+              {(!isMobile) ? <small className={currentSong?.id === song.id ? 'chosen-green' : ''} title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 30)}{song.title.length > 30 && '...'}</small> : <small title={song.title}>{song.title.slice((song.title.indexOf('-' || ':') + 2), song.title.length + 1).slice(0, 15)}{song.title.length > 15 && '...'}</small>}
+              <small>{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
             </div>
           </div>
-          <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf("-" || ":"))}</small>
+          <small className='song-artist-name'>{song.title.substring(0, song.title.indexOf('-' || ':'))}</small>
           <small onClick={() => { onAddSongTpPlayList(song) }} className='fa-regular plus'></small>
         </li>)}
         </ul>

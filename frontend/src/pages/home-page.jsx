@@ -19,12 +19,12 @@ export function HomePage() {
     setPop(pop)
   }, [])
 
-  youtubeService.getVideoResults("pink")
+  youtubeService.getVideoResults('pink')
     .then(res => {
     })
 
   if (!pop) return
-  return <section className="main-page home-page">
+  return <section className='main-page home-page'>
     <h2 className='home-page-title'>POP</h2>
     <PlaylistList playlists={pop.songs} />
     <h2 className='home-page-title'>HIPHOP</h2>

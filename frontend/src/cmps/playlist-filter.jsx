@@ -16,16 +16,16 @@ export function PlaylistFilter({ onSetFilter, title }) {
         onSetFilter(filterByToEdit)
     }
 
-    return <section className="playlist-filter">
+    return <section className='playlist-filter'>
         <form onSubmit={onSubmitFilter}>
-            <input className={title ? "search-detail" : ""} type="text"
-                name="txt"
-                placeholder={title || "What do you want to listen to?"}
+            <input className={title ? 'search-detail' : ''} type='text'
+                name='txt'
+                placeholder={title || 'What do you want to listen to?'}
                 value={filterByToEdit.txt}
                 onChange={handleChange}
             />
         </form>
-        <div className={title ? "svg-container svg-detail" : "svg-container"}>
+        <div className={title ? 'svg-container svg-detail' : 'svg-container'}>
             <SearchSvg />
         </div>
     </section>

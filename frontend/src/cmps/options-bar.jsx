@@ -8,21 +8,21 @@ export function OptionsBar() {
         setVolume(target.value)
     }
 
-    return <section className="options-bar">
+    return <section className='options-bar'>
         <MikeBtn />
         <QueueBtn />
         <DiviceBtn />
-        <div className="volume-bar">
+        <div className='volume-bar'>
             <VolumeBtn />
-            <div className="slider-container">
-                <input type="range"
-                    min="0"
-                    max="1"
-                    step="0.1"
-                    className="slider"
+            <div className='slider-container'>
+                <input type='range'
+                    min='0'
+                    max='1'
+                    step='0.1'
+                    className='slider'
                     value={volume}
                     onChange={handleChange} />
-                <div className="progress" style={{ width: `${volume * 100}%` }}></div>
+                <div className='progress' style={{ width: `${volume * 100}%` }}></div>
             </div>
         </div>
     </section >

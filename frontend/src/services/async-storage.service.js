@@ -30,15 +30,15 @@ function post(entityType, newEntity) {
 }
 
 function put(entityType, updatedEntity) {
-    console.log("put", updatedEntity._id, entityType)
+    console.log('put', updatedEntity._id, entityType)
     return query(entityType).then(entities => {
         console.log(entities)
         const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
-        console.log("put", idx)
+        console.log('put', idx)
         if (idx < 0) throw new Error(`Update failed, cannot find entity with id: ${updatedEntity._id} in: ${entityType}`)
         entities.splice(idx, 1, updatedEntity)
         _save(entityType, entities)
-        console.log("put", updatedEntity)
+        console.log('put', updatedEntity)
 
         return updatedEntity
 

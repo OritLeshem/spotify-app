@@ -51,18 +51,14 @@ const genres = [
         bgc: 'rgb(232, 17, 91)',
         imgUrl: 'https://i.scdn.co/image/ab67706f000000027ea4d505212b9de1f72c5112'
     },
-    // {
-    //     name: 'Live Events',
-    //     bgc: 'rgb(115, 88, 255)',
-    //     imgUrl: 'https://concerts.spotifycdn.com/images/live-events_category-image.jpg'
-    // },
+
 ]
 
 export function GenreList() {
 
-    return <ul className="genre-list">
-        {genres.map(genre => <Link to={`/genre/${genre.name}`}><li key={genre.name} className="genre-preview" style={{ backgroundColor: genre.bgc }}>
-            <img src={genre.imgUrl} alt="" />
+    return <ul className='genre-list'>
+        {genres.map(genre => <Link to={`/genre/${genre.name}`}><li key={genre.name} className='genre-preview' style={{ backgroundColor: genre.bgc }}>
+            <img src={genre.imgUrl} alt='' />
             <h2>{genre.name}</h2>
         </li></Link>
         )}
