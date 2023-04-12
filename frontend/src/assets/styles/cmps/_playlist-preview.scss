@@ -5,6 +5,11 @@
     border-radius: em(6px);
     max-width: 204px;
 
+    @media (max-width: 770px) {
+        margin-top: 2rem;
+
+    }
+
     .img-container-preview {
         position: relative;
         overflow: hidden;
@@ -64,4 +69,7 @@
     to {
         background-position-x: -200%;
     }
+
+
+
 }

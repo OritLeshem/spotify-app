@@ -11,6 +11,11 @@
         display: none;
     }
 
+    @media (max-width: 770px) {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     @media (min-width: 770px) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }

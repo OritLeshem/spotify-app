@@ -5,6 +5,12 @@
     grid-gap: rem(24px);
     min-width: rem(432px);
 
+    @media (max-width: 770px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-width: rem(340px);
+
+    }
+
     @media (min-width: 770px) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
