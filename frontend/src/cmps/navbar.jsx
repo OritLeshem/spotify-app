@@ -65,7 +65,7 @@ export function Navbar() {
     </nav>
     <div className='preferences'>
       <NavLink onClick={handleCreate} to='/create'><CreatePlaylist /><h3>Create Playlist</h3></NavLink>
-      <NavLink to='/liked'><LikedSongs /><h3>Liked Songs</h3></NavLink>
+      <NavLink to='/like'><LikedSongs /><h3>Liked Songs</h3></NavLink>
     </div>
     <div className='divider'></div>
 

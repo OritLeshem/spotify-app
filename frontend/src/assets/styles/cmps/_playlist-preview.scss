@@ -5,10 +5,7 @@
     border-radius: em(6px);
     max-width: 204px;
 
-    @media (max-width: 770px) {
-        margin-top: 2rem;
-
-    }
+    @media (max-width: 770px) {}
 
     .img-container-preview {
         position: relative;
@@ -53,23 +50,19 @@
     }
 }
 
-.playlist-preview-loader {
-    background-color: $bgc-highlight;
-    padding: 1em;
-    border-radius: em(6px);
-    max-width: 204px;
-    min-height: 280px;
+// .playlist-preview-loader {
+//     background-color: $bgc-highlight;
+//     padding: 1em;
+//     border-radius: em(6px);
+//     max-width: 204px;
+//     min-height: 280px;
 
-    background: linear-gradient(90deg, $bgc-highlight 8%, $bgc-base 18%, $bgc-highlight 33%);
-    background-size: 200% 100%;
-    animation: 1.5s shine linear infinite;
-}
+//     background: linear-gradient(90deg, $bgc-highlight 8%, $bgc-base 18%, $bgc-highlight 33%);
+//     background-size: 200% 100%;
+//     animation: 1.5s shine linear infinite;
+// }
 
-@keyframes shine {
-    to {
-        background-position-x: -200%;
-    }
-
-
-
-}
+// @keyframes shine {
+//     to {
+//         background-position-x: -200%;
+//     }

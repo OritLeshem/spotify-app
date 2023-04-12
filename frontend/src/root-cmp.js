@@ -10,6 +10,8 @@ import { Navbar } from './cmps/navbar'
 import { UserMsg } from './cmps/user-msg'
 import { PlaylistEdit } from './pages/playlist-edit'
 import { PlaylistGenre } from './pages/playlist-genre'
+import { PlaylistLike } from './pages/playlist-like'
+
 export function RootCmp() {
 
 
@@ -22,6 +24,7 @@ export function RootCmp() {
         <Route path="/playlist" element={<PlaylistIndex />} />
         <Route path="/search" element={<PlaylistSearch />} />
         <Route path="/create" element={<PlaylistEdit />} />
+        <Route path="/like" element={<PlaylistLike />} />
         <Route path="/detail/:playlistId" element={<PlaylistDetail />} />
         <Route path="/genre/:genreName" element={<PlaylistGenre />} />
 
