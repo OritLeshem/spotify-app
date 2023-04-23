@@ -13,6 +13,7 @@ Users can search for a song or an artist.
 - Node.js
 - Express
 - MongoDB
+- REST API
 - cloudinary
 - React
 - Redux
