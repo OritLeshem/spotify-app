@@ -1,7 +1,7 @@
 # spotify app
 
 Responsive music connects people ❤️
-Live on render ](https://spotify-app-uejg.onrender.com/)
+[Live on render](https://spotify-app-uejg.onrender.com/)
 
 
 Users can sign in / login
