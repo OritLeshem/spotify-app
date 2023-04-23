@@ -1,6 +1,6 @@
 # spotify app
 
-music connects people ❤️ [Live on render ](https://spotify-app-uejg.onrender.com/)
+Responsive music connects people ❤️ [Live on render ](https://spotify-app-uejg.onrender.com/)
 
 
 Users can sign in / login
@@ -24,6 +24,9 @@ Home Page
 
 ![2023-04-23_16-04-51](https://user-images.githubusercontent.com/80868084/233862951-14c3086c-3533-46fd-92f1-1970e0db10b4.png)
 
+Search
+
+![2023-04-23_16-09-44](https://user-images.githubusercontent.com/80868084/233863369-98bacd87-ef48-4b6b-8a00-70adad7d444c.png)
 
 
 List
