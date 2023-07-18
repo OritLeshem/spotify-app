@@ -63,7 +63,7 @@ export async function removePlaylist(playlistId) {
 export async function addPlaylist(playlist) {
     try {
         const savedPlaylist = await playlistService.save(playlist)
-        console.log('Added Playlist', savedPlaylist)
+        console.log('Added Playlist1', savedPlaylist)
         store.dispatch(getActionAddPlaylist(savedPlaylist))
         return savedPlaylist
     } catch (err) {
